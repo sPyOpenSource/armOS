@@ -78,3 +78,5 @@ int main( void )
 
 	return 0;
 }
+
+extern "C" void __cxa_pure_virtual() {while (true);}

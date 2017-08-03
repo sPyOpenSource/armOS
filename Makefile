@@ -24,7 +24,7 @@
 
 #user specific settings:
 #where to find the IDE
-ADIR:=/home/spy/workspace/Drone
+ADIR:=./
 #which serial port to use (add a file with SUBSYSTEMS=="usb",
 #ATTRS{product}=="Arduino Due Prog. Port", ATTRS{idProduct}=="003d",
 #ATTRS{idVendor}=="2341", SYMLINK+="arduino_due" in /etc/udev/rules.d/
@@ -39,11 +39,10 @@ VERIFY:=
 
 
 #then some general settings. They should not be necessary to modify.
-#CXX:=$(ADIR)/tools/g++_arm_none_eabi/bin/arm-none-eabi-g++
 CXX:=arm-none-eabi-g++
-#CC:=$(ADIR)/tools/g++_arm_none_eabi/bin/arm-none-eabi-gcc
 CC:=arm-none-eabi-gcc
 OBJCOPY:=arm-none-eabi-objcopy
+AR:=arm-none-eabi-ar
 
 C:=$(CC)
 #SAM:=arduino/sam/
@@ -51,7 +50,6 @@ SAM:=$(ADIR)
 #CMSIS:=arduino/sam/system/CMSIS/
 #LIBSAM:=arduino/sam/system/libsam
 TMPDIR:=$(PWD)/build
-AR:=arm-none-eabi-ar
 
 #all these values are hard coded and should maybe be configured somehow else,
 #like olikraus does in his makefile.
@@ -79,13 +77,6 @@ CXXFLAGS:=$(COMMON_FLAGS) -fno-rtti -fno-exceptions -std=gnu++11 -Wall -Wextra
 #let the results be named after the project
 #PROJNAME:=$(shell basename *.ino .ino)
 PROJNAME:=drone
-
-#we will make a new mainfile from the ino file.
-#NEWMAINFILE:=$(TMPDIR)/$(PROJNAME).ino.cpp
-
-#our own sourcefiles is the (converted) ino file and any local cpp files
-#MYSRCFILES:=$(NEWMAINFILE) $(shell ls *.cpp 2>/dev/null)
-#MYOBJFILES:=$(addsuffix .o,$(addprefix $(TMPDIR)/,$(notdir $(MYSRCFILES))))
 
 #These source files are the ones forming core.a
 CORESRCXX:=$(shell ls ${SAM}/src/*.cpp ${SAM}/USB/*.cpp  ${SAM}/arduino_due/variant.cpp ${SAM}/libraries/Sensors/*.cpp ${SAM}/libraries/Receiver/*.cpp ${SAM}/libraries/LSM303/*.cpp ${SAM}/libraries/KalmanFilter-master/*.cpp ${SAM}/libraries/Arduino-PID-Library/*.cpp ${SAM}/libraries/AIDrone/*.cpp ${SAM}/libraries/Adafruit_master/*.cpp)
@@ -126,7 +117,6 @@ $(foreach src,$(CORESRC), $(eval $(call OBJ_template,$(src),$(addsuffix .o,$(add
 #and our own c++ sources
 $(foreach src,$(MYSRCFILES), $(eval $(call OBJ_template,$(src),$(addsuffix .o,$(addprefix $(TMPDIR)/,$(notdir $(src)))),XX) ) )
 
-
 clean:
 	test ! -d $(TMPDIR) || rm -rf $(TMPDIR)
 
@@ -137,16 +127,6 @@ $(TMPDIR):
 
 $(TMPDIR)/core:
 	mkdir -p $(TMPDIR)/core
-
-#creates the cpp file from the .ino file
-$(NEWMAINFILE): 
-        #$(PROJNAME).ino
-	cat $(SAM)/src/main.cpp > $(NEWMAINFILE)
-	#cat $(PROJNAME).ino >> $(NEWMAINFILE)
-	echo 'extern "C" void __cxa_pure_virtual() {while (true);}' >> $(NEWMAINFILE)
-
-#include the dependencies for our own files
--include $(MYOBJFILES:.o=.d)
 
 #create the core library from the core objects. Do this EXACTLY as the
 #arduino IDE does it, seems *really* picky about this.
@@ -192,9 +172,8 @@ $(TMPDIR)/core.a: $(TMPDIR)/core $(COREOBJS) $(COREOBJSXX)
 	
 
 #link our own object files with core to form the elf file
-$(TMPDIR)/$(PROJNAME).elf: $(TMPDIR)/core.a $(TMPDIR)/core/syscalls_sam3.c.o #$(MYOBJFILES) 
-	$(CC) -mcpu=cortex-m3 -mthumb -Os -Wl,--gc-sections -T$(SAM)/arduino_due/linker_scripts/gcc/flash.ld -Wl,-Map,--cref -Wl,--check-sections -Wl,--gc-sections -Wl,--entry=Reset_Handler -Wl,--unresolved-symbols=report-all -Wl,--warn-common -Wl,--warn-section-align -Wl,--start-group -u _sbrk -u link -u _close -u _fstat -u _isatty -u _lseek -u _read -u _write -u _exit -u kill -u _getpid $(MYOBJFILES) $(TMPDIR)/core/variant.cpp.o $(SAM)/arduino_due/libsam_sam3x8e_gcc_rel.a $(TMPDIR)/core.a -Wl,--end-group -lm -gcc
-
+$(TMPDIR)/$(PROJNAME).elf: $(TMPDIR)/core.a $(TMPDIR)/core/syscalls_sam3.c.o
+	$(CC) -mcpu=cortex-m3 -mthumb -Os -Wl,--gc-sections -T$(SAM)/arduino_due/linker_scripts/gcc/flash.ld -Wl,-Map,$(TMPDIR)/main.cpp.map -o $@ -L$(TMPDIR) -Wl,--cref -Wl,--check-sections -Wl,--gc-sections -Wl,--entry=Reset_Handler -Wl,--unresolved-symbols=report-all -Wl,--warn-common -Wl,--warn-section-align -Wl,--start-group -u _sbrk -u link -u _close -u _fstat -u _isatty -u _lseek -u _read -u _write -u _exit -u kill -u _getpid $(TMPDIR)/core/variant.cpp.o $(SAM)/arduino_due/libsam_sam3x8e_gcc_rel.a $(TMPDIR)/core.a -Wl,--end-group -lm -gcc
 #copy from the hex to our bin file (why?)
 $(TMPDIR)/$(PROJNAME).bin: $(TMPDIR)/$(PROJNAME).elf 
 	$(OBJCOPY) -O binary $< $@

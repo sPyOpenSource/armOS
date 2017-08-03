@@ -198,7 +198,7 @@ extern const PinDescription g_APinDescription[] ;
 #endif // __cplusplus
 
 // Include board variant
-#include "../arduino_due_x/variant.h"
+#include "../arduino_due/variant.h"
 
 #include "wiring.h"
 #include "wiring_digital.h"
