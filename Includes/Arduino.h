@@ -29,7 +29,7 @@
 // AVR stuff, assuming Arduino.h or WProgram.h
 // automatically includes it...
 #include <../avr/pgmspace.h>
-#include <../avr/interrupt.h>
+//#include <../avr/interrupt.h>
 
 #include "binary.h"
 #include "itoa.h"

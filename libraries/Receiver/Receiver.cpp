@@ -4,7 +4,6 @@
   Released into the public domain.
 */
 
-#include "Arduino.h"
 #include "Receiver.h"
 
 const byte interruptPins[4] = {53, 51, 49, 47};

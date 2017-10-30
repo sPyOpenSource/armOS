@@ -10,7 +10,7 @@
 # TODO:
 #  * support libraries
 #  * handle possibly missing files in the currently hard coded ar step
-#    when assembling core.a together. 
+#    when assembling core.a together.
 #  * see what to do about the $(SAM)/cores/arduino/wiring_pulse_asm.S" add -x assembler-with-cpp
 #    and this one: $(SAM)/cores/arduino/avr/dtostrf.c
 #
@@ -39,10 +39,11 @@ VERIFY:=
 
 
 #then some general settings. They should not be necessary to modify.
-CXX:=arm-none-eabi-g++
-CC:=arm-none-eabi-gcc
-OBJCOPY:=arm-none-eabi-objcopy
-AR:=arm-none-eabi-ar
+BASE:=./gcc-arm-none-eabi-6-2017-q2-update/bin/
+CXX:=$(BASE)arm-none-eabi-g++
+CC:=$(BASE)arm-none-eabi-gcc
+OBJCOPY:=$(BASE)arm-none-eabi-objcopy
+AR:=$(BASE)arm-none-eabi-ar
 
 C:=$(CC)
 #SAM:=arduino/sam/
@@ -56,7 +57,7 @@ TMPDIR:=$(PWD)/build
 DEFINES:=-Dprintf=iprintf -DF_CPU=84000000  -DARDUINO=10611 -D__SAM3X8E__ -DUSB_PID=0x003e -DUSB_VID=0x2341 -DUSBCON \
          -DARDUINO_SAM_DUE -DARDUINO_ARCH_SAM '-DUSB_MANUFACTURER="Arduino LLC"' '-DUSB_PRODUCT="Arduino Due"'
 
-INCLUDES:=-I$(SAM)/arduino_due -I$(SAM)/Includes/sam \
+INCLUDES:=-I$(SAM)/libraries/arduino_due -I$(SAM)/Includes/sam \
           -I$(SAM)/libraries/Receiver -I$(SAM)/libraries/Sensors \
           -I$(SAM)/libraries/Adafruit_master -I$(SAM)/libraries/Arduino-PID-Library \
           -I$(SAM)/libraries/KalmanFilter-master -I$(SAM)/libraries/LSM303 \
@@ -65,7 +66,7 @@ INCLUDES:=-I$(SAM)/arduino_due -I$(SAM)/Includes/sam \
 #also include the current dir for convenience
 INCLUDES += -I.
 
-#compilation flags common to both c and c++ 
+#compilation flags common to both c and c++
 COMMON_FLAGS:=-g -Os -w -ffunction-sections -fdata-sections -nostdlib \
               --param max-inline-insns-single=500 -mcpu=cortex-m3 -mthumb \
               -fno-threadsafe-statics
@@ -79,7 +80,7 @@ CXXFLAGS:=$(COMMON_FLAGS) -fno-rtti -fno-exceptions -std=gnu++11 -Wall -Wextra
 PROJNAME:=drone
 
 #These source files are the ones forming core.a
-CORESRCXX:=$(shell ls ${SAM}/src/*.cpp ${SAM}/USB/*.cpp  ${SAM}/arduino_due/variant.cpp ${SAM}/libraries/Sensors/*.cpp ${SAM}/libraries/Receiver/*.cpp ${SAM}/libraries/LSM303/*.cpp ${SAM}/libraries/KalmanFilter-master/*.cpp ${SAM}/libraries/Arduino-PID-Library/*.cpp ${SAM}/libraries/AIDrone/*.cpp ${SAM}/libraries/Adafruit_master/*.cpp)
+CORESRCXX:=$(shell ls ${SAM}/src/*.cpp ${SAM}/libraries/USB/*.cpp ${SAM}/libraries/arduino_due/variant.cpp ${SAM}/libraries/Sensors/*.cpp ${SAM}/libraries/Receiver/*.cpp ${SAM}/libraries/LSM303/*.cpp ${SAM}/libraries/KalmanFilter-master/*.cpp ${SAM}/libraries/Arduino-PID-Library/*.cpp ${SAM}/libraries/AIDrone/*.cpp ${SAM}/libraries/Adafruit_master/*.cpp)
 CORESRC:=$(shell ls ${SAM}/src/*.c)
 
 #hey this one is needed too: $(SAM)/cores/arduino/wiring_pulse_asm.S" add -x assembler-with-cpp
@@ -92,12 +93,7 @@ COREOBJSXX:=$(addsuffix .o,$(COREOBJSXX))
 COREOBJS:=$(addprefix $(TMPDIR)/core/,$(notdir $(CORESRC)) )
 COREOBJS:=$(addsuffix .o,$(COREOBJS))
 
-default:
-	@echo default rule, does nothing. Try make compile or make upload.
-
-#This rule is good to just make sure stuff compiles, without having to wait
-#for bossac.
-all: $(TMPDIR)/$(PROJNAME).elf
+default: $(TMPDIR)/$(PROJNAME).elf
 
 #This is a make rule template to create object files from the source files.
 # arg 1=src file
@@ -132,32 +128,32 @@ $(TMPDIR)/core:
 #arduino IDE does it, seems *really* picky about this.
 #Sorry for the hard coding.
 $(TMPDIR)/core.a: $(TMPDIR)/core $(COREOBJS) $(COREOBJSXX)
-	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/wiring_shift.c.o 
-	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/wiring_analog.c.o 
-	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/itoa.c.o 
-	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/cortex_handlers.c.o 
-	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/hooks.c.o 
-	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/wiring.c.o 
-	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/WInterrupts.c.o 
-	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/syscalls_sam3.c.o 
-	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/iar_calls_sam3.c.o 
-	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/wiring_digital.c.o 
-	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/Print.cpp.o 
-	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/USARTClass.cpp.o 
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/wiring_shift.c.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/wiring_analog.c.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/itoa.c.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/cortex_handlers.c.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/hooks.c.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/wiring.c.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/WInterrupts.c.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/syscalls_sam3.c.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/iar_calls_sam3.c.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/wiring_digital.c.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/Print.cpp.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/USARTClass.cpp.o
 	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/WString.cpp.o
-	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/PluggableUSB.cpp.o 
-	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/USBCore.cpp.o 
-	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/CDC.cpp.o 
-	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/wiring_pulse.cpp.o 
-	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/UARTClass.cpp.o 
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/PluggableUSB.cpp.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/USBCore.cpp.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/CDC.cpp.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/wiring_pulse.cpp.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/UARTClass.cpp.o
 	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/main.cpp.o
 	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/new.cpp.o
 	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/watchdog.cpp.o
-	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/Stream.cpp.o 
-	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/RingBuffer.cpp.o 
-	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/IPAddress.cpp.o 
-	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/Reset.cpp.o 
-	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/WMath.cpp.o 
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/Stream.cpp.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/RingBuffer.cpp.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/IPAddress.cpp.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/Reset.cpp.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/WMath.cpp.o
 	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/variant.cpp.o
 	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/AIDrone.cpp.o
 	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/Adafruit_L3GD20.cpp.o
@@ -169,19 +165,19 @@ $(TMPDIR)/core.a: $(TMPDIR)/core $(COREOBJS) $(COREOBJSXX)
 	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/SFE_BMP180.cpp.o
 	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/Servo.cpp.o
 	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/Wire.cpp.o
-	
+
 
 #link our own object files with core to form the elf file
 $(TMPDIR)/$(PROJNAME).elf: $(TMPDIR)/core.a $(TMPDIR)/core/syscalls_sam3.c.o
-	$(CC) -mcpu=cortex-m3 -mthumb -Os -Wl,--gc-sections -T$(SAM)/arduino_due/linker_scripts/gcc/flash.ld -Wl,-Map,$(TMPDIR)/main.cpp.map -o $@ -L$(TMPDIR) -Wl,--cref -Wl,--check-sections -Wl,--gc-sections -Wl,--entry=Reset_Handler -Wl,--unresolved-symbols=report-all -Wl,--warn-common -Wl,--warn-section-align -Wl,--start-group -u _sbrk -u link -u _close -u _fstat -u _isatty -u _lseek -u _read -u _write -u _exit -u kill -u _getpid $(TMPDIR)/core/variant.cpp.o $(SAM)/arduino_due/libsam_sam3x8e_gcc_rel.a $(TMPDIR)/core.a -Wl,--end-group -lm -gcc
+	$(CC) -mcpu=cortex-m3 -mthumb -Os -Wl,--gc-sections -T$(SAM)/libraries/arduino_due/linker_scripts/gcc/flash.ld -Wl,-Map,$(TMPDIR)/main.cpp.map -o $@ -L$(TMPDIR) -Wl,--cref -Wl,--check-sections -Wl,--gc-sections -Wl,--entry=Reset_Handler -Wl,--unresolved-symbols=report-all -Wl,--warn-common -Wl,--warn-section-align -Wl,--start-group -u _sbrk -u link -u _close -u _fstat -u _isatty -u _lseek -u _read -u _write -u _exit -u kill -u _getpid $(TMPDIR)/core/variant.cpp.o $(SAM)/libraries/arduino_due/libsam_sam3x8e_gcc_rel.a $(TMPDIR)/core.a -Wl,--end-group -lm -gcc
 #copy from the hex to our bin file (why?)
-$(TMPDIR)/$(PROJNAME).bin: $(TMPDIR)/$(PROJNAME).elf 
+$(TMPDIR)/$(PROJNAME).bin: $(TMPDIR)/$(PROJNAME).elf
 	$(OBJCOPY) -O binary $< $@
 
 #upload to the arduino by first resetting it (stty) and the running bossac
 upload: $(TMPDIR)/$(PROJNAME).bin
 	stty -F /dev/$(PORT) cs8 1200 hupcl
-	$(ADIR)/packages/arduino/tools/bossac/1.6.1-arduino/bossac -i -d --port=$(PORT) -U false -e -w $(VERIFY) -b $(TMPDIR)/$(PROJNAME).bin -R
+	$(ADIR)/packages/1.6.1-arduino/bossac -i -d --port=$(PORT) -U false -e -w $(VERIFY) -b $(TMPDIR)/$(PROJNAME).bin -R
 
 #to view the serial port with screen.
 monitor:

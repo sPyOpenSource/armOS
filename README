@@ -1,0 +1,24 @@
+Drone
+========
+
+Motivation
+----------
+This is a firmware for a drone.
+
+Installation
+------------
+Run following command to get the source code:
+
+	git clone git://s55969da3.adsl.online.nl/drone/firmware.git
+
+Now you have to go inside the folder:
+
+	cd firmware
+
+Now goto https://developer.arm.com/open-source/gnu-toolchain/gnu-rm/downloads to download the tool chain and unzip it to this folder. Then run following command to compile:
+
+	make all
+
+To clean the build:
+
+  make clean

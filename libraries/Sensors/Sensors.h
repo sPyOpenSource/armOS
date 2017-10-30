@@ -7,7 +7,6 @@
 #ifndef Sensors_h
 #define Sensors_h
 
-#include "Arduino.h"
 #include "SFE_BMP180.h"
 
 class Sensors {
