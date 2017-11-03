@@ -9,9 +9,10 @@
 #define Receiver_h
 
 #include "Arduino.h"
+
 class Receiver {
     public:
-       int getInput(int);
+       unsigned int getInput(unsigned char);
        void start(uint32_t);
        uint32_t getTime();
 };

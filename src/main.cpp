@@ -18,8 +18,8 @@
 */
 
 #define ARDUINO_MAIN
-#include "Arduino.h"
 #include "AIDrone.h"
+#include "UnitTest.h"
 
 /*
  * Cortex-M3 Systick IT handler
@@ -37,13 +37,28 @@ extern void SysTick_Handler( void )
 void initVariant() __attribute__((weak));
 void initVariant() { }
 
+void testVectorDouble(){
+  UnitTest unitTest;
+  unitTest.start();
+  VectorDouble testVector;
+  testVector.setValues(1, 1, 1);
+  unitTest.assert(testVector.x, 1.0);
+  unitTest.assert(testVector.y, 1.0);
+  unitTest.assert(testVector.z, 1.0);
+  unitTest.assert(testVector.length(), 1.0);
+  Receiver testReceiver;
+  unitTest.assert(testReceiver.getInput(0), (unsigned int)1000);
+  unitTest.end();
+}
+
 Drone drone;
 
-void setup() {
+void setup(){
+  testVectorDouble();
   drone.start();
 }
 
-void loop() {
+void loop(){
   drone.read();
   drone.compute();
   drone.write();

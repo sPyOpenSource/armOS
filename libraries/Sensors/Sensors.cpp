@@ -18,7 +18,7 @@ void Sensors::read()
     if (millis()-t0>=statusTemperature){
       statusTemperature = pressure.getTemperature(T);
       restartTemperature = true;
-      if (statusTemperature == 0) 
+      if (statusTemperature == 0)
           Serial.println("error retrieving pressure measurement\n");
     }
   }
@@ -37,17 +37,17 @@ void Sensors::read()
      if(millis()-t1>=statusPressure){
         statusPressure = pressure.getPressure(P,T);
         restartPressure = true;
-        if (statusPressure == 0) 
+        if (statusPressure == 0)
           Serial.println("error retrieving pressure measurement\n");
         else
           height = pressure.altitude(P,baseline);
-     }   
+     }
   }
   else Serial.println("error starting pressure measurement\n");
 }
 
 void Sensors::start(){
-// Initialize the sensor (it is important to get calibration values stored on the device).
+  // Initialize the sensor (it is important to get calibration values stored on the device).
   if (pressure.begin())
     Serial.println("BMP180 init success");
   else
@@ -62,7 +62,7 @@ void Sensors::start(){
   {
     delay(statusTemperature);
     statusTemperature = pressure.getTemperature(T);
-    if (statusTemperature == 0) 
+    if (statusTemperature == 0)
           Serial.println("error retrieving temperature measurement\n");
     else
     {
@@ -77,7 +77,7 @@ void Sensors::start(){
           {
               delay(statusPressure);
               statusPressure = pressure.getPressure(P,T);
-              if (statusPressure == 0) 
+              if (statusPressure == 0)
                 Serial.println("error retrieving pressure measurement\n");
               else
                 baseline = P;
@@ -86,7 +86,7 @@ void Sensors::start(){
       }
   }
   else Serial.println("error starting temperature measurement\n");
-  
+
   Serial.print("baseline pressure: ");
   Serial.print(baseline);
   Serial.println("mbar");

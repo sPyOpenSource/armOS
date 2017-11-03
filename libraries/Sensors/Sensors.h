@@ -11,11 +11,11 @@
 
 class Sensors {
   public:
-    void read();
     double T = 20;  // in degree Celsius
     double P;
     double height;
     void start();
+    void read();
 
   private:
     SFE_BMP180 pressure;

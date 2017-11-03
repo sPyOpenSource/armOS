@@ -1,10 +1,10 @@
 /***************************************************
   This is a library for the L3GD20 and L3GD20H GYROSCOPE
 
-  Designed specifically to work with the Adafruit L3GD20(H) Breakout 
+  Designed specifically to work with the Adafruit L3GD20(H) Breakout
   ----> https://www.adafruit.com/products/1032
 
-  These sensors use I2C or SPI to communicate, 2 pins (I2C) 
+  These sensors use I2C or SPI to communicate, 2 pins (I2C)
   or 4 pins (SPI) are required to interface.
 
   Adafruit invests time and resources providing this open source code,
@@ -144,7 +144,7 @@ bool Adafruit_L3GD20::begin(l3gd20Range_t rng, byte addr)
  PUBLIC FUNCTIONS
  ***************************************************************************/
 void Adafruit_L3GD20::read()
-{ 
+{
   uint8_t xhi, xlo, ylo, yhi, zlo, zhi;
 
   if (_cs == -1) {
@@ -153,10 +153,10 @@ void Adafruit_L3GD20::read()
     Wire.write(L3GD20_REGISTER_OUT_X_L | 0x80);
     Wire.endTransmission();
     Wire.requestFrom(address, (byte)6);
-    
+
     // Wait around until enough data is available
     while (Wire.available() < 6);
-    
+
     ylo = Wire.read();
     yhi = Wire.read();
     xlo = Wire.read();
@@ -183,24 +183,24 @@ void Adafruit_L3GD20::read()
   data.x = -(int16_t)(xlo | (xhi << 8));
   data.y =  (int16_t)(ylo | (yhi << 8));
   data.z =  (int16_t)(zlo | (zhi << 8));
-  
+
   // Compensate values depending on the resolution
   switch(range)
   {
     case L3DS20_RANGE_250DPS:
-      data.x *= L3GD20_SENSITIVITY_250DPS;
-      data.y *= L3GD20_SENSITIVITY_250DPS;
-      data.z *= L3GD20_SENSITIVITY_250DPS;
+      data.x *= L3GD20_SENSITIVITY_250DPS * DEG_TO_RAD;
+      data.y *= L3GD20_SENSITIVITY_250DPS * DEG_TO_RAD;
+      data.z *= L3GD20_SENSITIVITY_250DPS * DEG_TO_RAD;
       break;
     case L3DS20_RANGE_500DPS:
-      data.x *= L3GD20_SENSITIVITY_500DPS;
-      data.y *= L3GD20_SENSITIVITY_500DPS;
-      data.z *= L3GD20_SENSITIVITY_500DPS;
+      data.x *= L3GD20_SENSITIVITY_500DPS * DEG_TO_RAD;
+      data.y *= L3GD20_SENSITIVITY_500DPS * DEG_TO_RAD;
+      data.z *= L3GD20_SENSITIVITY_500DPS * DEG_TO_RAD;
       break;
     case L3DS20_RANGE_2000DPS:
-      data.x *= L3GD20_SENSITIVITY_2000DPS;
-      data.y *= L3GD20_SENSITIVITY_2000DPS;
-      data.z *= L3GD20_SENSITIVITY_2000DPS;
+      data.x *= L3GD20_SENSITIVITY_2000DPS * DEG_TO_RAD;
+      data.y *= L3GD20_SENSITIVITY_2000DPS * DEG_TO_RAD;
+      data.z *= L3GD20_SENSITIVITY_2000DPS * DEG_TO_RAD;
       break;
   }
 }

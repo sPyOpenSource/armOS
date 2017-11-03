@@ -34,9 +34,7 @@ PORT:=ttyACM3
 #if you want to verify the bossac upload, define this to -v
 VERIFY:=
 
-
 #end of user configuration.
-
 
 #then some general settings. They should not be necessary to modify.
 BASE:=./gcc-arm-none-eabi-6-2017-q2-update/bin/
@@ -46,10 +44,7 @@ OBJCOPY:=$(BASE)arm-none-eabi-objcopy
 AR:=$(BASE)arm-none-eabi-ar
 
 C:=$(CC)
-#SAM:=arduino/sam/
 SAM:=$(ADIR)
-#CMSIS:=arduino/sam/system/CMSIS/
-#LIBSAM:=arduino/sam/system/libsam
 TMPDIR:=$(PWD)/build
 
 #all these values are hard coded and should maybe be configured somehow else,
@@ -57,11 +52,11 @@ TMPDIR:=$(PWD)/build
 DEFINES:=-Dprintf=iprintf -DF_CPU=84000000  -DARDUINO=10611 -D__SAM3X8E__ -DUSB_PID=0x003e -DUSB_VID=0x2341 -DUSBCON \
          -DARDUINO_SAM_DUE -DARDUINO_ARCH_SAM '-DUSB_MANUFACTURER="Arduino LLC"' '-DUSB_PRODUCT="Arduino Due"'
 
-INCLUDES:=-I$(SAM)/libraries/arduino_due -I$(SAM)/Includes/sam \
-          -I$(SAM)/libraries/Receiver -I$(SAM)/libraries/Sensors \
-          -I$(SAM)/libraries/Adafruit_master -I$(SAM)/libraries/Arduino-PID-Library \
-          -I$(SAM)/libraries/KalmanFilter-master -I$(SAM)/libraries/LSM303 \
-          -I$(SAM)/Includes -I$(SAM)/libraries/AIDrone
+INCLUDES:=-I$(ADIR)/libraries/arduino_due -I$(ADIR)/Includes/sam \
+          -I$(ADIR)/libraries/Receiver -I$(ADIR)/libraries/Sensors \
+          -I$(ADIR)/libraries/Adafruit_master -I$(ADIR)/libraries/Arduino-PID-Library \
+          -I$(ADIR)/libraries/KalmanFilter-master -I$(ADIR)/libraries/LSM303 \
+          -I$(ADIR)/Includes -I$(ADIR)/libraries/AIDrone -I$(ADIR)/libraries/UnitTest
 
 #also include the current dir for convenience
 INCLUDES += -I.
@@ -70,17 +65,18 @@ INCLUDES += -I.
 COMMON_FLAGS:=-g -Os -w -ffunction-sections -fdata-sections -nostdlib \
               --param max-inline-insns-single=500 -mcpu=cortex-m3 -mthumb \
               -fno-threadsafe-statics
+
 #for compiling c (do not warn, this is not our code)
 CFLAGS:=$(COMMON_FLAGS) -std=gnu11
+
 #for compiling c++
 CXXFLAGS:=$(COMMON_FLAGS) -fno-rtti -fno-exceptions -std=gnu++11 -Wall -Wextra
 
 #let the results be named after the project
-#PROJNAME:=$(shell basename *.ino .ino)
 PROJNAME:=drone
 
 #These source files are the ones forming core.a
-CORESRCXX:=$(shell ls ${SAM}/src/*.cpp ${SAM}/libraries/USB/*.cpp ${SAM}/libraries/arduino_due/variant.cpp ${SAM}/libraries/Sensors/*.cpp ${SAM}/libraries/Receiver/*.cpp ${SAM}/libraries/LSM303/*.cpp ${SAM}/libraries/KalmanFilter-master/*.cpp ${SAM}/libraries/Arduino-PID-Library/*.cpp ${SAM}/libraries/AIDrone/*.cpp ${SAM}/libraries/Adafruit_master/*.cpp)
+CORESRCXX:=$(shell ls ${SAM}/src/*.cpp ${SAM}/libraries/USB/*.cpp ${SAM}/libraries/arduino_due/variant.cpp ${SAM}/libraries/Sensors/*.cpp ${SAM}/libraries/Receiver/*.cpp ${SAM}/libraries/LSM303/*.cpp ${SAM}/libraries/KalmanFilter-master/*.cpp ${SAM}/libraries/Arduino-PID-Library/*.cpp ${SAM}/libraries/AIDrone/*.cpp ${SAM}/libraries/Adafruit_master/*.cpp ${SAM}/libraries/UnitTest/*.cpp)
 CORESRC:=$(shell ls ${SAM}/src/*.c)
 
 #hey this one is needed too: $(SAM)/cores/arduino/wiring_pulse_asm.S" add -x assembler-with-cpp
@@ -165,11 +161,12 @@ $(TMPDIR)/core.a: $(TMPDIR)/core $(COREOBJS) $(COREOBJSXX)
 	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/SFE_BMP180.cpp.o
 	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/Servo.cpp.o
 	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/Wire.cpp.o
-
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/UnitTest.cpp.o
 
 #link our own object files with core to form the elf file
 $(TMPDIR)/$(PROJNAME).elf: $(TMPDIR)/core.a $(TMPDIR)/core/syscalls_sam3.c.o
 	$(CC) -mcpu=cortex-m3 -mthumb -Os -Wl,--gc-sections -T$(SAM)/libraries/arduino_due/linker_scripts/gcc/flash.ld -Wl,-Map,$(TMPDIR)/main.cpp.map -o $@ -L$(TMPDIR) -Wl,--cref -Wl,--check-sections -Wl,--gc-sections -Wl,--entry=Reset_Handler -Wl,--unresolved-symbols=report-all -Wl,--warn-common -Wl,--warn-section-align -Wl,--start-group -u _sbrk -u link -u _close -u _fstat -u _isatty -u _lseek -u _read -u _write -u _exit -u kill -u _getpid $(TMPDIR)/core/variant.cpp.o $(SAM)/libraries/arduino_due/libsam_sam3x8e_gcc_rel.a $(TMPDIR)/core.a -Wl,--end-group -lm -gcc
+
 #copy from the hex to our bin file (why?)
 $(TMPDIR)/$(PROJNAME).bin: $(TMPDIR)/$(PROJNAME).elf
 	$(OBJCOPY) -O binary $< $@
