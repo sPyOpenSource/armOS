@@ -121,7 +121,7 @@ void Drone::compute(){
 }
 
 void Drone::start(){
-   Serial.begin(115200);
+   //Serial.begin(115200);
 
    //turn the PID on
    myPID.x.Init(&lsm303.a.x , &output.x, &setpoint.x, Kp.x, Ki.x, Kd.x, DIRECT, -Maximum.x, Maximum.x);
@@ -243,6 +243,8 @@ void Drone::write(){
          Serial.print(kalMag.y.getRate());
          Serial.print(",");
          Serial.println(kalMag.z.getRate());
+         break;
+      default:
          break;
     }
 }

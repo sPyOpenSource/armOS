@@ -2,6 +2,12 @@
 #define PID_v1_h
 #define LIBRARY_VERSION	1.1.1
 
+#if ARDUINO >= 100
+  #include "Arduino.h"
+#else
+  #include "WProgram.h"
+#endif
+
 class PID
 {
   public:

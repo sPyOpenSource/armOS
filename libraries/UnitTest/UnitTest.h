@@ -11,6 +11,7 @@ class UnitTest
 {
     private:
         unsigned int testCount;
+        unsigned long time;
 
     public:
         /**

@@ -89,7 +89,7 @@ COREOBJSXX:=$(addsuffix .o,$(COREOBJSXX))
 COREOBJS:=$(addprefix $(TMPDIR)/core/,$(notdir $(CORESRC)) )
 COREOBJS:=$(addsuffix .o,$(COREOBJS))
 
-default: $(TMPDIR)/$(PROJNAME).elf
+default: $(TMPDIR)/$(PROJNAME).elf $(TMPDIR)/$(PROJNAME).bin
 
 #This is a make rule template to create object files from the source files.
 # arg 1=src file

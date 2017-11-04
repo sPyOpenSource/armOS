@@ -1,13 +1,18 @@
 #include "UnitTest.h"
 
 void UnitTest::start(){
+    Serial.begin(115200);
     testCount = 1;
     Serial.println("UnitTest:");
     Serial.println();
+    time = millis();
 }
 
 void UnitTest::end(){
-    Serial.println("End");
+    Serial.print("End: ");
+    Serial.print((millis()-time)/1000.0);
+    Serial.println("s");
+    Serial.println();
 }
 
 void UnitTest::assert(int a, int b){

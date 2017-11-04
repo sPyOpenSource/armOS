@@ -41,11 +41,11 @@ void testVectorDouble(){
   UnitTest unitTest;
   unitTest.start();
   VectorDouble testVector;
-  testVector.setValues(1, 1, 1);
-  unitTest.assert(testVector.x, 1.0);
-  unitTest.assert(testVector.y, 1.0);
-  unitTest.assert(testVector.z, 1.0);
-  unitTest.assert(testVector.length(), 1.0);
+  testVector.setValues(0, 3, 4);
+  unitTest.assert(testVector.x, 0.0);
+  unitTest.assert(testVector.y, 3.0);
+  unitTest.assert(testVector.z, 4.0);
+  unitTest.assert(testVector.length(), 5.0);
   Receiver testReceiver;
   unitTest.assert(testReceiver.getInput(0), (unsigned int)1000);
   unitTest.end();

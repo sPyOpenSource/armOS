@@ -1,3 +1,6 @@
+v1.4 XW 4-11-2017
+cleaned up the code
+
 v1.3 XW 3-11-2017
 added: UnitTest
 moved: Vector in AIDrone.h to Vector.h
