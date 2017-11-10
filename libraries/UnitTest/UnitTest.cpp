@@ -26,7 +26,7 @@ void UnitTest::assert(int a, int b){
         Serial.print(a);
         Serial.print(". But: ");
         Serial.println(b);
-        while(true){}
+        stop();
     }
     testCount++;
 }
@@ -42,7 +42,7 @@ void UnitTest::assert(unsigned int a, unsigned int b){
         Serial.print(a);
         Serial.print(". But: ");
         Serial.println(b);
-        while(true){}
+        stop();
     }
     testCount++;
 }
@@ -58,7 +58,7 @@ void UnitTest::assert(double a, double b){
         Serial.print(a);
         Serial.print(". But: ");
         Serial.println(b);
-        while(true){}
+        stop();
     }
     testCount++;
 }

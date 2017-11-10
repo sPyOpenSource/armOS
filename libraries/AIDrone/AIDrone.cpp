@@ -103,12 +103,12 @@ void Drone::compute(){
 
   lsm303.a.normalize();
   VectorDouble::cross(&lsm303.a, &gyro.data, &arate);
-  kalAcc.get(&lsm303.a, &arate, dt),
+  kalAcc.update(&lsm303.a, &arate, dt),
 
   lsm303.m.minus(&offset);
   lsm303.m.normalize();
   VectorDouble::cross(&lsm303.m, &gyro.data, &mrate);
-  kalMag.get(&lsm303.m, &mrate, dt),
+  kalMag.update(&lsm303.m, &mrate, dt),
 
   VectorDouble::cross(&lsm303.m, &lsm303.a, &E);
   theta = atan2(E.y, E.x) - angle;
@@ -121,8 +121,6 @@ void Drone::compute(){
 }
 
 void Drone::start(){
-   //Serial.begin(115200);
-
    //turn the PID on
    myPID.x.Init(&lsm303.a.x , &output.x, &setpoint.x, Kp.x, Ki.x, Kd.x, DIRECT, -Maximum.x, Maximum.x);
    myPID.y.Init(&lsm303.a.y , &output.y, &setpoint.y, Kp.y, Ki.y, Kd.y, DIRECT, -Maximum.y, Maximum.y);
@@ -135,7 +133,9 @@ void Drone::start(){
    if (!gyro.begin(gyro.L3DS20_RANGE_250DPS))
    {
        Serial.println("Oops ... unable to initialize the L3GD20. Check your wiring!");
-       while (1);
+       while (true){
+         delay(60);
+       }
    }
    timer = micros();
    receiver.start(timer);

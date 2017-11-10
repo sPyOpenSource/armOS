@@ -32,6 +32,12 @@ class UnitTest
         void assert(unsigned int, unsigned int);
 
         void assert(double, double);
+
+        static void stop(){
+          while(true){
+            delay(60);
+          }
+        }
 };
 
 #endif

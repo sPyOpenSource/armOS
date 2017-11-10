@@ -8,6 +8,9 @@
 
 void Sensors::read()
 {
+  lsm303.read();
+  gyro.read();
+
   if(restartTemperature){
     statusTemperature = pressure.startTemperature();
     t0 = millis();
@@ -47,15 +50,28 @@ void Sensors::read()
 }
 
 void Sensors::start(){
+  Wire.begin();
+  lsm303.init();
+  lsm303.enableDefault();
+
+  // Try to initialise and warn if we couldn't detect the chip
+  if (!gyro.begin(gyro.L3DS20_RANGE_250DPS))
+  {
+      Serial.println("Oops ... unable to initialize the L3GD20. Check your wiring!");
+      UnitTest::stop();
+  }
+  
+  acc = lsm303.a;
+  mag = lsm303.m;
+  gyr = gyro.data;
+
   // Initialize the sensor (it is important to get calibration values stored on the device).
-  if (pressure.begin())
-    Serial.println("BMP180 init success");
-  else
+  if (!pressure.begin())
   {
     // Oops, something went wrong, this is usually a connection p,roblem,
     // see the comments at the top of this sketch for the proper connections.
     Serial.println("BMP180 init fail (disconnected?)\n\n");
-    while(1); // Pause forever.
+    UnitTest::stop();
   }
   statusTemperature = pressure.startTemperature();
   if (statusTemperature != 0)

@@ -61,7 +61,7 @@ class VectorKalman: public Vector<Kalman> {
       z.set(a->z);
     };
 
-    void get(VectorDouble * a, const VectorDouble * b, double dt){
+    void update(VectorDouble * a, const VectorDouble * b, double dt){
       a->x = x.get(a->x, b->x, dt);
       a->y = y.get(a->y, b->y, dt);
       a->z = z.get(a->z, b->z, dt);
