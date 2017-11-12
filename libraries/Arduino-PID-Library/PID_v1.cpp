@@ -16,7 +16,7 @@ void PID::Reset(){
  *   pid Output needs to be computed.  returns true when the output is computed,
  *   false when nothing has been done.
  **********************************************************************************/
-void PID::Compute(double dt, float v)
+void PID::Compute(double dt, double v)
 {
    /*Compute all the working error variables*/
    double input = *myInput;
@@ -48,7 +48,6 @@ void PID::SetTunings(double Kp, double Ki, double Kd)
 {
   if (Kp < 0 || Ki < 0 || Kd < 0) return;
 
-  dispKp = Kp; dispKi = Ki; dispKd = Kd;
   kp = Kp; ki = Ki; kd = Kd;
   if(controllerDirection ==REVERSE)
    {
@@ -111,13 +110,3 @@ void PID::SetControllerDirection(int Direction)
    }
    controllerDirection = Direction;
 }
-
-/* Status Funcions*************************************************************
- * Just because you set the Kp=-1 doesn't mean it actually happened.  these
- * functions query the internal state of the PID.  they're here for display
- * purposes.  this are the functions the PID Front-end uses for example
- ******************************************************************************/
-double PID::GetKp(){ return  dispKp; }
-double PID::GetKi(){ return  dispKi; }
-double PID::GetKd(){ return  dispKd; }
-int PID::GetDirection(){ return controllerDirection; }

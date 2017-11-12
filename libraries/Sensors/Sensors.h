@@ -15,8 +15,7 @@
 class Sensors {
   public:
     double T = 20;  // in degree Celsius
-    double P;
-    double height;
+    double P, height;
     VectorDouble gyr, acc, mag;
     void start();
     void read();
@@ -25,10 +24,9 @@ class Sensors {
     SFE_BMP180 pressure;
     LSM303 lsm303;
     Adafruit_L3GD20 gyro;
-    bool restartTemperature = true;
+    bool restartTemperature = true, restartPressure = true;
     char statusPressure, statusTemperature;
     uint32_t t0, t1;
-    bool restartPressure = true;
     double baseline = 1013.2;  // in mbar
 };
 

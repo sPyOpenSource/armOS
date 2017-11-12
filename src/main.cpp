@@ -37,7 +37,7 @@ extern void SysTick_Handler( void )
 void initVariant() __attribute__((weak));
 void initVariant() { }
 
-void testVectorDouble(){
+void testUnitTest(){
   UnitTest unitTest;
   unitTest.start();
   VectorDouble testVector;
@@ -48,13 +48,23 @@ void testVectorDouble(){
   unitTest.assert(testVector.length(), 5.0);
   Receiver testReceiver;
   unitTest.assert(testReceiver.getInput(0), (unsigned int)1000);
+  Kalman testKalman;
+  testKalman.setParameters(1, 1, 1);
+  testKalman.set(1);
+  unitTest.assert(testKalman.get(1, 1, 1), 1.0);
+  unitTest.assert(testKalman.getRate(), 1.0);
+  PID testPID;
+  double a=1,b,c=1;
+  testPID.Init(&a,&b,&c,1,1,1,1,1,1);
+  testPID.Compute(1,1);
+  unitTest.assert(b,-3.0);
   unitTest.end();
 }
 
 Drone drone;
 
 void setup(){
-  testVectorDouble();
+  testUnitTest();
   drone.start();
 }
 

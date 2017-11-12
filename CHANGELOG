@@ -1,3 +1,6 @@
+v1.6 XW 12-11-2017
+added: unitest for kalman and pid
+
 v1.5 XW 10-11-2017
 added: gyr, acc and mag to sensors.
 

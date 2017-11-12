@@ -26,22 +26,18 @@ public:
     double get(double newX, double newRate, double dt);
 
     void set(double x); // Used to set angle, this should be set as the starting angle
-    double getRate(); // Return the unbiased rate
+    double getRate();   // Return the unbiased rate
 
     /* These are used to tune the Kalman filter */
     void setParameters(double Q, double Q_bias, double R_measure);
 
-    double getQ();
-    double getQbias();
-    double getRmeasure();
-
 private:
     /* Kalman filter variables */
-    double Q; // Process noise variance for the accelerometer
-    double Q_bias; // Process noise variance for the gyro bias
+    double Q;         // Process noise variance for the accelerometer
+    double Q_bias;    // Process noise variance for the gyro bias
     double R_measure; // Measurement noise variance - this is actually the variance of the measurement noise
 
-    double x; // The angle calculated by the Kalman filter - part of the 2x1 state vector
+    double x;    // The angle calculated by the Kalman filter - part of the 2x1 state vector
     double bias; // The gyro bias calculated by the Kalman filter - part of the 2x1 state vector
     double rate; // Unbiased rate calculated from the rate and the calculated bias - you have to call getAngle to update the rate
 

@@ -89,7 +89,3 @@ void Kalman::setParameters(double Q, double Q_bias, double R_measure) {
 	this->Q_bias = Q_bias;
 	this->R_measure = R_measure;
 };
-
-double Kalman::getQ() { return this->Q; };
-double Kalman::getQbias() { return this->Q_bias; };
-double Kalman::getRmeasure() { return this->R_measure; };
