@@ -65,13 +65,11 @@ Drone drone;
 
 void setup(){
   testUnitTest();
-  drone.start();
+  drone.init();
 }
 
 void loop(){
-  drone.read();
   drone.compute();
-  drone.write();
 }
 
 

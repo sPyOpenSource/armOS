@@ -37,12 +37,12 @@ class Drone {
       	double opticalY = 0;
       	int motor[4] = {1000, 1000, 1000, 1000};
       	const byte motorPin[4] = {9, 10, 11, 12};
+        void read();
+        void write();
 
     public:
         Drone();
-        void read();
-        void write();
         void compute();
-        void start();
+        void init();
 };
 #endif

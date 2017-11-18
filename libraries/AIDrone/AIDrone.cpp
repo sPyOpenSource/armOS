@@ -97,6 +97,7 @@ void Drone::read(){
 }
 
 void Drone::compute(){
+  read();
   uint32_t start = micros();
   double dt = (double)(start - timer) / 1000000; // Calculate delta time in seconds
   timer = start;
@@ -118,9 +119,10 @@ void Drone::compute(){
 
   myPID.x.Compute(dt, kalAcc.x.getRate());
   myPID.y.Compute(dt, kalAcc.y.getRate());
+  write();
 }
 
-void Drone::start(){
+void Drone::init(){
    //turn the PID on
    myPID.x.Init(&lsm303.a.x , &output.x, &setpoint.x, Kp.x, Ki.x, Kd.x, DIRECT, -Maximum.x, Maximum.x);
    myPID.y.Init(&lsm303.a.y , &output.y, &setpoint.y, Kp.y, Ki.y, Kd.y, DIRECT, -Maximum.y, Maximum.y);
