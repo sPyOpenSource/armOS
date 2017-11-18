@@ -43,7 +43,7 @@ void Drone::read(){
       switch (Serial.read()){
       case '0':
         out = Serial.parseInt();
-        Serial.println("0:OK");
+        Serial.println("OK");
         break;
       case '1':
         Kp.x = Serial.parseFloat();
@@ -58,7 +58,7 @@ void Drone::read(){
         myPID.x.SetTunings(Kp.x, Ki.x, Kd.x);
         myPID.y.SetTunings(Kp.y, Ki.y, Kd.y);
         myPID.z.SetTunings(Kp.z, Ki.z, Kd.z);
-        Serial.println("0:OK");
+        Serial.println("OK");
         break;
       case '2':
         QAcc.x = Serial.parseFloat();
@@ -71,26 +71,26 @@ void Drone::read(){
         RAcc.y = Serial.parseFloat();
         RAcc.z = Serial.parseFloat();
         kalAcc.setParameters(&QAcc, &QbiasAcc, &RAcc);
-        Serial.println("0:OK");
+        Serial.println("OK");
         break;
       case '3':
         offset.x = Serial.parseFloat();
         offset.y = Serial.parseFloat();
         offset.z = Serial.parseFloat();
-        Serial.println("0:OK");
+        Serial.println("OK");
         break;
       case '4':
         m_offset.x = Serial.parseFloat();
         m_offset.y = Serial.parseFloat();
         m_offset.z = Serial.parseFloat();
-        Serial.println("0:OK");
+        Serial.println("OK");
         break;
       case '5':
         opticalX = Serial.parseFloat();
         opticalY = Serial.parseFloat();
         break;
       default:
-        Serial.println("0:BAD");
+        Serial.println("Unknown");
         break;
       }
    }
@@ -196,7 +196,6 @@ void Drone::write(){
          Serial.println(motor[3]);
          break;
      case 8:
-       	 Serial.print("8:");
        	 Serial.print(m_offset.x);
        	 Serial.print(",");
        	 Serial.print(m_offset.y);
@@ -224,7 +223,6 @@ void Drone::write(){
        	 Serial.println(gyro.data.z);
        	 break;
      case 11:
-         Serial.print("11:");
          Serial.print(dq*1000);
          Serial.print(",");
          Serial.print(dqb*1000);
