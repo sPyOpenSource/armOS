@@ -2,7 +2,7 @@
 #define LSM303_h
 
 #include <Arduino.h> // for byte data type
-#include <Vector.h>
+#include <common/Vector.h>
 #include <Wire.h>
 
 class LSM303

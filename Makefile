@@ -59,7 +59,8 @@ INCLUDES:=-I$(ADIR)/libraries/arduino_due -I$(ADIR)/src/sam \
           -I$(ADIR)/src -I$(ADIR)/libraries/AIDrone -I$(ADIR)/libraries/UnitTest \
           -I$(ADIR)/libraries/Adafruit_GFX_Library -I$(ADIR)/libraries/Adafruit_ST7735_and_ST7789_Library \
 	  			-I$(ADIR)/libraries/SD/src -I$(ADIR)/libraries/HID/src -I$(ADIR)/libraries/SPI/src \
-					-I$(ADIR)/libraries/USB
+					-I$(ADIR)/libraries/USB -I$(ADIR)/libraries/Servo/src -I$(ADIR)/libraries/SFE_BMP180 \
+					-I$(ADIR)/libraries/Wire
 
 #also include the current dir for convenience
 INCLUDES += -I.

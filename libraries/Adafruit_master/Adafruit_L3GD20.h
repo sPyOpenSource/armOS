@@ -23,7 +23,7 @@
  #include "WProgram.h"
 #endif
 #include "Wire.h"
-#include <Vector.h>
+#include <common/Vector.h>
 
 #define L3GD20_ADDRESS                (0x6B)        // 1101011
 #define L3GD20_POLL_TIMEOUT           (100)         // Maximum number of read attempts
