@@ -33,10 +33,10 @@
  *        Headers
  *----------------------------------------------------------------------------*/
 
-#include "../Includes/Arduino.h"
+#include "Arduino.h"
 #ifdef __cplusplus
-#include "../Includes/UARTClass.h"
-#include "../Includes/USARTClass.h"
+#include "UARTClass.h"
+#include "USARTClass.h"
 #endif
 
 #ifdef __cplusplus
@@ -47,7 +47,7 @@ extern "C"{
  * Libc porting layers
  */
 #if defined (  __GNUC__  ) /* GCC CS3 */
-#    include <../Includes/syscalls.h> /** RedHat Newlib minimal stub */
+#    include <syscalls.h> /** RedHat Newlib minimal stub */
 #endif
 
 /*----------------------------------------------------------------------------
@@ -281,4 +281,3 @@ extern USARTClass Serial3;
 #define SERIAL_PORT_HARDWARE3       Serial3
 
 #endif /* _VARIANT_ARDUINO_DUE_X_ */
-

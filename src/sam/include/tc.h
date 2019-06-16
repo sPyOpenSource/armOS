@@ -48,7 +48,7 @@
  *         Headers
  *------------------------------------------------------------------------------*/
 
-#include "../Includes/chip.h"
+#include "chip.h"
 
 #include <stdint.h>
 
@@ -83,4 +83,3 @@ extern void TC_SetRC(Tc *tc, uint32_t chan, uint32_t v) ;
 #endif
 
 #endif /* #ifndef _TC_ */
-

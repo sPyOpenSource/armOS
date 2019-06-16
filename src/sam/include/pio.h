@@ -34,7 +34,7 @@
  *         Headers
  */
 
-#include "../Includes/chip.h"
+#include "chip.h"
 
 #include <stdint.h>
 
@@ -129,4 +129,3 @@ extern uint32_t PIO_GetOutputDataStatus( const Pio* pPio, const uint32_t dwMask 
 #endif
 
 #endif /* #ifndef _PIO_ */
-

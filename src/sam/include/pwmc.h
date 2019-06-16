@@ -61,7 +61,7 @@
  *        Headers
  *----------------------------------------------------------------------------*/
 
-#include "../Includes/chip.h"
+#include "chip.h"
 
 #include <stdint.h>
 
@@ -106,4 +106,3 @@ extern void PWMC_ConfigureEventLineMode( Pwm* pPwm, uint32_t x, uint32_t mode ) 
 #endif
 
 #endif /* #ifndef _PWMC_ */
-

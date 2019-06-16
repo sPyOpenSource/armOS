@@ -1,7 +1,7 @@
 /**
  * \file
  *
- * \brief General Purpose Backup Registers (GPBR) driver for SAM.
+ * \brief Reset Controller (RSTC) driver for SAM.
  *
  * Copyright (c) 2011-2012 Atmel Corporation. All rights reserved.
  *
@@ -41,40 +41,38 @@
  *
  */
 
-#ifndef GPBR_H_INCLUDED
-#define GPBR_H_INCLUDED
+#ifndef RSTC_H_INCLUDED
+#define RSTC_H_INCLUDED
 
-#include "../Includes/chip.h"
+#include "chip.h"
 
-/// @cond 0
-/**INDENT-OFF**/
 #ifdef __cplusplus
 extern "C" {
 #endif
-/**INDENT-ON**/
-/// @endcond
 
-/** GPBR register number type */
-typedef enum gpbr_num_type {
-	GPBR0 = 0,
-	GPBR1,
-	GPBR2,
-	GPBR3,
-	GPBR4,
-	GPBR5,
-	GPBR6,
-	GPBR7
-} gpbr_num_t;
+/** Definitions of Reset Controller Status */
+/** Reset cause */
+#define RSTC_GENERAL_RESET   (0 << RSTC_SR_RSTTYP_Pos)
+#define RSTC_BACKUP_RESET    (1 << RSTC_SR_RSTTYP_Pos)
+#define RSTC_WATCHDOG_RESET  (2 << RSTC_SR_RSTTYP_Pos)
+#define RSTC_SOFTWARE_RESET  (3 << RSTC_SR_RSTTYP_Pos)
+#define RSTC_USER_RESET      (4 << RSTC_SR_RSTTYP_Pos)
+/** NRST Pin Level */
+#define RSTC_NRST_LOW   (LOW << 16)
+#define RSTC_NRST_HIGH  (HIGH << 16)
 
-uint32_t gpbr_read(gpbr_num_t ul_reg_num);
-void gpbr_write(gpbr_num_t ul_reg_num, uint32_t ul_value);
+void rstc_set_external_reset(Rstc* p_rstc, const uint32_t ul_length);
+void rstc_enable_user_reset(Rstc* p_rstc);
+void rstc_disable_user_reset(Rstc* p_rstc);
+void rstc_enable_user_reset_interrupt(Rstc* p_rstc);
+void rstc_disable_user_reset_interrupt(Rstc* p_rstc);
+void rstc_start_software_reset(Rstc* p_rstc);
+void rstc_reset_extern(Rstc *p_rstc);
+uint32_t rstc_get_status(Rstc* p_rstc);
+uint32_t rstc_get_reset_cause(Rstc* p_rstc);
 
-/// @cond 0
-/**INDENT-OFF**/
 #ifdef __cplusplus
 }
 #endif
-/**INDENT-ON**/
-/// @endcond
 
-#endif /* GPBR_H_INCLUDED */
+#endif /* RSTC_H_INCLUDED */

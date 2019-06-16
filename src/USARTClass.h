@@ -8,7 +8,7 @@
 
   This library is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
   See the GNU Lesser General Public License for more details.
 
   You should have received a copy of the GNU Lesser General Public
@@ -23,7 +23,7 @@
 #include "RingBuffer.h"
 
 // Includes Atmel CMSIS
-#include <../Includes/chip.h>
+#include <chip.h>
 
 // Define config for Serial.begin(baud, config);
 #define SERIAL_5N1 USARTClass::Mode_5N1

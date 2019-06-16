@@ -58,7 +58,7 @@
  *         Headers
  *------------------------------------------------------------------------------*/
 
-#include "../Includes/chip.h"
+#include "chip.h"
 
 #include <stdint.h>
 
@@ -130,4 +130,3 @@ extern uint8_t USART_GetChar( Usart *usart ) ;
 #endif
 
 #endif /* #ifndef _USART_ */
-

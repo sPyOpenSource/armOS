@@ -22,7 +22,7 @@
 /*
  * Core and peripherals registers definitions
  */
-#include <../Includes/sam/sam.h>
+#include <sam/sam.h>
 
 /* Define attribute */
 #if defined (  __GNUC__  ) /* GCC CS3 */
@@ -41,37 +41,37 @@
 /*
  * Peripherals
  */
-#include "../Includes/sam/include/adc.h"
+#include "sam/include/adc.h"
 #if (SAM3XA_SERIES) || (SAM3N_SERIES) || (SAM3S_SERIES)
-#include "../Includes/sam/include/dacc.h"
+#include "sam/include/dacc.h"
 #endif // (SAM3XA_SERIES) || (SAM3N_SERIES) || (SAM3S_SERIES)
 
-#include "../Includes/sam/include/interrupt_sam_nvic.h"
-#include "../Includes/sam/include/efc.h"
-#include "../Includes/sam/include/gpbr.h"
-#include "../Includes/sam/include/pio.h"
-#include "../Includes/sam/include/pmc.h"
-#include "../Includes/sam/include/pwmc.h"
-#include "../Includes/sam/include/rstc.h"
-#include "../Includes/sam/include/rtc.h"
-#include "../Includes/sam/include/rtt.h"
-#include "../Includes/sam/include/spi.h"
-#include "../Includes/sam/include/ssc.h"
-#include "../Includes/sam/include/tc.h"
-#include "../Includes/sam/include/twi.h"
-#include "../Includes/sam/include/usart.h"
-#include "../Includes/sam/include/wdt.h"
+#include "sam/include/interrupt_sam_nvic.h"
+#include "sam/include/efc.h"
+#include "sam/include/gpbr.h"
+#include "sam/include/pio.h"
+#include "sam/include/pmc.h"
+#include "sam/include/pwmc.h"
+#include "sam/include/rstc.h"
+#include "sam/include/rtc.h"
+#include "sam/include/rtt.h"
+#include "sam/include/spi.h"
+#include "sam/include/ssc.h"
+#include "sam/include/tc.h"
+#include "sam/include/twi.h"
+#include "sam/include/usart.h"
+#include "sam/include/wdt.h"
 
-#include "../Includes/sam/include/timetick.h"
-#include "../Includes/sam/include/USB_device.h"
-#include "../Includes/sam/include/USB_host.h"
+#include "sam/include/timetick.h"
+#include "sam/include/USB_device.h"
+#include "sam/include/USB_host.h"
 
 #if (SAM3XA_SERIES)
-#include "../Includes/sam/include/can.h"
-#include "../Includes/sam/include/emac.h"
-#include "../Includes/sam/include/trng.h"
-#include "../Includes/sam/include/uotghs_device.h"
-#include "../Includes/sam/include/uotghs_host.h"
+#include "sam/include/can.h"
+#include "sam/include/emac.h"
+#include "sam/include/trng.h"
+#include "sam/include/uotghs_device.h"
+#include "sam/include/uotghs_host.h"
 #endif /* (SAM3XA_SERIES) */
 
 #endif /* _LIB_SAM_ */

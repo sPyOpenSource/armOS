@@ -41,7 +41,7 @@
  *         Headers
  *------------------------------------------------------------------------------*/
 
-#include "../Includes/chip.h"
+#include "chip.h"
 
 #include <stdint.h>
 

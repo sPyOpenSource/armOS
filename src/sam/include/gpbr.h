@@ -1,7 +1,7 @@
 /**
  * \file
  *
- * \brief API for SAM TRNG.
+ * \brief General Purpose Backup Registers (GPBR) driver for SAM.
  *
  * Copyright (c) 2011-2012 Atmel Corporation. All rights reserved.
  *
@@ -41,10 +41,10 @@
  *
  */
 
-#ifndef TRNG_H_INCLUDED
-#define TRNG_H_INCLUDED
+#ifndef GPBR_H_INCLUDED
+#define GPBR_H_INCLUDED
 
-#include "../Includes/chip.h"
+#include "chip.h"
 
 /// @cond 0
 /**INDENT-OFF**/
@@ -54,13 +54,20 @@ extern "C" {
 /**INDENT-ON**/
 /// @endcond
 
-void trng_enable(Trng *p_trng);
-void trng_disable(Trng *p_trng);
-void trng_enable_interrupt(Trng *p_trng);
-void trng_disable_interrupt(Trng *p_trng);
-uint32_t trng_get_interrupt_mask(Trng *p_trng);
-uint32_t trng_get_interrupt_status(Trng *p_trng);
-uint32_t trng_read_output_data(Trng *p_trng);
+/** GPBR register number type */
+typedef enum gpbr_num_type {
+	GPBR0 = 0,
+	GPBR1,
+	GPBR2,
+	GPBR3,
+	GPBR4,
+	GPBR5,
+	GPBR6,
+	GPBR7
+} gpbr_num_t;
+
+uint32_t gpbr_read(gpbr_num_t ul_reg_num);
+void gpbr_write(gpbr_num_t ul_reg_num, uint32_t ul_value);
 
 /// @cond 0
 /**INDENT-OFF**/
@@ -70,4 +77,4 @@ uint32_t trng_read_output_data(Trng *p_trng);
 /**INDENT-ON**/
 /// @endcond
 
-#endif /* TRNG_H_INCLUDED */
+#endif /* GPBR_H_INCLUDED */

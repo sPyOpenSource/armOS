@@ -30,7 +30,7 @@
 #ifndef UTILS_INTERRUPT_INTERRUPT_H
 #define UTILS_INTERRUPT_INTERRUPT_H
 
-#include "../Includes/chip.h"
+#include "chip.h"
 
 /**
  * \weakgroup interrupt_group

@@ -44,7 +44,7 @@
 #ifndef EMAC_H_INCLUDED
 #define EMAC_H_INCLUDED
 
-#include "../Includes/chip.h"
+#include "chip.h"
 //#include "conf_eth.h"
 
 /// @cond 0

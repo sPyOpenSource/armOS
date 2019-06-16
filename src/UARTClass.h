@@ -8,7 +8,7 @@
 
   This library is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
   See the GNU Lesser General Public License for more details.
 
   You should have received a copy of the GNU Lesser General Public
@@ -23,7 +23,7 @@
 #include "RingBuffer.h"
 
 // Includes Atmel CMSIS
-#include <../Includes/chip.h>
+#include <chip.h>
 
 #define SERIAL_8N1 UARTClass::Mode_8N1
 #define SERIAL_8E1 UARTClass::Mode_8E1

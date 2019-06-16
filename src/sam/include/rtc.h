@@ -40,7 +40,7 @@
 /*----------------------------------------------------------------------------
  *        Headers
  *----------------------------------------------------------------------------*/
-#include "../Includes/chip.h"
+#include "chip.h"
 
 #include <stdint.h>
 
@@ -94,4 +94,3 @@ extern uint32_t RTC_GetSR( Rtc* pRtc, uint32_t dwMask ) ;
 #endif
 
 #endif /* #ifndef _RTC_ */
-

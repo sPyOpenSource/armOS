@@ -30,7 +30,7 @@
 #ifndef ADC_H_INCLUDED
 #define ADC_H_INCLUDED
 
-#include "../Includes/chip.h"
+#include "chip.h"
 
 /// @cond 0
 /**INDENT-OFF**/

@@ -41,7 +41,7 @@
  *        Headers
  *----------------------------------------------------------------------------*/
 
-#include "../Includes/chip.h"
+#include "chip.h"
 
 /*----------------------------------------------------------------------------
  *        Macros
@@ -114,4 +114,3 @@ extern uint32_t SPI_ReadBuffer( Spi* spi, void* pvBuffer, uint32_t dwLength ) ;
 #endif
 
 #endif /* #ifndef _SPI_ */
-

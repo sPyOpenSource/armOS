@@ -52,11 +52,11 @@ TMPDIR:=$(PWD)/build
 DEFINES:=-Dprintf=iprintf -DF_CPU=84000000  -DARDUINO=10611 -D__SAM3X8E__ -DUSB_PID=0x003e -DUSB_VID=0x2341 -DUSBCON \
          -DARDUINO_SAM_DUE -DARDUINO_ARCH_SAM '-DUSB_MANUFACTURER="Arduino LLC"' '-DUSB_PRODUCT="Arduino Due"'
 
-INCLUDES:=-I$(ADIR)/libraries/arduino_due -I$(ADIR)/Includes/sam \
+INCLUDES:=-I$(ADIR)/libraries/arduino_due -I$(ADIR)/src/sam \
           -I$(ADIR)/libraries/Receiver -I$(ADIR)/libraries/Sensors \
           -I$(ADIR)/libraries/Adafruit_master -I$(ADIR)/libraries/Arduino-PID-Library \
           -I$(ADIR)/libraries/KalmanFilter-master -I$(ADIR)/libraries/LSM303 \
-          -I$(ADIR)/Includes -I$(ADIR)/libraries/AIDrone -I$(ADIR)/libraries/UnitTest \
+          -I$(ADIR)/src -I$(ADIR)/libraries/AIDrone -I$(ADIR)/libraries/UnitTest \
           -I$(ADIR)/libraries/Adafruit_GFX_Library -I$(ADIR)/libraries/Adafruit_ST7735_and_ST7789_Library \
 	  			-I$(ADIR)/libraries/SD/src -I$(ADIR)/libraries/HID/src -I$(ADIR)/libraries/SPI/src \
 					-I$(ADIR)/libraries/USB

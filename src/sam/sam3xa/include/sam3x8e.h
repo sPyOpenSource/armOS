@@ -257,7 +257,7 @@ void WDT_Handler        ( void );
  * \brief CMSIS includes
  */
 
-#include <../Includes/core/core_cm3.h>
+#include <core/core_cm3.h>
 #if !defined DONT_USE_CMSIS_INIT
 #include "system_sam3xa.h"
 #endif /* DONT_USE_CMSIS_INIT */

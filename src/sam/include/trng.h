@@ -1,7 +1,7 @@
 /**
  * \file
  *
- * \brief Reset Controller (RSTC) driver for SAM.
+ * \brief API for SAM TRNG.
  *
  * Copyright (c) 2011-2012 Atmel Corporation. All rights reserved.
  *
@@ -41,38 +41,33 @@
  *
  */
 
-#ifndef RSTC_H_INCLUDED
-#define RSTC_H_INCLUDED
+#ifndef TRNG_H_INCLUDED
+#define TRNG_H_INCLUDED
 
-#include "../Includes/chip.h"
+#include "chip.h"
 
+/// @cond 0
+/**INDENT-OFF**/
 #ifdef __cplusplus
 extern "C" {
 #endif
+/**INDENT-ON**/
+/// @endcond
 
-/** Definitions of Reset Controller Status */
-/** Reset cause */
-#define RSTC_GENERAL_RESET   (0 << RSTC_SR_RSTTYP_Pos)
-#define RSTC_BACKUP_RESET    (1 << RSTC_SR_RSTTYP_Pos)
-#define RSTC_WATCHDOG_RESET  (2 << RSTC_SR_RSTTYP_Pos)
-#define RSTC_SOFTWARE_RESET  (3 << RSTC_SR_RSTTYP_Pos)
-#define RSTC_USER_RESET      (4 << RSTC_SR_RSTTYP_Pos)
-/** NRST Pin Level */
-#define RSTC_NRST_LOW   (LOW << 16)
-#define RSTC_NRST_HIGH  (HIGH << 16)
+void trng_enable(Trng *p_trng);
+void trng_disable(Trng *p_trng);
+void trng_enable_interrupt(Trng *p_trng);
+void trng_disable_interrupt(Trng *p_trng);
+uint32_t trng_get_interrupt_mask(Trng *p_trng);
+uint32_t trng_get_interrupt_status(Trng *p_trng);
+uint32_t trng_read_output_data(Trng *p_trng);
 
-void rstc_set_external_reset(Rstc* p_rstc, const uint32_t ul_length);
-void rstc_enable_user_reset(Rstc* p_rstc);
-void rstc_disable_user_reset(Rstc* p_rstc);
-void rstc_enable_user_reset_interrupt(Rstc* p_rstc);
-void rstc_disable_user_reset_interrupt(Rstc* p_rstc);
-void rstc_start_software_reset(Rstc* p_rstc);
-void rstc_reset_extern(Rstc *p_rstc);
-uint32_t rstc_get_status(Rstc* p_rstc);
-uint32_t rstc_get_reset_cause(Rstc* p_rstc);
-
+/// @cond 0
+/**INDENT-OFF**/
 #ifdef __cplusplus
 }
 #endif
+/**INDENT-ON**/
+/// @endcond
 
-#endif /* RSTC_H_INCLUDED */
+#endif /* TRNG_H_INCLUDED */

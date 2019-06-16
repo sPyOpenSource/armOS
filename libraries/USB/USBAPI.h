@@ -21,8 +21,8 @@
 
 #if defined __cplusplus
 
-#include "../Includes/RingBuffer.h"
-#include "../Includes/Stream.h"
+#include "RingBuffer.h"
+#include "Stream.h"
 
 //================================================================================
 //================================================================================
