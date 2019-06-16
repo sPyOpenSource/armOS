@@ -80,7 +80,7 @@ CXXFLAGS:=$(COMMON_FLAGS) -fno-rtti -fno-exceptions -std=gnu++11 -Wall -Wextra
 PROJNAME:=drone
 
 #These source files are the ones forming core.a
-CORESRCXX:=$(shell ls ${SAM}/libraries/USB/*.cpp ${SAM}/libraries/HID/src/*.cpp ${SAM}/libraries/SD/src/*.cpp ${SAM}/libraries/SD/src/utility/*.cpp ${SAM}/libraries/SPI/src/*.cpp ${SAM}/libraries/Adafruit_GFX_Library/*.cpp ${SAM}/libraries/Adafruit_ST7735_and_ST7789_Library/*.cpp ${SAM}/src/*.cpp ${SAM}/libraries/USB/*.cpp ${SAM}/libraries/arduino_due/variant.cpp ${SAM}/libraries/Sensors/*.cpp ${SAM}/libraries/Receiver/*.cpp ${SAM}/libraries/LSM303/*.cpp ${SAM}/libraries/KalmanFilter-master/*.cpp ${SAM}/libraries/Arduino-PID-Library/*.cpp ${SAM}/libraries/AIDrone/*.cpp ${SAM}/libraries/Adafruit_master/*.cpp ${SAM}/libraries/UnitTest/*.cpp)
+CORESRCXX:=$(shell ls ${SAM}/src/gui/*.cpp ${SAM}/libraries/USB/*.cpp ${SAM}/libraries/Servo/src/sam/*.cpp ${SAM}/libraries/SFE_BMP180/*.cpp ${SAM}/libraries/Wire/*.cpp ${SAM}/libraries/HID/src/*.cpp ${SAM}/libraries/SD/src/*.cpp ${SAM}/libraries/SD/src/utility/*.cpp ${SAM}/libraries/SPI/src/*.cpp ${SAM}/libraries/Adafruit_GFX_Library/*.cpp ${SAM}/libraries/Adafruit_ST7735_and_ST7789_Library/*.cpp ${SAM}/src/*.cpp ${SAM}/libraries/USB/*.cpp ${SAM}/libraries/arduino_due/variant.cpp ${SAM}/libraries/Sensors/*.cpp ${SAM}/libraries/Receiver/*.cpp ${SAM}/libraries/LSM303/*.cpp ${SAM}/libraries/KalmanFilter-master/*.cpp ${SAM}/libraries/Arduino-PID-Library/*.cpp ${SAM}/libraries/AIDrone/*.cpp ${SAM}/libraries/Adafruit_master/*.cpp ${SAM}/libraries/UnitTest/*.cpp)
 CORESRC:=$(shell ls ${SAM}/src/*.c)
 
 #hey this one is needed too: $(SAM)/cores/arduino/wiring_pulse_asm.S" add -x assembler-with-cpp
@@ -175,6 +175,9 @@ $(TMPDIR)/core.a: $(TMPDIR)/core $(COREOBJS) $(COREOBJSXX)
 	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/SdVolume.cpp.o
 	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/SdFile.cpp.o
 	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/Sd2Card.cpp.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/desktop.cpp.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/widget.cpp.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/window.cpp.o
 
 #link our own object files with core to form the elf file
 $(TMPDIR)/$(PROJNAME).elf: $(TMPDIR)/core.a $(TMPDIR)/core/syscalls_sam3.c.o

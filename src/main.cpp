@@ -23,10 +23,12 @@
 #include <Adafruit_GFX.h>    // Core graphics library
 #include <Adafruit_ST7735.h> // Hardware-specific library
 #include <SD.h>
-//#include <gui/desktop.h>
-//#include <gui/window.h>
+#include <gui/desktop.h>
+#include <gui/window.h>
 
-//#define GRAPHICSMODE
+#define GRAPHICSMODE
+
+using namespace myos::gui;
 
 const int TFT_DC = 15;
 const int TFT_CS = 5;
@@ -101,6 +103,10 @@ void testUnitTest(){
 
 Drone drone;
 
+#ifdef GRAPHICSMODE
+    Desktop desktop(128, 160, 0x00, 0x00, 0xA8);
+#endif
+
 void setup(){
     Serial.begin(115200);
     tft.initR(INITR_BLACKTAB);
@@ -115,10 +121,47 @@ void setup(){
         drawtext("OK!", ST77XX_WHITE);
     }
     testUnitTest();
+    desktop.Draw(&tft);
+    //tft.fillRect(10, 12, 10, 10, ST77XX_WHITE);
     drone.init();
+
+    printf("Initializing Hardware, Stage 1\n");
+
+        #ifdef GRAPHICSMODE
+            //KeyboardDriver keyboard(&interrupts, &desktop);
+        #else
+            PrintfKeyboardEventHandler kbhandler;
+            KeyboardDriver keyboard(&interrupts, &kbhandler);
+        #endif
+
+        #ifdef GRAPHICSMODE
+            //MouseDriver mouse(&interrupts, &desktop);
+        #else
+            MouseToConsole mousehandler;
+            MouseDriver mouse(&interrupts, &mousehandler);
+        #endif
+
+        #ifdef GRAPHICSMODE
+            //VideoGraphicsArray vga;
+        #endif
+
+    printf("Initializing Hardware, Stage 2\n");
+
+    printf("Initializing Hardware, Stage 3\n");
+
+    #ifdef GRAPHICSMODE
+        //vga.SetMode(320, 200, 8);
+        Window win1(&desktop, 10, 10, 20, 20, 0x00, 0xA8, 0x00);
+        desktop.AddChild(&win1);
+        Window win2(&desktop, 40, 15, 30, 30, 0x00, 0xA8, 0x00);
+        desktop.AddChild(&win2);
+    #endif
 }
 
 void loop(){
+  #ifdef GRAPHICSMODE
+            desktop.Draw(&tft);
+  #endif
   drone.compute();
 }
 

@@ -1,13 +1,13 @@
 #ifndef __MYOS__COMMON__GRAPHICSCONTEXT_H
 #define __MYOS__COMMON__GRAPHICSCONTEXT_H
 
-//#include <drivers/vga.h>
+#include <Adafruit_ST7735.h> // Hardware-specific library
 
 namespace myos
 {
     namespace common
     {
-        typedef myos::drivers::VideoGraphicsArray GraphicsContext;
+        typedef Adafruit_ST7735 GraphicsContext;
     }
 }
 

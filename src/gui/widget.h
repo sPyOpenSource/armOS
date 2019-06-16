@@ -3,7 +3,7 @@
 #define __MYOS__GUI__WIDGET_H
 
 
-//#include <common/graphicscontext.h>
+#include <common/graphicscontext.h>
 //#include <drivers/keyboard.h>
 
 namespace myos
@@ -11,7 +11,7 @@ namespace myos
     namespace gui
     {
 
-        class Widget : public myos::drivers::KeyboardEventHandler
+        class Widget //: public myos::drivers::KeyboardEventHandler
         {
         protected:
             Widget* parent;
@@ -33,7 +33,7 @@ namespace myos
             ~Widget();
 
             virtual void GetFocus(Widget* widget);
-            virtual void ModelToScreen(int32_t &x, int32_t& y);
+            virtual void ModelToScreen(int32_t x, int32_t y);
             virtual bool ContainsCoordinate(int32_t x, int32_t y);
 
             virtual void Draw(common::GraphicsContext* gc);

@@ -7,7 +7,7 @@ using namespace myos::gui;
 
 Widget::Widget(Widget* parent, int32_t x, int32_t y, int32_t w, int32_t h,
                                uint8_t r, uint8_t g, uint8_t b)
-: KeyboardEventHandler()
+//: KeyboardEventHandler()
 {
     this->parent = parent;
     this->x = x;
@@ -30,7 +30,7 @@ void Widget::GetFocus(Widget* widget)
         parent->GetFocus(widget);
 }
 
-void Widget::ModelToScreen(int32_t &x, int32_t& y)
+void Widget::ModelToScreen(int32_t x, int32_t y)
 {
     if(parent != 0)
         parent->ModelToScreen(x, y);
@@ -43,7 +43,8 @@ void Widget::Draw(GraphicsContext* gc)
     int X = 0;
     int Y = 0;
     ModelToScreen(X, Y);
-    gc->FillRectangle(X, Y, w, h, r, g, b);
+    gc->fillRect(X, Y, w, h, (uint16_t)r << 11 | (uint16_t)g << 5 | (uint16_t)b);
+    //gc->fillRect(X, Y, w, h, ST77XX_WHITE);
 }
 
 void Widget::OnMouseDown(int32_t x, int32_t y, uint8_t button)
@@ -147,12 +148,12 @@ void CompositeWidget::OnMouseMove(int32_t oldx, int32_t oldy, int32_t newx, int3
 
 void CompositeWidget::OnKeyDown(char str)
 {
-    if(focussedChild != 0)
-        focussedChild->OnKeyDown(str);
+    /*if(focussedChild != 0)
+        focussedChild->OnKeyDown(str);*/
 }
 
 void CompositeWidget::OnKeyUp(char str)
 {
-    if(focussedChild != 0)
-        focussedChild->OnKeyUp(str);
+    /*if(focussedChild != 0)
+        focussedChild->OnKeyUp(str);*/
 }

@@ -8,8 +8,7 @@ using namespace myos::gui;
 
 Desktop::Desktop(int32_t w, int32_t h,
                  uint8_t r, uint8_t g, uint8_t b)
-:   CompositeWidget(0, 0, 0, w, h, r, g, b),
-    MouseEventHandler()
+:   CompositeWidget(0, 0, 0, w, h, r, g, b)//, MouseEventHandler()
 {
     MouseX = w / 2;
     MouseY = h / 2;
@@ -23,13 +22,14 @@ void Desktop::Draw(common::GraphicsContext* gc)
 {
     CompositeWidget::Draw(gc);
 
-    for(int i = 0; i < 4; i++)
+    /*for(int i = 0; i < 4; i++)
     {
         gc->PutPixel(MouseX - i, MouseY, 0xFF, 0xFF, 0xFF);
         gc->PutPixel(MouseX + i, MouseY, 0xFF, 0xFF, 0xFF);
         gc->PutPixel(MouseX, MouseY - i, 0xFF, 0xFF, 0xFF);
         gc->PutPixel(MouseX, MouseY + i, 0xFF, 0xFF, 0xFF);
-    }
+    }*/
+    gc->fillRect(2, 2, MouseX, MouseY, ST77XX_WHITE);
 }
 
 void Desktop::OnMouseDown(uint8_t button)

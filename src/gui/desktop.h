@@ -9,7 +9,7 @@ namespace myos
 {
     namespace gui
     {
-        class Desktop : public CompositeWidget, public myos::drivers::MouseEventHandler
+        class Desktop : public CompositeWidget//, public myos::drivers::MouseEventHandler
         {
         protected:
             uint32_t MouseX;
