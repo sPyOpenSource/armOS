@@ -23,6 +23,8 @@
 #include <Adafruit_GFX.h>    // Core graphics library
 #include <Adafruit_ST7735.h> // Hardware-specific library
 #include <SD.h>
+//#include <gui/desktop.h>
+//#include <gui/window.h>
 
 //#define GRAPHICSMODE
 
@@ -34,7 +36,7 @@ Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS,  TFT_DC, 0/*no reset*/);
 
 int i = 0;
 void drawtext(const char *text, uint16_t color) {
-  tft.setCursor(0, i * 20);
+  tft.setCursor(0, i * 10);
   i++;
   tft.setTextColor(color);
   tft.setTextWrap(true);
@@ -100,10 +102,11 @@ void testUnitTest(){
 Drone drone;
 
 void setup(){
+    Serial.begin(115200);
     tft.initR(INITR_BLACKTAB);
     tft.fillScreen(ST77XX_BLACK);
-    Serial.print("Initializing SD card...");
-    drawtext("Initializing SD card...", ST77XX_WHITE);
+    Serial.print("Initializing SD...");
+    drawtext("Initializing SD...", ST77XX_WHITE);
     if (!SD.begin(SD_CS)) {
         Serial.println("failed!");
         drawtext("failed!", ST77XX_WHITE);

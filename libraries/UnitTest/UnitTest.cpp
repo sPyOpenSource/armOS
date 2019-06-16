@@ -1,23 +1,26 @@
 #include "UnitTest.h"
+#include <Adafruit_ST7735.h> // Hardware-specific library
+
+void drawtext(const char *text, uint16_t color);
 
 void UnitTest::start(){
-    Serial.begin(115200);
     testCount = 1;
     Serial.println("UnitTest:");
+    drawtext("UnitTest:", ST77XX_WHITE);
     Serial.println();
     time = millis();
 }
 
 void UnitTest::end(){
     Serial.print("End: ");
-    Serial.print((millis()-time)/1000.0);
+    Serial.print((millis() - time) / 1000.0);
     Serial.println("s");
     Serial.println();
 }
 
 void UnitTest::assert(int a, int b){
     printf("Test %d: ", testCount);
-    if(a==b){
+    if(a == b){
         Serial.println("Passed");
         Serial.println();
     } else {
@@ -33,11 +36,13 @@ void UnitTest::assert(int a, int b){
 
 void UnitTest::assert(unsigned int a, unsigned int b){
     printf("Test %d: ", testCount);
-    if(a==b){
+    if(a == b){
         Serial.println("Passed");
+        drawtext("Passed", ST77XX_WHITE);
         Serial.println();
     } else {
         Serial.println("Failed");
+        drawtext("Failed", ST77XX_WHITE);
         Serial.print("Expected: ");
         Serial.print(a);
         Serial.print(". But: ");
@@ -49,11 +54,13 @@ void UnitTest::assert(unsigned int a, unsigned int b){
 
 void UnitTest::assert(double a, double b){
     printf("Test %d: ", testCount);
-    if(a==b){
+    if(a == b){
         Serial.println("Passed");
+        drawtext("Passed", ST77XX_WHITE);
         Serial.println();
     } else {
         Serial.println("Failed");
+        drawtext("Failed", ST77XX_WHITE);
         Serial.print("Expected: ");
         Serial.print(a);
         Serial.print(". But: ");
