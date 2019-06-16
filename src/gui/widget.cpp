@@ -43,8 +43,7 @@ void Widget::Draw(GraphicsContext* gc)
     int X = 0;
     int Y = 0;
     ModelToScreen(X, Y);
-    gc->fillRect(X, Y, w, h, (uint16_t)r << 11 | (uint16_t)g << 5 | (uint16_t)b);
-    //gc->fillRect(X, Y, w, h, ST77XX_WHITE);
+    gc->fillRect(x, y, w, h, (uint16_t)r << 11 | (uint16_t)g << 5 | (uint16_t)b);
 }
 
 void Widget::OnMouseDown(int32_t x, int32_t y, uint8_t button)

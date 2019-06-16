@@ -29,7 +29,7 @@ void Desktop::Draw(common::GraphicsContext* gc)
         gc->PutPixel(MouseX, MouseY - i, 0xFF, 0xFF, 0xFF);
         gc->PutPixel(MouseX, MouseY + i, 0xFF, 0xFF, 0xFF);
     }*/
-    gc->fillRect(2, 2, MouseX, MouseY, ST77XX_WHITE);
+    gc->fillRect(MouseX, MouseY, 4, 4, ST77XX_WHITE);
 }
 
 void Desktop::OnMouseDown(uint8_t button)

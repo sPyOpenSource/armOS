@@ -121,9 +121,6 @@ void setup(){
         drawtext("OK!", ST77XX_WHITE);
     }
     testUnitTest();
-    desktop.Draw(&tft);
-    //tft.fillRect(10, 12, 10, 10, ST77XX_WHITE);
-    drone.init();
 
     printf("Initializing Hardware, Stage 1\n");
 
@@ -151,11 +148,13 @@ void setup(){
 
     #ifdef GRAPHICSMODE
         //vga.SetMode(320, 200, 8);
-        Window win1(&desktop, 10, 10, 20, 20, 0x00, 0xA8, 0x00);
+        Window win1(&desktop, 10, 10, 20, 20, 0xFF, 0x00, 0x00);
         desktop.AddChild(&win1);
         Window win2(&desktop, 40, 15, 30, 30, 0x00, 0xA8, 0x00);
         desktop.AddChild(&win2);
     #endif
+    desktop.Draw(&tft);
+    drone.init();
 }
 
 void loop(){
