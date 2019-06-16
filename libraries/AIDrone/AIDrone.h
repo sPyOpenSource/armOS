@@ -27,7 +27,7 @@ class Drone {
         Vector<int> neutral;
         Vector<PID> myPID;
 
-      	int out = 1;
+      	int out = 8;
       	int startingPoint = 1400;
       	int timeout = 100000;           // in us
       	int wait = 300000;              // in us
@@ -37,6 +37,15 @@ class Drone {
       	double opticalY = 0;
       	int motor[4] = {1000, 1000, 1000, 1000};
       	const byte motorPin[4] = {9, 10, 11, 12};
+        const byte rightPWM     = 5;
+        const byte leftPWM      = 23;
+        const byte leftInL      = 27;
+        const byte leftInH      = 26;
+        const byte rightInL     = 2;
+        const byte rightInH     = 4;
+        const byte rightSensor  = 19;
+        const byte leftSensor   = 13;
+        const byte centerSensor = 12;
         void read();
         void write();
 

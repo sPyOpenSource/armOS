@@ -30,7 +30,7 @@ ADIR:=./
 #ATTRS{idVendor}=="2341", SYMLINK+="arduino_due" in /etc/udev/rules.d/
 #to get this working). Do not prefix the port with /dev/, just take
 #the basename.
-PORT:=ttyACM3
+PORT:=ttyACM0
 #if you want to verify the bossac upload, define this to -v
 VERIFY:=
 
@@ -56,7 +56,10 @@ INCLUDES:=-I$(ADIR)/libraries/arduino_due -I$(ADIR)/Includes/sam \
           -I$(ADIR)/libraries/Receiver -I$(ADIR)/libraries/Sensors \
           -I$(ADIR)/libraries/Adafruit_master -I$(ADIR)/libraries/Arduino-PID-Library \
           -I$(ADIR)/libraries/KalmanFilter-master -I$(ADIR)/libraries/LSM303 \
-          -I$(ADIR)/Includes -I$(ADIR)/libraries/AIDrone -I$(ADIR)/libraries/UnitTest
+          -I$(ADIR)/Includes -I$(ADIR)/libraries/AIDrone -I$(ADIR)/libraries/UnitTest \
+          -I$(ADIR)/libraries/Adafruit_GFX_Library -I$(ADIR)/libraries/Adafruit_ST7735_and_ST7789_Library \
+	  			-I$(ADIR)/libraries/SD/src -I$(ADIR)/libraries/HID/src -I$(ADIR)/libraries/SPI/src \
+					-I$(ADIR)/libraries/USB
 
 #also include the current dir for convenience
 INCLUDES += -I.
@@ -76,7 +79,7 @@ CXXFLAGS:=$(COMMON_FLAGS) -fno-rtti -fno-exceptions -std=gnu++11 -Wall -Wextra
 PROJNAME:=drone
 
 #These source files are the ones forming core.a
-CORESRCXX:=$(shell ls ${SAM}/src/*.cpp ${SAM}/libraries/USB/*.cpp ${SAM}/libraries/arduino_due/variant.cpp ${SAM}/libraries/Sensors/*.cpp ${SAM}/libraries/Receiver/*.cpp ${SAM}/libraries/LSM303/*.cpp ${SAM}/libraries/KalmanFilter-master/*.cpp ${SAM}/libraries/Arduino-PID-Library/*.cpp ${SAM}/libraries/AIDrone/*.cpp ${SAM}/libraries/Adafruit_master/*.cpp ${SAM}/libraries/UnitTest/*.cpp)
+CORESRCXX:=$(shell ls ${SAM}/libraries/USB/*.cpp ${SAM}/libraries/HID/src/*.cpp ${SAM}/libraries/SD/src/*.cpp ${SAM}/libraries/SD/src/utility/*.cpp ${SAM}/libraries/SPI/src/*.cpp ${SAM}/libraries/Adafruit_GFX_Library/*.cpp ${SAM}/libraries/Adafruit_ST7735_and_ST7789_Library/*.cpp ${SAM}/src/*.cpp ${SAM}/libraries/USB/*.cpp ${SAM}/libraries/arduino_due/variant.cpp ${SAM}/libraries/Sensors/*.cpp ${SAM}/libraries/Receiver/*.cpp ${SAM}/libraries/LSM303/*.cpp ${SAM}/libraries/KalmanFilter-master/*.cpp ${SAM}/libraries/Arduino-PID-Library/*.cpp ${SAM}/libraries/AIDrone/*.cpp ${SAM}/libraries/Adafruit_master/*.cpp ${SAM}/libraries/UnitTest/*.cpp)
 CORESRC:=$(shell ls ${SAM}/src/*.c)
 
 #hey this one is needed too: $(SAM)/cores/arduino/wiring_pulse_asm.S" add -x assembler-with-cpp
@@ -162,6 +165,15 @@ $(TMPDIR)/core.a: $(TMPDIR)/core $(COREOBJS) $(COREOBJSXX)
 	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/Servo.cpp.o
 	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/Wire.cpp.o
 	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/UnitTest.cpp.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/Adafruit_ST7735.cpp.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/SPI.cpp.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/SD.cpp.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/Adafruit_GFX.cpp.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/Adafruit_ST77xx.cpp.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/Adafruit_SPITFT.cpp.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/SdVolume.cpp.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/SdFile.cpp.o
+	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/Sd2Card.cpp.o
 
 #link our own object files with core to form the elf file
 $(TMPDIR)/$(PROJNAME).elf: $(TMPDIR)/core.a $(TMPDIR)/core/syscalls_sam3.c.o
@@ -174,7 +186,7 @@ $(TMPDIR)/$(PROJNAME).bin: $(TMPDIR)/$(PROJNAME).elf
 #upload to the arduino by first resetting it (stty) and the running bossac
 upload: $(TMPDIR)/$(PROJNAME).bin
 	stty -F /dev/$(PORT) cs8 1200 hupcl
-	$(ADIR)/packages/1.6.1-arduino/bossac -i -d --port=$(PORT) -U false -e -w $(VERIFY) -b $(TMPDIR)/$(PROJNAME).bin -R
+	./bossac -i -d --port=$(PORT) -U false -e -w $(VERIFY) -b $(TMPDIR)/$(PROJNAME).bin -R
 
 #to view the serial port with screen.
 monitor:

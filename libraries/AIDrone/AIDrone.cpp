@@ -22,7 +22,7 @@ Drone::Drone(){
    Maximum.setValues (  200      ,  200      ,  200      );
    factor.setValues  ( 1000      , 1000      ,    2      );
    m_offset.setValues(  -47      ,  -43.5    ,   14      );
-   neutral.setValues ( 1480      , 1500      , 1500      );
+   neutral.setValues ( 1471      , 1508      , 1508      );
 
    myServo[0].attach(motorPin[0]);
    myServo[1].attach(motorPin[1]);
@@ -99,11 +99,19 @@ void Drone::read(){
 void Drone::compute(){
   read();
   uint32_t start = micros();
-  double dt = (double)(start - timer) / 1000000; // Calculate delta time in seconds
+  double dt = (start - timer) / 1000000.0; // Calculate delta time in seconds
   timer = start;
 
   lsm303.a.normalize();
+  /*Serial.print(lsm303.a.x);
+  Serial.print(",");
+  Serial.print(lsm303.a.y);
+  Serial.print(",");
+  Serial.print(lsm303.a.z);
+  Serial.print(",");*/
   VectorDouble::cross(&lsm303.a, &gyro.data, &arate);
+  arate.x = - gyro.data.y;
+  arate.y =   gyro.data.x;
   kalAcc.update(&lsm303.a, &arate, dt),
 
   lsm303.m.minus(&offset);
@@ -117,33 +125,46 @@ void Drone::compute(){
   E.normalize();
   VectorDouble::cross(&lsm303.a, &E, &lsm303.m);
 
-  myPID.x.Compute(dt, kalAcc.x.getRate());
-  myPID.y.Compute(dt, kalAcc.y.getRate());
+  myPID.x.Compute(dt, arate.x);
+  myPID.y.Compute(dt, arate.y);
   write();
 }
 
 void Drone::init(){
+   pinMode(leftInL,  OUTPUT);
+   pinMode(leftInH,  OUTPUT);
+   pinMode(rightInL, OUTPUT);
+   pinMode(rightInH, OUTPUT);
+   pinMode(rightPWM, OUTPUT);
+   pinMode(leftPWM, OUTPUT);
+   pinMode(rightSensor,  INPUT);
+   pinMode(leftSensor,   INPUT);
+   pinMode(centerSensor, INPUT);
+   digitalWrite(leftInL,  LOW);
+   digitalWrite(leftInH,  HIGH);
+   digitalWrite(rightInL, LOW);
+   digitalWrite(rightInH, HIGH);
+   analogWrite(leftPWM,  0);
+   analogWrite(rightPWM, 0);
+
    //turn the PID on
-   myPID.x.Init(&lsm303.a.x , &output.x, &setpoint.x, Kp.x, Ki.x, Kd.x, DIRECT, -Maximum.x, Maximum.x);
-   myPID.y.Init(&lsm303.a.y , &output.y, &setpoint.y, Kp.y, Ki.y, Kd.y, DIRECT, -Maximum.y, Maximum.y);
-   myPID.z.Init(&theta , &output.z, &setpoint.z, Kp.z, Ki.z, Kd.z, DIRECT, -Maximum.z, Maximum.z);
+   myPID.x.Init(&lsm303.a.x , &output.x, &setpoint.x, Kp.x, Ki.x, Kd.x, DIRECT, - Maximum.x, Maximum.x);
+   myPID.y.Init(&lsm303.a.y , &output.y, &setpoint.y, Kp.y, Ki.y, Kd.y, DIRECT, - Maximum.y, Maximum.y);
+   myPID.z.Init(&theta , &output.z, &setpoint.z, Kp.z, Ki.z, Kd.z, DIRECT, - Maximum.z, Maximum.z);
    Wire.begin();
    lsm303.init();
    lsm303.enableDefault();
 
    // Try to initialise and warn if we couldn't detect the chip
-   if (!gyro.begin(gyro.L3DS20_RANGE_250DPS))
-   {
+   if (!gyro.begin(gyro.L3DS20_RANGE_250DPS)){
        Serial.println("Oops ... unable to initialize the L3GD20. Check your wiring!");
-       while (true){
+       while (true)
          delay(60);
-       }
    }
    timer = micros();
    receiver.start(timer);
-   while(micros() - timer < wait){
+   while(micros() - timer < wait)
        Drone::read();
-   }
    lsm303.m.minus(&offset);
    lsm303.m.normalize();
    lsm303.a.normalize();
@@ -155,39 +176,63 @@ void Drone::init(){
 
 double dq, dqb, dr;
 void Drone::write(){
-  if((micros() - receiver.getTime()) < timeout && (isSenderOn || receiver.getInput(2) < startingPoint)){
-     isSenderOn = true;
-     setpoint.x = - (receiver.getInput(1) - neutral.x) / factor.x;
-     setpoint.y =   (receiver.getInput(0) - neutral.y) / factor.y;
-     m_offset.z = - (receiver.getInput(3) - neutral.z) / factor.z + 15;
-     output.x += m_offset.x;
-     output.y += m_offset.y;
-     output.z = m_offset.z;
-     dq = (receiver.getInput(4) - 1000) / 10.0;
-     dqb = (receiver.getInput(5) - 1000) / 3.0;
-     myPID.x.SetTunings(dqb, Ki.x, dq);
-     myPID.y.SetTunings(dqb, Ki.y, dq);
-     motor[0] =   output.y * pow(sin(phi), 2) + output.x * pow(cos(phi), 2) + receiver.getInput(2) + output.z - opticalX - opticalY;
-     motor[1] = - output.y * pow(cos(phi), 2) + output.x * pow(sin(phi), 2) + receiver.getInput(2) - output.z + opticalX - opticalY;
-     motor[2] = - output.y * pow(sin(phi), 2) - output.x * pow(cos(phi), 2) + receiver.getInput(2) + output.z + opticalX + opticalY;
-     motor[3] =   output.y * pow(cos(phi), 2) - output.x * pow(sin(phi), 2) + receiver.getInput(2) - output.z - opticalX + opticalY;
-     myServo[0].writeMicroseconds(motor[0]);
-     myServo[1].writeMicroseconds(motor[1]);
-     myServo[2].writeMicroseconds(motor[2]);
-     myServo[3].writeMicroseconds(motor[3]);
+  if(receiver.getInput(2) > startingPoint){
+     //isSenderOn = true;
+     setpoint.x = - ((double)receiver.getInput(1) - neutral.x) / factor.x;
+     setpoint.y =   ((double)receiver.getInput(0) - neutral.y) / factor.y;
+     output.z   = - ((double)receiver.getInput(3) - neutral.z) / factor.z;
+     //dq = (receiver.getInput(4) - 1000) / 10.0;
+     //dqb = (receiver.getInput(5) - 1000) / 3.0;
+     //myPID.x.SetTunings(dqb, Ki.x, dq);
+     //myPID.y.SetTunings(dqb, Ki.y, dq);
+     motor[0] =   output.y * pow(sin(phi), 2) + output.x * pow(cos(phi), 2) + receiver.getInput(2) + output.z;// - opticalX - opticalY;
+     motor[1] = - output.y * pow(cos(phi), 2) + output.x * pow(sin(phi), 2) + receiver.getInput(2) - output.z;// + opticalX - opticalY;
+     motor[2] = - output.y * pow(sin(phi), 2) - output.x * pow(cos(phi), 2) + receiver.getInput(2) + output.z;// + opticalX + opticalY;
+     motor[3] =   output.y * pow(cos(phi), 2) - output.x * pow(sin(phi), 2) + receiver.getInput(2) - output.z;// - opticalX + opticalY;
   } else {
-     isSenderOn = false;
-     myServo[0].writeMicroseconds(1000);
-     myServo[1].writeMicroseconds(1000);
-     myServo[2].writeMicroseconds(1000);
-     myServo[3].writeMicroseconds(1000);
+     //isSenderOn = false;
+     motor[0] = 1000;
+     motor[1] = 1000;
+     motor[2] = 1000;
+     motor[3] = 1000;
      myPID.x.Reset();
      myPID.y.Reset();
-     myPID.z.Reset();
-     angle = atan2(E.y, E.x);
+     //myPID.z.Reset();
+     //angle = atan2(E.y, E.x);
   }
-
+  myServo[0].writeMicroseconds(motor[0]);
+  myServo[1].writeMicroseconds(motor[1]);
+  myServo[2].writeMicroseconds(motor[2]);
+  myServo[3].writeMicroseconds(motor[3]);
   switch(out){
+     case 1:
+         Serial.print(lsm303.m.x);
+         Serial.print(",");
+         Serial.print(lsm303.m.y);
+         Serial.print(",");
+         Serial.println(lsm303.m.z);
+         break;
+     case 2:
+         Serial.print(lsm303.a.x);
+         Serial.print(",");
+         Serial.print(lsm303.a.y);
+         Serial.print(",");
+         Serial.println(lsm303.a.z);
+         break;
+     case 3:
+         Serial.print(arate.x*100);
+         Serial.print(",");
+         Serial.print(arate.y*100);
+         Serial.print(",");
+         Serial.println(arate.z*100);
+         break;
+     case 4:
+         Serial.print(mrate.x);
+         Serial.print(",");
+         Serial.print(mrate.y);
+         Serial.print(",");
+         Serial.println(mrate.z);
+         break;
      case 5:
          Serial.print(motor[0]);
          Serial.print(",");
@@ -198,11 +243,11 @@ void Drone::write(){
          Serial.println(motor[3]);
          break;
      case 8:
-       	 Serial.print(m_offset.x);
+       	 Serial.print(output.x);
        	 Serial.print(",");
-       	 Serial.print(m_offset.y);
+       	 Serial.print(output.y);
        	 Serial.print(",");
-       	 Serial.println(m_offset.z);
+       	 Serial.println(output.z);
      	   break;
      case 9:
        	 Serial.print(receiver.getInput(0));
@@ -218,11 +263,11 @@ void Drone::write(){
        	 Serial.println(receiver.getInput(5));
        	 break;
      case 10:
-       	 Serial.print(gyro.data.x);
+       	 Serial.print(gyro.data.x*100);
        	 Serial.print(",");
-       	 Serial.print(gyro.data.y);
+       	 Serial.print(gyro.data.y*100);
        	 Serial.print(",");
-       	 Serial.println(gyro.data.z);
+       	 Serial.println(gyro.data.z*100);
        	 break;
      case 11:
          Serial.print(dq*1000);
@@ -232,17 +277,18 @@ void Drone::write(){
          Serial.println(dr*1000);
          break;
      case 12:
-         Serial.print(mrate.x);
-         Serial.print(",");
-         Serial.print(mrate.y);
-         Serial.print(",");
-         Serial.print(mrate.z);
-         Serial.print(",");
          Serial.print(kalMag.x.getRate());
          Serial.print(",");
          Serial.print(kalMag.y.getRate());
          Serial.print(",");
          Serial.println(kalMag.z.getRate());
+         break;
+     case 13:
+         Serial.print(kalAcc.x.getRate()*100);
+         Serial.print(",");
+         Serial.print(kalAcc.y.getRate()*100);
+         Serial.print(",");
+         Serial.println(kalAcc.z.getRate()*100);
          break;
       default:
          break;

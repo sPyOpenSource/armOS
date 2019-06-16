@@ -1,5 +1,5 @@
 Drone
-========
+=====
 
 Motivation
 ----------
@@ -17,7 +17,7 @@ Now you have to go inside the folder:
 
 Now goto https://developer.arm.com/open-source/gnu-toolchain/gnu-rm/downloads to download the tool chain and unzip it to this folder. Then run following command to compile:
 
-	make all
+	make
 
 To clean the build:
 
