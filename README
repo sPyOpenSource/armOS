@@ -21,4 +21,4 @@ Now goto https://developer.arm.com/open-source/gnu-toolchain/gnu-rm/downloads to
 
 To clean the build:
 
-  make clean
+  	make clean
