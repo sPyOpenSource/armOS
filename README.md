@@ -39,6 +39,9 @@ Steps
   - Illustrate hardware abstraction layer (HAL) by introducing CMSIS
   - Both emulator (based on stm32-p103) and real device (STM32F429i discovery)
     are supported.
+* `09-mOS`
+* `10-RPi`
+* `11-dueOS`
 
 Building and Verification
 -------------------------
