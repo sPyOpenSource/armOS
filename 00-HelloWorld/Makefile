@@ -1,4 +1,4 @@
-CROSS_COMPILE ?= arm-none-eabi-
+CROSS_COMPILE ?= /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/bin/arm-none-eabi-
 CC := $(CROSS_COMPILE)gcc
 CFLAGS = -fno-common -O0 \
 	 -mcpu=cortex-m3 -mthumb \

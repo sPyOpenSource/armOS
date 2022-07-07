@@ -1,2 +1,0 @@
-/home/spy/Source/OS/armOS/10-RPi3/out/build/CMakeFiles/edit_cache.dir
-/home/spy/Source/OS/armOS/10-RPi3/out/build/CMakeFiles/rebuild_cache.dir

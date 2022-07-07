@@ -1,8 +1,10 @@
-/build
+*.bin
+*.elf
+*.list
+build
 /.settings
 .cproject
 .project
-/Binaries
-/CMSIS
+/11-dueOS/Binaries
 /gcc-arm-none-eabi-6-2017-q2-update
 *.h.gch
