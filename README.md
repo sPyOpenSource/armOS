@@ -40,8 +40,13 @@ Steps
   - Both emulator (based on stm32-p103) and real device (STM32F429i discovery)
     are supported.
 * `09-mOS`
-* `10-RPi`
+  - mbed
+  - K64F
+  - Bootloader
+* `10-RPi3`
+  - arm64
 * `11-dueOS`
+  - Arduino Due
 
 Building and Verification
 -------------------------
