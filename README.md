@@ -74,7 +74,7 @@ Install additional utilities:
   - [NeoCon](http://wiki.openmoko.org/wiki/NeoCon) or [screen](http://www.commandlinefu.com/commands/view/6130/use-screen-as-a-terminal-emulator-to-connect-to-serial-consoles)
 
 
-## Quick Start / Support Devices:
+## Support Devices:
 - [STM32F429i-Discovery(physical devices)](http://www2.st.com/content/st_com/en/products/evaluation-tools/product-evaluation-tools/mcu-eval-tools/stm32-mcu-eval-tools/stm32-mcu-discovery-kits/32f429idiscovery.html)
   - [Details in Chinese by NCKU](http://wiki.csie.ncku.edu.tw/embedded/STM32F429)
   - STM32F429i-Discovery uses `USART1(Tx=PA9,Rx=PA10,baud rate=115200)` as default serial port here.
@@ -84,6 +84,9 @@ Install additional utilities:
       - Then, attach the device file where a serial to USB converter is attached:
       `screen /dev/ttyUSB0 115200 8n1`
       - Once you want to quit screen, press: `Ctrl-a` then `k`
+- [K64F](https://www.nxp.com/design/development-boards/freedom-development-boards/mcu-boards/freedom-development-platform-for-kinetis-k64-k63-and-k24-mcus:FRDM-K64F)
+- [Raspberry Pi)(https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/)
+- [Arduino Due](https://store.arduino.cc/products/arduino-due)
 
 ## Available commands:
 **Overall**
