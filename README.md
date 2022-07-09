@@ -47,7 +47,9 @@ Steps
   - arm64
 * `11-dueOS`
   - Arduino Due
-
+* `12-m1n1`
+  - MacBook Air M1
+  
 Building and Verification
 -------------------------
 * Changes the current working directory to the specified one and then
@@ -87,7 +89,7 @@ Install additional utilities:
 - [K64F](https://www.nxp.com/design/development-boards/freedom-development-boards/mcu-boards/freedom-development-platform-for-kinetis-k64-k63-and-k24-mcus:FRDM-K64F)
 - [Raspberry Pi](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/)
 - [Arduino Due](https://store.arduino.cc/products/arduino-due)
-- [Mac Book Air M1](https://en.wikipedia.org/wiki/Apple_M1)
+- [MacBook Air M1](https://en.wikipedia.org/wiki/Apple_M1)
 
 ## Available commands:
 **Overall**
