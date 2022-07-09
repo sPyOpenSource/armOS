@@ -85,7 +85,7 @@ Install additional utilities:
       `screen /dev/ttyUSB0 115200 8n1`
       - Once you want to quit screen, press: `Ctrl-a` then `k`
 - [K64F](https://www.nxp.com/design/development-boards/freedom-development-boards/mcu-boards/freedom-development-platform-for-kinetis-k64-k63-and-k24-mcus:FRDM-K64F)
-- [Raspberry Pi)(https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/)
+- [Raspberry Pi](https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/)
 - [Arduino Due](https://store.arduino.cc/products/arduino-due)
 
 ## Available commands:
