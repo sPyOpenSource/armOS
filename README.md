@@ -44,7 +44,7 @@ Steps
   - K64F
   - Bootloader
 * `10-RPi3`
-  - arm64
+  - Raspberry Pi 3 with arm64
 * `11-dueOS`
   - Arduino Due
 * `12-m1n1`
