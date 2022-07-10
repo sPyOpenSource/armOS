@@ -13,6 +13,14 @@ struct SerialHelperFuncs UART_Helpers;
 UARTClass Serial(true, &USBUART_Helpers);
 UARTClass Serial1(false, &UART_Helpers);
 
+void setup(){
+  Serial.println("ok");
+}
+
+void loop(){
+
+}
+
 int main()
 {
     

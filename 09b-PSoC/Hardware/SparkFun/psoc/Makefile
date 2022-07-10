@@ -24,7 +24,7 @@
 
 #user specific settings:
 #where to find the IDE
-ADIR:=./
+ADIR:=.
 #which serial port to use (add a file with SUBSYSTEMS=="usb",
 #ATTRS{product}=="Arduino Due Prog. Port", ATTRS{idProduct}=="003d",
 #ATTRS{idVendor}=="2341", SYMLINK+="arduino_due" in /etc/udev/rules.d/
@@ -37,7 +37,7 @@ VERIFY:=
 #end of user configuration.
 
 #then some general settings. They should not be necessary to modify.
-BASE:=./gcc-arm-none-eabi-6-2017-q2-update/bin/
+BASE:=/Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/bin/
 CXX:=$(BASE)arm-none-eabi-g++
 CC:=$(BASE)arm-none-eabi-gcc
 OBJCOPY:=$(BASE)arm-none-eabi-objcopy
@@ -71,7 +71,7 @@ CFLAGS:=$(COMMON_FLAGS) -std=gnu11
 CXXFLAGS:=$(COMMON_FLAGS) -fno-rtti -fno-exceptions -std=gnu++11 -Wall -Wextra
 
 #let the results be named after the project
-PROJNAME:=drone
+PROJNAME:=psoc
 
 #These source files are the ones forming core.a
 CORESRCXX:=$(shell ls ${SAM}/libraries/Servo/*.cpp ${SAM}/libraries/Wire/*.cpp ${SAM}/libraries/SPI/*.cpp ${SAM}/src/cores/arduino/*.cpp $(SAM)/src/variants/standard/*.cpp)
@@ -125,6 +125,8 @@ $(TMPDIR)/core.a: $(TMPDIR)/core $(COREOBJS) $(COREOBJSXX)
 	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/Arduino_Advanced_IO.cpp.o
 	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/Arduino_Analog_In.cpp.o
 	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/Arduino_Serial.cpp.o
+	$(AR) rsc $(TMPDIR)/core.a $(TMPDIR)/core/Arduino_Pins.cpp.o
+	$(AR) rsc $(TMPDIR)/core.a $(TMPDIR)/core/Arduino_Time.cpp.o
 	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/itoa.c.o
 	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/Print.cpp.o
 	$(AR) rcs $(TMPDIR)/core.a $(TMPDIR)/core/UARTClass.cpp.o
@@ -140,7 +142,7 @@ $(TMPDIR)/core.a: $(TMPDIR)/core $(COREOBJS) $(COREOBJSXX)
 
 #link our own object files with core to form the elf file
 $(TMPDIR)/$(PROJNAME).elf: $(TMPDIR)/core.a
-	$(CC) -Wl,--start-group -o $@ $(TMPDIR)/core/variant.cpp.o $(TMPDIR)/core.a $(SAM)/src/variants/standard/CyCompLib.a -mthumb -march=armv7-m -mfix-cortex-m3-ldrd -lm -Wl,-Map,$(TMPDIR)/main.cpp.map -T$(SAM)/src/cores/arduino/cm3gcc.ld -g -u _printf_float -Wl,--gc-sections -Wl,--end-group -lstdc++
+	$(CC) -Wl,--start-group -o $@ $(TMPDIR)/core/variant.cpp.o $(TMPDIR)/core.a $(SAM)/src/variants/standard/CyCompLib.a $(SAM)/src/variants/standard/Uno_blocks.a -mthumb -march=armv7-m -mfix-cortex-m3-ldrd -lm -Wl,-Map,$(TMPDIR)/main.cpp.map -T$(SAM)/src/cores/arduino/cm3gcc.ld -g -u _printf_float -Wl,--gc-sections -Wl,--end-group -lstdc++
 
 #copy from the hex to our bin file (why?)
 $(TMPDIR)/$(PROJNAME).bin: $(TMPDIR)/$(PROJNAME).elf
