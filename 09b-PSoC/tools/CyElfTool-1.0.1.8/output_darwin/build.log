@@ -1,0 +1,8 @@
+[INFO] cyelftool darwin build started Thu Jan 6 19:07:27 2022
+[INFO] ---------------------------------------------
+[INFO] 
+extracting libelf package...
+[INFO] done
+[INFO] 
+running CMake...
+[ERROR] command "cmake -DELFTOOL_VER="1.0.0.Thu Jan  6 19:07:27 2022" -G"Visual Studio 12" "/Users/xuyi/Source/PSoC/CyElfTool-1.0.1.8"" failed with exit code 127

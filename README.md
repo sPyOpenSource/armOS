@@ -19,9 +19,9 @@ Steps
 -----
 * `00-Semihosting`
   - Minimal semihosted ARM Cortex-M "Hello World"
-* `00-HelloWorld`
+* `01a-HelloWorld`
   - Enable STM32 USART to print trivial greetings
-* `01-HelloWorld`
+* `01b-HelloWorld`
   - Almost identical to the previous one but improved startup routines
 * `02-ContextSwitch-1`
   - Basic switch between user and kernel mode
@@ -39,14 +39,18 @@ Steps
   - Illustrate hardware abstraction layer (HAL) by introducing CMSIS
   - Both emulator (based on stm32-p103) and real device (STM32F429i discovery)
     are supported.
-* `09-mOS`
+* `09a-dueOS`
+  - Arduino Due
+* `09b-PSoC`
+  - PSoC
+* `10-mOS`
   - mbed
   - K64F
   - Bootloader
-* `10-RPi3`
+* `11a-RPi3`
   - Raspberry Pi 3 with arm64
-* `11-dueOS`
-  - Arduino Due
+* `11b-iPod`
+  - iPod
 * `12-m1n1`
   - MacBook Air M1
   

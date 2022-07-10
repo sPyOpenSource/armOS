@@ -1,0 +1,5 @@
+Module: lithp
+Description: A Lispish programming language that can be used to write stuff for podzilla.
+Category: Libraries
+Display-name: Lithp Engine (Lisp-like interpreter)
+Author: Scott Lawrence

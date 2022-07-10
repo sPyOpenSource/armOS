@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Name="CE195277_ADC_and_UART" WorkspaceName="CE195277_ADC_and_UART.cywrk">
+  <Version>1.10</Version>
+  <Keyword>UART</Keyword>
+  <Keyword>ADC_DelSig</Keyword>
+  <Keyword Hidden="true">CY8CKIT-059</Keyword>
+  <Description>This code example demonstrates the implementation of a simple data collection system using the ADC_DelSig and UART Components in PSoC 3 and PSoC 5LP.</Description>
+  <DeviceFilter>PSoC 5LP</DeviceFilter>
+  <Document>CE195277_ADC_and_UART.pdf</Document>
+  <MinToolVersion>4.2</MinToolVersion>
+</Project>

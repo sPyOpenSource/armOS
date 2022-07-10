@@ -2,9 +2,5 @@
 *.elf
 *.list
 build
-/.settings
-.cproject
-.project
-/11-dueOS/Binaries
 /gcc-arm-none-eabi-6-2017-q2-update
 *.h.gch
