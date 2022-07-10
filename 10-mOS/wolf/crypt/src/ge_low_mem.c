@@ -26,18 +26,18 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifdef HAVE_ED25519
 #ifdef ED25519_SMALL /* use slower code that takes less memory */
 
-#include <wolfcrypt/ge_operations.h>
-#include <wolfcrypt/error-crypt.h>
+#include <wolf/crypt/headers/ge_operations.h>
+#include <wolf/crypt/headers/error-crypt.h>
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 void ed25519_smult(ge_p3 *r, const ge_p3 *a, const byte *e);

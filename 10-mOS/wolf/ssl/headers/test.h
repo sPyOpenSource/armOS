@@ -7,35 +7,35 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <ctype.h>
-#include <wolfssl/wolfcrypt/types.h>
-#include <wolfssl/wolfcrypt/error-crypt.h>
-#include <wolfssl/wolfcrypt/random.h>
-#include <wolfssl/wolfcrypt/mem_track.h>
+#include <wolf/ssl/headers/wolfcrypt/types.h>
+#include <wolf/ssl/headers/wolfcrypt/error-crypt.h>
+#include <wolf/ssl/headers/wolfcrypt/random.h>
+#include <wolf/ssl/headers/wolfcrypt/mem_track.h>
 #if defined(OPENSSL_EXTRA) && defined(SHOW_CERTS)
-    #include <wolfssl/openssl/ssl.h> /* for domain component NID value */
+    #include <wolf/ssl/headers/openssl/ssl.h> /* for domain component NID value */
 #endif
 
 #ifdef ATOMIC_USER
-    #include <wolfssl/wolfcrypt/aes.h>
-    #include <wolfssl/wolfcrypt/arc4.h>
-    #include <wolfssl/wolfcrypt/hmac.h>
+    #include <wolf/ssl/headers/wolfcrypt/aes.h>
+    #include <wolf/ssl/headers/wolfcrypt/arc4.h>
+    #include <wolf/ssl/headers/wolfcrypt/hmac.h>
 #endif
 #ifdef HAVE_PK_CALLBACKS
-    #include <wolfssl/wolfcrypt/asn.h>
+    #include <wolf/ssl/headers/wolfcrypt/asn.h>
     #ifndef NO_RSA
-        #include <wolfssl/wolfcrypt/rsa.h>
+        #include <wolf/ssl/headers/wolfcrypt/rsa.h>
     #endif
     #ifdef HAVE_ECC
-        #include <wolfssl/wolfcrypt/ecc.h>
+        #include <wolf/ssl/headers/wolfcrypt/ecc.h>
     #endif /* HAVE_ECC */
     #ifndef NO_DH
-        #include <wolfssl/wolfcrypt/dh.h>
+        #include <wolf/ssl/headers/wolfcrypt/dh.h>
     #endif /* !NO_DH */
     #ifdef HAVE_ED25519
-        #include <wolfssl/wolfcrypt/ed25519.h>
+        #include <wolf/ssl/headers/wolfcrypt/ed25519.h>
     #endif /* HAVE_ED25519 */
     #ifdef HAVE_CURVE25519
-        #include <wolfssl/wolfcrypt/curve25519.h>
+        #include <wolf/ssl/headers/wolfcrypt/curve25519.h>
     #endif /* HAVE_ECC */
 #endif /*HAVE_PK_CALLBACKS */
 
@@ -119,10 +119,10 @@
 #endif /* USE_WINDOWS_API */
 
 #ifdef WOLFSSL_ASYNC_CRYPT
-    #include <wolfssl/wolfcrypt/async.h>
+    #include <wolf/ssl/headers/wolfcrypt/async.h>
 #endif
 #ifdef HAVE_CAVIUM
-    #include <wolfssl/wolfcrypt/port/cavium/cavium_nitrox.h>
+    #include <wolf/ssl/headers/wolfcrypt/port/cavium/cavium_nitrox.h>
 #endif
 #ifdef _MSC_VER
     /* disable conversion warning */
@@ -2773,7 +2773,7 @@ static WC_INLINE const char* mymktemp(char *tempfn, int len, int num)
 #if defined(HAVE_SESSION_TICKET) && defined(HAVE_CHACHA) && \
                                     defined(HAVE_POLY1305)
 
-    #include <wolfssl/wolfcrypt/chacha20_poly1305.h>
+    #include <wolf/ssl/headers/wolfcrypt/chacha20_poly1305.h>
 
     typedef struct key_ctx {
         byte name[WOLFSSL_TICKET_NAME_SZ];        /* name for this context */

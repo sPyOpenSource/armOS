@@ -25,7 +25,7 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifndef WOLFCRYPT_ONLY
 
@@ -34,9 +34,9 @@
     #include <winsock2.h>
 #endif
 
-#include <wolfssl/internal.h>
-#include <wolfssl/error-ssl.h>
-#include <wolfssl/wolfio.h>
+#include <wolf/ssl/headers/internal.h>
+#include <wolf/ssl/headers/error-ssl.h>
+#include <wolf/ssl/headers/wolfio.h>
 
 #if defined(HAVE_HTTP_CLIENT)
     #include <stdlib.h>   /* atoi(), strtol() */
@@ -271,7 +271,7 @@ int EmbedSend(WOLFSSL* ssl, char *buf, int sz, void *ctx)
 
 #ifdef WOLFSSL_DTLS
 
-#include <wolfssl/wolfcrypt/sha.h>
+#include <wolf/ssl/headers/wolfcrypt/sha.h>
 
 #define SENDTO_FUNCTION sendto
 #define RECVFROM_FUNCTION recvfrom

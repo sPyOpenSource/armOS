@@ -36,7 +36,7 @@
 #ifndef WOLFCRYPT_BLAKE2_IMPL_H
 #define WOLFCRYPT_BLAKE2_IMPL_H
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 static WC_INLINE word32 load32( const void *src )
 {

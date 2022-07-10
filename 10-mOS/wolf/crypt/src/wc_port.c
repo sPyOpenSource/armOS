@@ -24,16 +24,16 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
-#include <wolfcrypt/types.h>
-#include <wolfcrypt/error-crypt.h>
-#include <wolfcrypt/logging.h>
-#include <wolfcrypt/wc_port.h>
+#include <wolf/crypt/headers/settings.h>
+#include <wolf/crypt/headers/types.h>
+#include <wolf/crypt/headers/error-crypt.h>
+#include <wolf/crypt/headers/logging.h>
+#include <wolf/crypt/headers/wc_port.h>
 #ifdef HAVE_ECC
-    #include <wolfcrypt/ecc.h>
+    #include <wolf/crypt/headers/ecc.h>
 #endif
 #ifdef WOLFSSL_ASYNC_CRYPT
-    #include <wolfcrypt/async.h>
+    #include <wolf/crypt/headers/async.h>
 #endif
 
 /* IPP header files for library initialization */
@@ -43,29 +43,29 @@
 #endif
 
 #ifdef FREESCALE_LTC_TFM
-    #include <wolfcrypt/port/nxp/ksdk_port.h>
+    #include <wolf/crypt/headers/port/nxp/ksdk_port.h>
 #endif
 
 #if defined(WOLFSSL_ATMEL) || defined(WOLFSSL_ATECC508A)
-    #include <wolfcrypt/port/atmel/atmel.h>
+    #include <wolf/crypt/headers/port/atmel/atmel.h>
 #endif
 
 #if defined(OPENSSL_EXTRA) || defined(HAVE_WEBSERVER)
-    #include <wolfssl/openssl/evp.h>
+    #include <wolf/ssl/headers/openssl/evp.h>
 #endif
 
 #if defined(USE_WOLFSSL_MEMORY) && defined(WOLFSSL_TRACK_MEMORY)
-    #include <wolfcrypt/memory.h>
-    #include <wolfcrypt/mem_track.h>
+    #include <wolf/crypt/headers/memory.h>
+    #include <wolf/crypt/headers/mem_track.h>
 #endif
 
 #if defined(WOLFSSL_IMX6_CAAM) || defined(WOLFSSL_IMX6_CAAM_RNG) || \
     defined(WOLFSSL_IMX6_CAAM_BLOB)
-    #include <wolfcrypt/port/caam/wolfcaam.h>
+    #include <wolf/crypt/headers/port/caam/wolfcaam.h>
 #endif
 
 #ifdef WOLF_CRYPTO_DEV
-    #include <wolfcrypt/cryptodev.h>
+    #include <wolf/crypt/headers/cryptodev.h>
 #endif
 
 #ifdef _MSC_VER
@@ -1586,7 +1586,7 @@ char* mystrnstr(const char* s1, const char* s2, unsigned int n)
 #endif /* WOLFSSL_NUCLEUS_1_2 */
 
 #if defined(WOLFSSL_TI_CRYPT) || defined(WOLFSSL_TI_HASH)
-    #include <wolfcrypt/src/port/ti/ti-ccm.c>  /* initialize and Mutex for TI Crypt Engine */
-    #include <wolfcrypt/src/port/ti/ti-hash.c> /* md5, sha1, sha224, sha256 */
+    #include <wolf/crypt/src/port/ti/ti-ccm.c>  /* initialize and Mutex for TI Crypt Engine */
+    #include <wolf/crypt/src/port/ti/ti-hash.c> /* md5, sha1, sha224, sha256 */
 #endif
 

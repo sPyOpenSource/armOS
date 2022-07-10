@@ -25,13 +25,13 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifdef WOLF_CRYPTO_DEV
 
-#include <wolfcrypt/cryptodev.h>
-#include <wolfcrypt/error-crypt.h>
-#include <wolfcrypt/logging.h>
+#include <wolf/crypt/headers/cryptodev.h>
+#include <wolf/crypt/headers/error-crypt.h>
+#include <wolf/crypt/headers/logging.h>
 
 
 /* TODO: Consider linked list with mutex */

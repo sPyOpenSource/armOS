@@ -27,7 +27,7 @@
 #ifndef WOLF_CRYPT_HC128_H
 #define WOLF_CRYPT_HC128_H
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #ifndef NO_HC128
 
@@ -64,5 +64,3 @@ WOLFSSL_LOCAL int wc_Hc128_SetHeap(HC128* ctx, void* heap);
 
 #endif /* HAVE_HC128 */
 #endif /* WOLF_CRYPT_HC128_H */
-
-

@@ -24,8 +24,8 @@
     #include <config.h>
 #endif
 
-#include <wolf/crypt/settings.h>
-#include <wolf/crypt/error-crypt.h>
+#include <wolf/crypt/headers/settings.h>
+#include <wolf/crypt/headers/error-crypt.h>
 
 #if !defined(NO_AES)
 
@@ -41,8 +41,8 @@
     #endif
 #endif
 
-#include <wolf/crypt/aes.h>
-#include <wolf/crypt/cpuid.h>
+#include <wolf/crypt/headers/aes.h>
+#include <wolf/crypt/headers/cpuid.h>
 
 
 /* fips wrapper calls, user can call direct */
@@ -247,16 +247,16 @@
 
 
 #if defined(WOLFSSL_TI_CRYPT)
-    #include <wolfcrypt/src/port/ti/ti-aes.c>
+    #include <wolf/crypt/src/port/ti/ti-aes.c>
 #else
 
-#include <wolfcrypt/logging.h>
+#include <wolf/crypt/headers/logging.h>
 
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 #if !defined(WOLFSSL_ARMASM)
@@ -264,7 +264,7 @@
 #ifdef WOLFSSL_IMX6_CAAM_BLOB
     /* case of possibly not using hardware acceleration for AES but using key
        blobs */
-    #include <wolfcrypt/port/caam/wolfcaam.h>
+    #include <wolf/crypt/headers/port/caam/wolfcaam.h>
 #endif
 
 #ifdef DEBUG_AESNI
@@ -541,7 +541,7 @@
 #elif defined(HAVE_COLDFIRE_SEC)
     /* Freescale Coldfire SEC support for CBC mode.
      * NOTE: no support for AES-CTR/GCM/CCM/Direct */
-    #include <wolfssl/wolfcrypt/types.h>
+    #include <wolf/ssl/headers/wolfcrypt/types.h>
     #include "sec.h"
     #include "mcf5475_sec.h"
     #include "mcf5475_siu.h"
@@ -626,7 +626,7 @@
 
 #elif defined(WOLFSSL_PIC32MZ_CRYPT)
 
-    #include <wolfssl/wolfcrypt/port/pic32/pic32mz-crypt.h>
+    #include <wolf/ssl/headers/wolfcrypt/port/pic32/pic32mz-crypt.h>
 
     #if defined(HAVE_AESGCM) || defined(WOLFSSL_AES_DIRECT)
     static int wc_AesEncrypt(Aes* aes, const byte* inBlock, byte* outBlock)

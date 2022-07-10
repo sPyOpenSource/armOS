@@ -29,12 +29,12 @@
     #include <config.h>
 #endif
 
-#include <wolfssl/options.h>
-#include <wolfcrypt/random.h>
-#include <wolfcrypt/rsa.h>
-#include <wolfssh/error.h>
-#include <wolfssh/keygen.h>
-#include <wolfssh/log.h>
+#include <wolf/ssl/headers/options.h>
+#include <wolf/crypt/headers/random.h>
+#include <wolf/crypt/headers/rsa.h>
+#include <wolf/ssh/headers/error.h>
+#include <wolf/ssh/headers/keygen.h>
+#include <wolf/ssh/headers/log.h>
 
 #ifdef WOLFSSH_KEYGEN
 

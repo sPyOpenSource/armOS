@@ -27,11 +27,11 @@
 #pragma once
 
 #include <wolf/ssl/headers/options.h>
-#include <wolf/crypt/types.h>
-#include <wolf/ssh/settings.h>
-#include <wolf/ssh/version.h>
-#include <wolf/ssh/port.h>
-#include <wolf/ssh/error.h>
+#include <wolf/crypt/headers/types.h>
+#include <wolf/ssh/headers/settings.h>
+#include <wolf/ssh/headers/version.h>
+#include <wolf/ssh/headers/port.h>
+#include <wolf/ssh/headers/error.h>
 
 #ifdef __cplusplus
 extern "C" {

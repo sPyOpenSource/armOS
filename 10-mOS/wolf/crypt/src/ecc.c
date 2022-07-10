@@ -26,7 +26,7 @@
 #endif
 
 /* in case user set HAVE_ECC there */
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 /*
 Possible ECC enable options:
@@ -103,38 +103,38 @@ ECC Curve Sizes:
 	#endif
 #endif
 
-#include <wolfcrypt/ecc.h>
-#include <wolfcrypt/asn.h>
-#include <wolfcrypt/error-crypt.h>
-#include <wolfcrypt/logging.h>
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/ecc.h>
+#include <wolf/crypt/headers/asn.h>
+#include <wolf/crypt/headers/error-crypt.h>
+#include <wolf/crypt/headers/logging.h>
+#include <wolf/crypt/headers/types.h>
 
 #ifdef WOLFSSL_HAVE_SP_ECC
-#include <wolfcrypt/sp.h>
+#include <wolf/crypt/headers/sp.h>
 #endif
 
 #ifdef HAVE_ECC_ENCRYPT
-    #include <wolfcrypt/hmac.h>
-    #include <wolfcrypt/aes.h>
+    #include <wolf/crypt/headers/hmac.h>
+    #include <wolf/crypt/headers/aes.h>
 #endif
 
 #ifdef HAVE_X963_KDF
-    #include <wolfcrypt/hash.h>
+    #include <wolf/crypt/headers/hash.h>
 #endif
 
 #ifdef WOLF_CRYPTO_DEV
-    #include <wolfcrypt/cryptodev.h>
+    #include <wolf/crypt/headers/cryptodev.h>
 #endif
 
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 #if defined(FREESCALE_LTC_ECC)
-    #include <wolfcrypt/port/nxp/ksdk_port.h>
+    #include <wolf/crypt/headers/port/nxp/ksdk_port.h>
 #endif
 
 #ifdef WOLFSSL_SP_MATH

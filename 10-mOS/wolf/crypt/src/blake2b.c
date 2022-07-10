@@ -37,12 +37,12 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifdef HAVE_BLAKE2
 
-#include <wolfcrypt/blake2.h>
-#include <wolfcrypt/blake2-impl.h>
+#include <wolf/crypt/headers/blake2.h>
+#include <wolf/crypt/headers/blake2-impl.h>
 
 
 static const word64 blake2b_IV[8] =

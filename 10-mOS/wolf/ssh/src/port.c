@@ -32,7 +32,7 @@
 #endif
 
 #include <stdio.h>
-#include <wolfssh/port.h>
+#include <wolf/ssh/headers/port.h>
 
 
 int wfopen(WFILE** f, const char* filename, const char* mode)

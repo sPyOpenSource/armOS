@@ -24,7 +24,7 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #if defined(WOLFSSL_CMAC) && !defined(NO_AES) && defined(WOLFSSL_AES_DIRECT)
 
@@ -41,15 +41,15 @@
 #endif
 
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
-#include <wolfcrypt/error-crypt.h>
-#include <wolfcrypt/aes.h>
-#include <wolfcrypt/cmac.h>
+#include <wolf/crypt/headers/error-crypt.h>
+#include <wolf/crypt/headers/aes.h>
+#include <wolf/crypt/headers/cmac.h>
 
 
 static void ShiftAndXorRb(byte* out, byte* in)

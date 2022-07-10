@@ -24,24 +24,24 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #if !defined(NO_ASN) && !defined(NO_PWDBASED)
 
-#include <wolfcrypt/asn.h>
-#include <wolfcrypt/asn_public.h>
-#include <wolfcrypt/error-crypt.h>
-#include <wolfcrypt/hmac.h>
-#include <wolfcrypt/logging.h>
+#include <wolf/crypt/headers/asn.h>
+#include <wolf/crypt/headers/asn_public.h>
+#include <wolf/crypt/headers/error-crypt.h>
+#include <wolf/crypt/headers/hmac.h>
+#include <wolf/crypt/headers/logging.h>
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
-#include <wolfcrypt/pkcs12.h>
-#include <wolfcrypt/pwdbased.h>
-#include <wolfcrypt/hash.h>
+#include <wolf/crypt/headers/pkcs12.h>
+#include <wolf/crypt/headers/pwdbased.h>
+#include <wolf/crypt/headers/hash.h>
 
 
 #define ERROR_OUT(err, eLabel) { ret = (err); goto eLabel; }

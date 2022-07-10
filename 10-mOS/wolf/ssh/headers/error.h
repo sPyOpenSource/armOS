@@ -26,7 +26,7 @@
 
 #pragma once
 
-#include <wolfssh/settings.h>
+#include <wolf/ssh/headers/settings.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -91,4 +91,3 @@ enum WS_IOerrors {
 #ifdef __cplusplus
 }
 #endif
-

@@ -23,7 +23,7 @@
 #ifndef WOLFSSL_MD4_H_
 #define WOLFSSL_MD4_H_
 
-#include <wolfssl/wolfcrypt/settings.h>
+#include <wolf/ssl/headers/wolfcrypt/settings.h>
 
 #ifndef NO_MD4
 

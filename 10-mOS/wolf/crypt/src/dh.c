@@ -24,7 +24,7 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifndef NO_DH
 
@@ -40,19 +40,19 @@
     #endif
 #endif
 
-#include <wolfcrypt/dh.h>
-#include <wolfcrypt/error-crypt.h>
-#include <wolfcrypt/logging.h>
+#include <wolf/crypt/headers/dh.h>
+#include <wolf/crypt/headers/error-crypt.h>
+#include <wolf/crypt/headers/logging.h>
 
 #ifdef WOLFSSL_HAVE_SP_DH
-#include <wolfcrypt/sp.h>
+#include <wolf/crypt/headers/sp.h>
 #endif
 
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 

@@ -24,12 +24,12 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifndef NO_RC4
 
-#include <wolfcrypt/error-crypt.h>
-#include <wolfcrypt/arc4.h>
+#include <wolf/crypt/headers/error-crypt.h>
+#include <wolf/crypt/headers/arc4.h>
 
 
 int wc_Arc4SetKey(Arc4* arc4, const byte* key, word32 length)

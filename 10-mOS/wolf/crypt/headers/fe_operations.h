@@ -23,7 +23,7 @@
 #ifndef WOLF_CRYPT_FE_OPERATIONS_H
 #define WOLF_CRYPT_FE_OPERATIONS_H
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #if defined(HAVE_CURVE25519) || defined(HAVE_ED25519)
 
@@ -31,7 +31,7 @@
     #include <stdint.h>
 #endif
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #if defined(USE_INTEL_SPEEDUP) && !defined(NO_CURVED25519_X64)
     #define CURVED25519_X64

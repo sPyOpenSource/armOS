@@ -29,15 +29,15 @@
 #ifndef WOLFSSL_HMAC_H_
 #define WOLFSSL_HMAC_H_
 
-#include <wolfssl/wolfcrypt/settings.h>
+#include <wolf/ssl/headers/wolfcrypt/settings.h>
 
 #ifdef WOLFSSL_PREFIX
 #include "prefix_hmac.h"
 #endif
 
-#include <wolfssl/openssl/evp.h>
-#include <wolfssl/openssl/opensslv.h>
-#include <wolfssl/wolfcrypt/hmac.h>
+#include <wolf/ssl/headers/openssl/evp.h>
+#include <wolf/ssl/headers/openssl/opensslv.h>
+#include <wolf/ssl/headers/wolfcrypt/hmac.h>
 
 #ifdef __cplusplus
     extern "C" {

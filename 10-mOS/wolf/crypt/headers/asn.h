@@ -26,7 +26,7 @@
 #ifndef WOLF_CRYPT_ASN_H
 #define WOLF_CRYPT_ASN_H
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #ifndef NO_ASN
 
@@ -35,7 +35,7 @@
     #define NO_ASN_TIME /* backwards compatibility with NO_TIME_H */
 #endif
 
-#include <wolfcrypt/integer.h>
+#include <wolf/crypt/headers/integer.h>
 
 /* fips declare of RsaPrivateKeyDecode @wc_fips */
 #if defined(HAVE_FIPS) && !defined(NO_RSA) && \
@@ -44,19 +44,19 @@
 #endif
 
 #ifndef NO_DH
-    #include <wolfcrypt/dh.h>
+    #include <wolf/crypt/headers/dh.h>
 #endif
 #ifndef NO_DSA
-    #include <wolfcrypt/dsa.h>
+    #include <wolf/crypt/headers/dsa.h>
 #endif
 #ifndef NO_SHA
-    #include <wolfcrypt/sha.h>
+    #include <wolf/crypt/headers/sha.h>
 #endif
 #ifndef NO_MD5
-    #include <wolfcrypt/md5.h>
+    #include <wolf/crypt/headers/md5.h>
 #endif
-#include <wolfcrypt/sha256.h>
-#include <wolfcrypt/asn_public.h>   /* public interface */
+#include <wolf/crypt/headers/sha256.h>
+#include <wolf/crypt/headers/asn_public.h>   /* public interface */
 
 
 #ifdef __cplusplus

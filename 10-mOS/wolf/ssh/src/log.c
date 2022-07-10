@@ -30,9 +30,9 @@
     #include <config.h>
 #endif
 
-#include <wolf/ssh/ssh.h>
-#include <wolf/ssh/log.h>
-#include <wolf/ssh/error.h>
+#include <wolf/ssh/headers/ssh.h>
+#include <wolf/ssh/headers/log.h>
+#include <wolf/ssh/headers/error.h>
 
 #include <stdlib.h>
 #include <stdio.h>

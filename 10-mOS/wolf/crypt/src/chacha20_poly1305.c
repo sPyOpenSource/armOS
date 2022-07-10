@@ -25,21 +25,21 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #if defined(HAVE_CHACHA) && defined(HAVE_POLY1305)
 
-#include <wolfcrypt/chacha20_poly1305.h>
-#include <wolfcrypt/error-crypt.h>
-#include <wolfcrypt/logging.h>
-#include <wolfcrypt/chacha.h>
-#include <wolfcrypt/poly1305.h>
+#include <wolf/crypt/headers/chacha20_poly1305.h>
+#include <wolf/crypt/headers/error-crypt.h>
+#include <wolf/crypt/headers/logging.h>
+#include <wolf/crypt/headers/chacha.h>
+#include <wolf/crypt/headers/poly1305.h>
 
 #ifdef NO_INLINE
-#include <wolfcrypt/misc.h>
+#include <wolf/crypt/headers/misc.h>
 #else
 #define WOLFSSL_MISC_INCLUDED
-#include <wolfcrypt/src/misc.c>
+#include <wolf/crypt/src/misc.c>
 #endif
 
 #ifdef CHACHA_AEAD_TEST

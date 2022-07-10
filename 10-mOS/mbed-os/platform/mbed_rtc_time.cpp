@@ -21,6 +21,8 @@
 #include "platform/SingletonPtr.h"
 #include "platform/PlatformMutex.h"
 
+#include <sys/time.h>
+
 static SingletonPtr<PlatformMutex> _mutex;
 
 #if DEVICE_RTC

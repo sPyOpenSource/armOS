@@ -29,10 +29,10 @@
 #ifndef WOLFSSL_PEM_H_
 #define WOLFSSL_PEM_H_
 
-#include <wolfssl/openssl/evp.h>
-#include <wolfssl/openssl/bio.h>
-#include <wolfssl/openssl/rsa.h>
-#include <wolfssl/openssl/dsa.h>
+#include <wolf/ssl/headers/openssl/evp.h>
+#include <wolf/ssl/headers/openssl/bio.h>
+#include <wolf/ssl/headers/openssl/rsa.h>
+#include <wolf/ssl/headers/openssl/dsa.h>
 
 #ifdef __cplusplus
     extern "C" {

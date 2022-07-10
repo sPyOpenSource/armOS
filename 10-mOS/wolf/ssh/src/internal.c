@@ -29,16 +29,16 @@
     #include <config.h>
 #endif
 
-#include <wolf/ssh/ssh.h>
-#include <wolf/ssh/internal.h>
-#include <wolf/ssh/log.h>
-#include <wolf/crypt/asn.h>
-#include <wolf/crypt/dh.h>
-#include <wolf/crypt/rsa.h>
-#include <wolf/crypt/ecc.h>
-#include <wolf/crypt/hmac.h>
-#include <wolf/crypt/integer.h>
-#include <wolf/crypt/signature.h>
+#include <wolf/ssh/headers/ssh.h>
+#include <wolf/ssh/headers/internal.h>
+#include <wolf/ssh/headers/log.h>
+#include <wolf/crypt/headers/asn.h>
+#include <wolf/crypt/headers/dh.h>
+#include <wolf/crypt/headers/rsa.h>
+#include <wolf/crypt/headers/ecc.h>
+#include <wolf/crypt/headers/hmac.h>
+#include <wolf/crypt/headers/integer.h>
+#include <wolf/crypt/headers/signature.h>
 
 //#include "esp_log.h"
 //#include "esp_system.h"
@@ -47,7 +47,7 @@
     #include <wolf/ssh/misc.h>
 #else
     #define WOLFSSH_MISC_INCLUDED
-    #include "src/misc.c"
+    //#include "wolf/ssh/src/misc.c"
 #endif
 
 

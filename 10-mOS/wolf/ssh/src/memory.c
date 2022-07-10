@@ -28,13 +28,13 @@
     #include <config.h>
 #endif
 
-#include <wolfssh/settings.h>
+#include <wolf/ssh/headers/settings.h>
 
 
 #ifdef USE_WOLFSSH_MEMORY
 
-#include <wolfssh/memory.h>
-#include <wolfssh/error.h>
+#include <wolf/ssh/headers/memory.h>
+#include <wolf/ssh/headers/error.h>
 
 /* Set these to default values initially. */
 static wolfSSH_Malloc_cb  malloc_function  = NULL;
@@ -106,4 +106,3 @@ void* wolfSSH_Realloc(void *ptr, size_t size)
 }
 
 #endif /* USE_WOLFSSH_MEMORY */
-

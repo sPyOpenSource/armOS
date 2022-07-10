@@ -24,7 +24,7 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifndef WOLFCRYPT_ONLY
 #ifdef WOLFSSL_SNIFFER
@@ -42,16 +42,16 @@
     #define SNPRINTF snprintf
 #endif
 
-#include <wolfssl/openssl/ssl.h>
-#include <wolfssl/internal.h>
-#include <wolfssl/error-ssl.h>
-#include <wolfssl/sniffer.h>
-#include <wolfssl/sniffer_error.h>
+#include <wolf/ssl/headers/openssl/ssl.h>
+#include <wolf/ssl/headers/internal.h>
+#include <wolf/ssl/headers/error-ssl.h>
+#include <wolf/ssl/headers/sniffer.h>
+#include <wolf/ssl/headers/sniffer_error.h>
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 

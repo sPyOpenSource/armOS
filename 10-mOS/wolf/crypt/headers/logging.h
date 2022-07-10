@@ -30,7 +30,7 @@
 #ifndef WOLFSSL_LOGGING_H
 #define WOLFSSL_LOGGING_H
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #ifdef __cplusplus
     extern "C" {

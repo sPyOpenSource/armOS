@@ -25,11 +25,11 @@
 #ifndef WOLFSSL_MD5_H_
 #define WOLFSSL_MD5_H_
 
-#include <wolfssl/wolfcrypt/settings.h>
+#include <wolf/ssl/headers/wolfcrypt/settings.h>
 
 #ifndef NO_MD5
 
-#include <wolfssl/wolfcrypt/hash.h>
+#include <wolf/ssl/headers/wolfcrypt/hash.h>
 
 #ifdef WOLFSSL_PREFIX
 #include "prefix_md5.h"

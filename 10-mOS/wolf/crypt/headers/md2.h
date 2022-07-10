@@ -27,7 +27,7 @@
 #ifndef WOLF_CRYPT_MD2_H
 #define WOLF_CRYPT_MD2_H
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #ifdef WOLFSSL_MD2
 

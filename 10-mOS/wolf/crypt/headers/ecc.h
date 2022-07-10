@@ -27,30 +27,30 @@
 #ifndef WOLF_CRYPT_ECC_H
 #define WOLF_CRYPT_ECC_H
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #ifdef HAVE_ECC
 
 #if defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2)
-    #include <wolfcrypt/fips.h>
+    #include <wolf/crypt/headers/fips.h>
 #endif /* HAVE_FIPS_VERSION >= 2 */
 
-#include <wolfcrypt/integer.h>
-#include <wolfcrypt/random.h>
+#include <wolf/crypt/headers/integer.h>
+#include <wolf/crypt/headers/random.h>
 
 #ifdef HAVE_X963_KDF
-    #include <wolfcrypt/hash.h>
+    #include <wolf/crypt/headers/hash.h>
 #endif
 
 #ifdef WOLFSSL_ASYNC_CRYPT
-    #include <wolfcrypt/async.h>
+    #include <wolf/crypt/headers/async.h>
     #ifdef WOLFSSL_CERT_GEN
-        #include <wolfcrypt/asn.h>
+        #include <wolf/crypt/headers/asn.h>
     #endif
 #endif
 
 #ifdef WOLFSSL_ATECC508A
-    #include <wolfcrypt/port/atmel/atmel.h>
+    #include <wolf/crypt/headers/port/atmel/atmel.h>
 #endif /* WOLFSSL_ATECC508A */
 
 
@@ -677,4 +677,3 @@ WOLFSSL_API void wc_ecc_curve_cache_free(void);
 
 #endif /* HAVE_ECC */
 #endif /* WOLF_CRYPT_ECC_H */
-

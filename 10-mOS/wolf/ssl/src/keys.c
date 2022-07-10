@@ -26,12 +26,12 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifndef WOLFCRYPT_ONLY
 
-#include <wolfssl/internal.h>
-#include <wolfssl/error-ssl.h>
+#include <wolf/ssl/headers/internal.h>
+#include <wolf/ssl/headers/error-ssl.h>
 #if defined(SHOW_SECRETS) || defined(CHACHA_AEAD_TEST)
     #if defined(FREESCALE_MQX) || defined(FREESCALE_KSDK_MQX)
         #if MQX_USE_IO_OLD

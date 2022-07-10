@@ -24,8 +24,8 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
-#include <wolfcrypt/error-crypt.h>
+#include <wolf/crypt/headers/settings.h>
+#include <wolf/crypt/headers/error-crypt.h>
 
 /* on HPUX 11 you may need to install /dev/random see
    http://h20293.www2.hp.com/portal/swdepot/displayProductInfo.do?productNumber=KRNG11I
@@ -45,8 +45,8 @@
 #endif
 
 
-#include <wolfcrypt/random.h>
-#include <wolfcrypt/cpuid.h>
+#include <wolf/crypt/headers/random.h>
+#include <wolf/crypt/headers/cpuid.h>
 
 
 /* If building for old FIPS. */
@@ -103,13 +103,13 @@ int wc_RNG_GenerateByte(WC_RNG* rng, byte* b)
 
 #ifndef WC_NO_RNG /* if not FIPS and RNG is disabled then do not compile */
 
-#include <wolfcrypt/sha256.h>
+#include <wolf/crypt/headers/sha256.h>
 
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 #if defined(WOLFSSL_SGX)
@@ -122,7 +122,7 @@ int wc_RNG_GenerateByte(WC_RNG* rng, byte* b)
     #include <wincrypt.h>
 #elif defined(HAVE_WNR)
     #include <wnr.h>
-    #include <wolfcrypt/logging.h>
+    #include <wolf/crypt/headers/logging.h>
     wolfSSL_Mutex wnr_mutex;    /* global netRandom mutex */
     int wnr_timeout     = 0;    /* entropy timeout, mililseconds */
     int wnr_mutex_init  = 0;    /* flag for mutex init */
@@ -1815,7 +1815,7 @@ int wc_GenerateSeed(OS_Seed* os, byte* output, word32 sz)
     }
 
 #elif defined(WOLFSSL_ATMEL)
-    #include <wolfssl/wolfcrypt/port/atmel/atmel.h>
+    #include <wolf/ssl/headers/wolfcrypt/port/atmel/atmel.h>
 
     int wc_GenerateSeed(OS_Seed* os, byte* output, word32 sz)
     {
@@ -1864,8 +1864,8 @@ int wc_GenerateSeed(OS_Seed* os, byte* output, word32 sz)
 
 #elif (defined(WOLFSSL_IMX6_CAAM) || defined(WOLFSSL_IMX6_CAAM_RNG))
 
-    #include <wolfssl/wolfcrypt/port/caam/wolfcaam.h>
-    #include <wolfssl/wolfcrypt/port/caam/caam_driver.h>
+    #include <wolf/ssl/headers/wolfcrypt/port/caam/wolfcaam.h>
+    #include <wolf/ssl/headers/wolfcrypt/port/caam/caam_driver.h>
 
     int wc_GenerateSeed(OS_Seed* os, byte* output, word32 sz)
     {

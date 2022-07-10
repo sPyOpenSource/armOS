@@ -27,19 +27,19 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifdef HAVE_ED25519
 #ifndef ED25519_SMALL /* run when not defined to use small memory math */
 
-#include <wolfcrypt/ge_operations.h>
-#include <wolfcrypt/ed25519.h>
-#include <wolfcrypt/error-crypt.h>
+#include <wolf/crypt/headers/ge_operations.h>
+#include <wolf/crypt/headers/ed25519.h>
+#include <wolf/crypt/headers/error-crypt.h>
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 static void ge_p2_0(ge_p2 *);

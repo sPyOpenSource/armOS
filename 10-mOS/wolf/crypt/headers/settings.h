@@ -169,10 +169,10 @@
 /* Uncomment next line if building for Nucleus 1.2 */
 /* #define WOLFSSL_NUCLEUS_1_2 */
 
-#include <wolfcrypt/visibility.h>
+#include <wolf/crypt/headers/visibility.h>
 #define WOLFSSL_USER_SETTINGS
 #ifdef WOLFSSL_USER_SETTINGS
-    #include "user_settings.h"
+    #include "wolf/ssl/user_settings.h"
 #endif
 
 

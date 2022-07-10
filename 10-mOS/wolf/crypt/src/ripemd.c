@@ -25,19 +25,19 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifdef WOLFSSL_RIPEMD
 
-#include <wolfcrypt/ripemd.h>
+#include <wolf/crypt/headers/ripemd.h>
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
-#include <wolfcrypt/error-crypt.h>
+#include <wolf/crypt/headers/error-crypt.h>
 
 int wc_InitRipeMd(RipeMd* ripemd)
 {

@@ -23,16 +23,16 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 
 #ifdef HAVE_WOLF_EVENT
 
-#include <wolfssl/internal.h>
-#include <wolfssl/error-ssl.h>
-#include <wolfcrypt/error-crypt.h>
+#include <wolf/ssl/headers/internal.h>
+#include <wolf/ssl/headers/error-ssl.h>
+#include <wolf/crypt/headers/error-crypt.h>
 
-#include <wolfcrypt/wolfevent.h>
+#include <wolf/crypt/headers/wolfevent.h>
 
 
 int wolfEvent_Init(WOLF_EVENT* event, WOLF_EVENT_TYPE type, void* context)

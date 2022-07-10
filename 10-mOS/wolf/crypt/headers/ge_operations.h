@@ -25,11 +25,11 @@
 #ifndef WOLF_CRYPT_GE_OPERATIONS_H
 #define WOLF_CRYPT_GE_OPERATIONS_H
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifdef HAVE_ED25519
 
-#include <wolfcrypt/fe_operations.h>
+#include <wolf/crypt/headers/fe_operations.h>
 
 /*
 ge means group element.

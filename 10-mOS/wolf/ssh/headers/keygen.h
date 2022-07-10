@@ -30,8 +30,8 @@
 #ifndef WOLFSSH_KEYGEN_H
 #define WOLFSSH_KEYGEN_H
 
-#include <wolfssh/settings.h>
-#include <wolfssh/port.h>
+#include <wolf/ssh/headers/settings.h>
+#include <wolf/ssh/headers/port.h>
 
 #ifdef __cplusplus
 extern "C" {

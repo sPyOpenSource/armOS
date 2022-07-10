@@ -24,8 +24,8 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
-#include <wolfcrypt/error-crypt.h>
+#include <wolf/crypt/headers/settings.h>
+#include <wolf/crypt/headers/error-crypt.h>
 
 #ifndef NO_HMAC
 
@@ -41,13 +41,13 @@
     #endif
 #endif
 
-#include <wolfcrypt/hmac.h>
+#include <wolf/crypt/headers/hmac.h>
 
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 

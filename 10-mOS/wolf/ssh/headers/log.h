@@ -28,7 +28,7 @@
 
 #pragma once
 
-#include <wolfssh/settings.h>
+#include <wolf/ssh/headers/settings.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -70,4 +70,3 @@ WOLFSSH_API void wolfSSH_Log(enum wolfSSH_LogLevel,
 #ifdef __cplusplus
 }
 #endif
-

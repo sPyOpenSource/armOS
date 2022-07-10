@@ -26,8 +26,8 @@
 #ifndef WOLF_CRYPT_TYPES_H
 #define WOLF_CRYPT_TYPES_H
 
-	#include <wolfcrypt/settings.h>
-	#include <wolfcrypt/wc_port.h>
+	#include <wolf/crypt/headers/settings.h>
+	#include <wolf/crypt/headers/wc_port.h>
 
 	#ifdef __cplusplus
 	    extern "C" {
@@ -211,7 +211,7 @@
 		WOLFSSL_API void* XREALLOC(void *p, size_t n, void* heap, int type);
 		WOLFSSL_API void XFREE(void *p, void* heap, int type);
 	#elif defined(WOLFSSL_ASYNC_CRYPT) && defined(HAVE_INTEL_QA)
-        #include <wolfssl/wolfcrypt/port/intel/quickassist_mem.h>
+        #include <wolf/ssl/wolfcrypt/port/intel/quickassist_mem.h>
         #undef USE_WOLFSSL_MEMORY
         #ifdef WOLFSSL_DEBUG_MEMORY
             #define XMALLOC(s, h, t)     IntelQaMalloc((s), (h), (t), __func__, __LINE__)
@@ -241,7 +241,7 @@
 	        && !defined(FREESCALE_KSDK_MQX) && !defined(FREESCALE_FREE_RTOS) \
             && !defined(WOLFSSL_LEANPSK) && !defined(WOLFSSL_uITRON4)
 	    /* default C runtime, can install different routines at runtime via cbs */
-	    #include <wolfcrypt/memory.h>
+	    #include <wolf/crypt/headers/memory.h>
         #ifdef WOLFSSL_STATIC_MEMORY
             #ifdef WOLFSSL_DEBUG_MEMORY
 				#define XMALLOC(s, h, t)     wolfSSL_Malloc((s), (h), (t), __func__, __LINE__)

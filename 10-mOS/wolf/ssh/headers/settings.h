@@ -28,7 +28,7 @@
 
 #pragma once
 
-#include <wolfssh/visibility.h>
+#include <wolf/ssh/headers/visibility.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -49,4 +49,3 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif
-

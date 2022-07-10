@@ -24,18 +24,18 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
-#include <wolfcrypt/signature.h>
-#include <wolfcrypt/error-crypt.h>
-#include <wolfcrypt/logging.h>
+#include <wolf/crypt/headers/settings.h>
+#include <wolf/crypt/headers/signature.h>
+#include <wolf/crypt/headers/error-crypt.h>
+#include <wolf/crypt/headers/logging.h>
 #ifndef NO_ASN
-#include <wolfcrypt/asn.h>
+#include <wolf/crypt/headers/asn.h>
 #endif
 #ifdef HAVE_ECC
-#include <wolfcrypt/ecc.h>
+#include <wolf/crypt/headers/ecc.h>
 #endif
 #ifndef NO_RSA
-#include <wolfcrypt/rsa.h>
+#include <wolf/crypt/headers/rsa.h>
 #endif
 
 /* If ECC and RSA are disabled then disable signature wrapper */

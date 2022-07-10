@@ -24,8 +24,8 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
-#include <wolfcrypt/error-crypt.h>
+#include <wolf/crypt/headers/settings.h>
+#include <wolf/crypt/headers/error-crypt.h>
 
 #ifndef NO_RSA
 
@@ -41,10 +41,10 @@
        #endif
 #endif
 
-#include <wolfcrypt/rsa.h>
+#include <wolf/crypt/headers/rsa.h>
 
 #ifdef WOLFSSL_HAVE_SP_RSA
-#include <wolfcrypt/sp.h>
+#include <wolf/crypt/headers/sp.h>
 #endif
 
 /*
@@ -188,16 +188,16 @@ int wc_RsaFlattenPublicKey(RsaKey* key, byte* a, word32* aSz, byte* b,
 
 #else /* else build without fips, or for new fips */
 
-#include <wolfcrypt/random.h>
-#include <wolfcrypt/logging.h>
+#include <wolf/crypt/headers/random.h>
+#include <wolf/crypt/headers/logging.h>
 #ifdef WOLF_CRYPTO_DEV
-    #include <wolfcrypt/cryptodev.h>
+    #include <wolf/crypt/headers/cryptodev.h>
 #endif
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 #define ERROR_OUT(x) { ret = (x); goto done;}

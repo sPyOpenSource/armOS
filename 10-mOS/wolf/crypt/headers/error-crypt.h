@@ -26,7 +26,7 @@
 #ifndef WOLF_CRYPT_ERROR_H
 #define WOLF_CRYPT_ERROR_H
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #ifdef HAVE_FIPS
 	#include <cyassl/ctaocrypt/error-crypt.h>

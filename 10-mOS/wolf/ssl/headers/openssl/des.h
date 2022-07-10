@@ -29,7 +29,7 @@
 #ifndef WOLFSSL_DES_H_
 #define WOLFSSL_DES_H_
 
-#include <wolfssl/wolfcrypt/settings.h>
+#include <wolf/ssl/headers/wolfcrypt/settings.h>
 
 #ifndef NO_DES3
 

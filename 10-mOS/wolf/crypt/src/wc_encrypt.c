@@ -24,23 +24,23 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
-#include <wolfcrypt/aes.h>
-#include <wolfcrypt/des3.h>
-#include <wolfcrypt/hash.h>
-#include <wolfcrypt/arc4.h>
-#include <wolfcrypt/wc_encrypt.h>
-#include <wolfcrypt/error-crypt.h>
-#include <wolfcrypt/asn.h>
-#include <wolfcrypt/coding.h>
-#include <wolfcrypt/pwdbased.h>
-#include <wolfcrypt/logging.h>
+#include <wolf/crypt/headers/settings.h>
+#include <wolf/crypt/headers/aes.h>
+#include <wolf/crypt/headers/des3.h>
+#include <wolf/crypt/headers/hash.h>
+#include <wolf/crypt/headers/arc4.h>
+#include <wolf/crypt/headers/wc_encrypt.h>
+#include <wolf/crypt/headers/error-crypt.h>
+#include <wolf/crypt/headers/asn.h>
+#include <wolf/crypt/headers/coding.h>
+#include <wolf/crypt/headers/pwdbased.h>
+#include <wolf/crypt/headers/logging.h>
 
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 #if !defined(NO_AES) && defined(HAVE_AES_CBC)

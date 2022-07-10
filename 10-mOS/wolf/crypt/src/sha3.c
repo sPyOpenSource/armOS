@@ -24,7 +24,7 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #if defined(WOLFSSL_SHA3) && !defined(WOLFSSL_XILINX_CRYPT)
 
@@ -40,14 +40,14 @@
     #endif
 #endif
 
-#include <wolfcrypt/sha3.h>
-#include <wolfcrypt/error-crypt.h>
+#include <wolf/crypt/headers/sha3.h>
+#include <wolf/crypt/headers/error-crypt.h>
 
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 

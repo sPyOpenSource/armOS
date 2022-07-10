@@ -24,22 +24,22 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifndef NO_DSA
 
-#include <wolfcrypt/random.h>
-#include <wolfcrypt/integer.h>
-#include <wolfcrypt/error-crypt.h>
-#include <wolfcrypt/logging.h>
-#include <wolfcrypt/sha.h>
-#include <wolfcrypt/dsa.h>
+#include <wolf/crypt/headers/random.h>
+#include <wolf/crypt/headers/integer.h>
+#include <wolf/crypt/headers/error-crypt.h>
+#include <wolf/crypt/headers/logging.h>
+#include <wolf/crypt/headers/sha.h>
+#include <wolf/crypt/headers/dsa.h>
 
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 

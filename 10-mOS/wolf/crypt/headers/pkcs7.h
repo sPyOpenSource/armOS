@@ -26,20 +26,20 @@
 #ifndef WOLF_CRYPT_PKCS7_H
 #define WOLF_CRYPT_PKCS7_H
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #ifdef HAVE_PKCS7
 
 #ifndef NO_ASN
-    #include <wolfcrypt/asn.h>
+    #include <wolf/crypt/headers/asn.h>
 #endif
-#include <wolfcrypt/asn_public.h>
-#include <wolfcrypt/random.h>
+#include <wolf/crypt/headers/asn_public.h>
+#include <wolf/crypt/headers/random.h>
 #ifndef NO_AES
-    #include <wolfcrypt/aes.h>
+    #include <wolf/crypt/headers/aes.h>
 #endif
 #ifndef NO_DES3
-    #include <wolfcrypt/des3.h>
+    #include <wolf/crypt/headers/des3.h>
 #endif
 
 #ifdef __cplusplus

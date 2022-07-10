@@ -27,9 +27,9 @@
 #ifndef WOLF_CRYPT_SIGNATURE_H
 #define WOLF_CRYPT_SIGNATURE_H
 
-#include <wolfcrypt/types.h>
-#include <wolfcrypt/hash.h>
-#include <wolfcrypt/random.h>
+#include <wolf/crypt/headers/types.h>
+#include <wolf/crypt/headers/hash.h>
+#include <wolf/crypt/headers/random.h>
 
 #ifdef __cplusplus
     extern "C" {

@@ -25,14 +25,14 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
-#include <wolfcrypt/error-crypt.h>
-#include <wolfcrypt/cpuid.h>
+#include <wolf/crypt/headers/settings.h>
+#include <wolf/crypt/headers/error-crypt.h>
+#include <wolf/crypt/headers/cpuid.h>
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 #if defined(WOLFSSL_HAVE_SP_RSA) || defined(WOLFSSL_HAVE_SP_DH) || \
@@ -46,7 +46,7 @@
 #endif
 #endif
 
-#include <wolfcrypt/sp.h>
+#include <wolf/crypt/headers/sp.h>
 
 #ifndef WOLFSSL_SP_ASM
 #if SP_WORD_SIZE == 32

@@ -24,12 +24,12 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifndef WOLF_CRYPT_MISC_C
 #define WOLF_CRYPT_MISC_C
 
-#include <wolfcrypt/misc.h>
+#include <wolf/crypt/headers/misc.h>
 
 /* inlining these functions is a huge speed increase and a small size decrease,
    because the functions are smaller than function call setup/cleanup, e.g.,

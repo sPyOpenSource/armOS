@@ -24,7 +24,7 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #if defined(WOLFSSL_SHA512) || defined(WOLFSSL_SHA384)
 
@@ -40,9 +40,9 @@
     #endif
 #endif
 
-#include <wolfcrypt/sha512.h>
-#include <wolfcrypt/error-crypt.h>
-#include <wolfcrypt/cpuid.h>
+#include <wolf/crypt/headers/sha512.h>
+#include <wolf/crypt/headers/error-crypt.h>
+#include <wolf/crypt/headers/cpuid.h>
 
 /* deprecated USE_SLOW_SHA2 (replaced with USE_SLOW_SHA512) */
 #if defined(USE_SLOW_SHA2) && !defined(USE_SLOW_SHA512)
@@ -135,13 +135,13 @@
 
 #else /* else build without fips, or for FIPS v2 */
 
-#include <wolfcrypt/logging.h>
+#include <wolf/crypt/headers/logging.h>
 
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 

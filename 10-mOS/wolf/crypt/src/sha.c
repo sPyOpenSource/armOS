@@ -24,7 +24,7 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #if !defined(NO_SHA)
 
@@ -40,8 +40,8 @@
     #endif
 #endif
 
-#include <wolfcrypt/sha.h>
-#include <wolfcrypt/error-crypt.h>
+#include <wolf/crypt/headers/sha.h>
+#include <wolf/crypt/headers/error-crypt.h>
 
 /* fips wrapper calls, user can call direct */
 #if defined(HAVE_FIPS) && \
@@ -89,22 +89,22 @@
 
 
 #if defined(WOLFSSL_TI_HASH)
-    /* #include <wolfcrypt/src/port/ti/ti-hash.c> included by wc_port.c */
+    /* #include <wolf/crypt/src/port/ti/ti-hash.c> included by wc_port.c */
 
 #else
 
-#include <wolfcrypt/logging.h>
+#include <wolf/crypt/headers/logging.h>
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 
 /* Hardware Acceleration */
 #if defined(WOLFSSL_PIC32MZ_HASH)
-    #include <wolfcrypt/port/pic32/pic32mz-crypt.h>
+    #include <wolf/crypt/headers/port/pic32/pic32mz-crypt.h>
 
 #elif defined(STM32_HASH)
 

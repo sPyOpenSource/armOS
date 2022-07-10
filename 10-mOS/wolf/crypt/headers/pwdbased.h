@@ -26,7 +26,7 @@
 #ifndef WOLF_CRYPT_PWDBASED_H
 #define WOLF_CRYPT_PWDBASED_H
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #ifndef NO_PWDBASED
 

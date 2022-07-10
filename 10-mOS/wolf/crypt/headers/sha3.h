@@ -23,13 +23,13 @@
 #ifndef WOLF_CRYPT_SHA3_H
 #define WOLF_CRYPT_SHA3_H
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #ifdef WOLFSSL_SHA3
 
 #ifdef HAVE_FIPS
     /* for fips @wc_fips */
-    #include <wolfcrypt/fips.h>
+    #include <wolf/crypt/headers/fips.h>
 #endif
 
 #ifdef __cplusplus
@@ -37,7 +37,7 @@
 #endif
 
 #ifdef WOLFSSL_ASYNC_CRYPT
-    #include <wolfcrypt/async.h>
+    #include <wolf/crypt/headers/async.h>
 #endif
 
 /* in bytes */

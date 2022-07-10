@@ -26,13 +26,13 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifndef WOLFCRYPT_ONLY
 #ifdef HAVE_CRL
 
-#include <wolfssl/internal.h>
-#include <wolfssl/error-ssl.h>
+#include <wolf/ssl/headers/internal.h>
+#include <wolf/ssl/headers/error-ssl.h>
 
 #include <string.h>
 

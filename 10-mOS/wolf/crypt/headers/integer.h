@@ -32,23 +32,23 @@
 /* may optionally use fast math instead, not yet supported on all platforms and
    may not be faster on all
 */
-#include <wolfcrypt/types.h>       /* will set MP_xxBIT if not default */
+#include <wolf/crypt/headers/types.h>       /* will set MP_xxBIT if not default */
 #ifdef WOLFSSL_SP_MATH
-    #include <wolfcrypt/sp_int.h>
+    #include <wolf/crypt/headers/sp_int.h>
 #elif defined(USE_FAST_MATH)
-    #include <wolfcrypt/tfm.h>
+    #include <wolf/crypt/headers/tfm.h>
 #else
 
-#include <wolfcrypt/random.h>
+#include <wolf/crypt/headers/random.h>
 
 #ifndef CHAR_BIT
     #include <limits.h>
 #endif
 
-#include <wolfcrypt/mpi_class.h>
+#include <wolf/crypt/headers/mpi_class.h>
 
 /* wolf big int and common functions */
-#include <wolfcrypt/wolfmath.h>
+#include <wolf/crypt/headers/wolfmath.h>
 
 
 #ifdef WOLFSSL_PUBLIC_MP
@@ -387,7 +387,7 @@ MP_API int mp_mod_d(mp_int* a, mp_digit b, mp_digit* c);
 
 
 /* wolf big int and common functions */
-#include <wolfcrypt/wolfmath.h>
+#include <wolf/crypt/headers/wolfmath.h>
 
 
 #ifdef __cplusplus
@@ -398,5 +398,3 @@ MP_API int mp_mod_d(mp_int* a, mp_digit b, mp_digit* c);
 #endif /* USE_FAST_MATH */
 
 #endif  /* WOLF_CRYPT_INTEGER_H */
-
-

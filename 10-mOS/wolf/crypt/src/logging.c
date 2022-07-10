@@ -24,15 +24,15 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 /* submitted by eof */
 
-#include <wolfcrypt/logging.h>
-#include <wolfcrypt/error-crypt.h>
+#include <wolf/crypt/headers/logging.h>
+#include <wolf/crypt/headers/error-crypt.h>
 #if defined(OPENSSL_EXTRA) && !defined(WOLFCRYPT_ONLY)
 /* avoid adding WANT_READ and WANT_WRITE to error queue */
-#include <wolfssl/error-ssl.h>
+#include <wolf/ssl/headers/error-ssl.h>
 #endif
 
 #if defined(OPENSSL_EXTRA) || defined(DEBUG_WOLFSSL_VERBOSE)

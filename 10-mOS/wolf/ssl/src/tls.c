@@ -25,28 +25,28 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifndef WOLFCRYPT_ONLY
 
-#include <wolfssl/ssl.h>
-#include <wolfssl/internal.h>
-#include <wolfssl/error-ssl.h>
-#include <wolfcrypt/hmac.h>
+#include <wolf/ssl/headers/ssl.h>
+#include <wolf/ssl/headers/internal.h>
+#include <wolf/ssl/headers/error-ssl.h>
+#include <wolf/crypt/headers/hmac.h>
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 #ifdef HAVE_CURVE25519
-    #include <wolfcrypt/curve25519.h>
+    #include <wolf/crypt/headers/curve25519.h>
 #endif
 
 #ifdef HAVE_NTRU
     #include "libntruencrypt/ntru_crypto.h"
-    #include <wolfcrypt/random.h>
+    #include <wolf/crypt/headers/random.h>
 #endif
 
 #ifdef HAVE_QSH

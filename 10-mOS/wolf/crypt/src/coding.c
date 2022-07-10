@@ -24,13 +24,13 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifndef NO_CODING
 
-#include <wolfcrypt/coding.h>
-#include <wolfcrypt/error-crypt.h>
-#include <wolfcrypt/logging.h>
+#include <wolf/crypt/headers/coding.h>
+#include <wolf/crypt/headers/error-crypt.h>
+#include <wolf/crypt/headers/logging.h>
 
 
 enum {

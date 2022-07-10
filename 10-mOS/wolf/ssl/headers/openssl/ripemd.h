@@ -25,7 +25,7 @@
 #ifndef WOLFSSL_RIPEMD_H_
 #define WOLFSSL_RIPEMD_H_
 
-#include <wolfssl/wolfcrypt/settings.h>
+#include <wolf/ssl/headers/wolfcrypt/settings.h>
 
 #ifdef __cplusplus
     extern "C" {

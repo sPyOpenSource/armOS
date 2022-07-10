@@ -25,19 +25,19 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
-#include <wolfcrypt/error-crypt.h>
+#include <wolf/crypt/headers/settings.h>
+#include <wolf/crypt/headers/error-crypt.h>
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 
 #ifdef WOLFSSL_SP_MATH
 
-#include <wolfcrypt/sp_int.h>
+#include <wolf/crypt/headers/sp_int.h>
 
 /* Initialize the big number to be zero.
  *

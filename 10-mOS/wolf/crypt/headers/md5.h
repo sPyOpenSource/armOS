@@ -27,7 +27,7 @@
 #ifndef WOLF_CRYPT_MD5_H
 #define WOLF_CRYPT_MD5_H
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #ifndef NO_MD5
 
@@ -60,13 +60,13 @@ enum {
 
 
 #ifdef WOLFSSL_MICROCHIP_PIC32MZ
-    #include <wolfcrypt/port/pic32/pic32mz-crypt.h>
+    #include <wolf/crypt/headers/port/pic32/pic32mz-crypt.h>
 #endif
 #ifdef STM32_HASH
-    #include <wolfcrypt/port/st/stm32.h>
+    #include <wolf/crypt/headers/port/st/stm32.h>
 #endif
 #ifdef WOLFSSL_ASYNC_CRYPT
-    #include <wolfcrypt/async.h>
+    #include <wolf/crypt/headers/async.h>
 #endif
 
 #ifdef WOLFSSL_TI_HASH
@@ -120,4 +120,3 @@ WOLFSSL_API void wc_Md5SizeSet(wc_Md5* md5, word32 len);
 
 #endif /* NO_MD5 */
 #endif /* WOLF_CRYPT_MD5_H */
-

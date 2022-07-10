@@ -24,25 +24,25 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifdef HAVE_PKCS7
 
-#include <wolfcrypt/pkcs7.h>
-#include <wolfcrypt/error-crypt.h>
-#include <wolfcrypt/logging.h>
-#include <wolfcrypt/hash.h>
+#include <wolf/crypt/headers/pkcs7.h>
+#include <wolf/crypt/headers/error-crypt.h>
+#include <wolf/crypt/headers/logging.h>
+#include <wolf/crypt/headers/hash.h>
 #ifndef NO_RSA
-    #include <wolfcrypt/rsa.h>
+    #include <wolf/crypt/headers/rsa.h>
 #endif
 #ifdef HAVE_ECC
-    #include <wolfcrypt/ecc.h>
+    #include <wolf/crypt/headers/ecc.h>
 #endif
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 

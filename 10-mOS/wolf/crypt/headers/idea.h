@@ -26,7 +26,7 @@
 #ifndef WOLF_CRYPT_IDEA_H
 #define WOLF_CRYPT_IDEA_H
 
-#include <wolfssl/wolfcrypt/types.h>
+#include <wolf/ssl/headers/wolfcrypt/types.h>
 
 #ifdef HAVE_IDEA
 

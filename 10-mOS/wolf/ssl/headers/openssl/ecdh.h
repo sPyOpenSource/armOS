@@ -24,8 +24,8 @@
 #ifndef WOLFSSL_ECDH_H_
 #define WOLFSSL_ECDH_H_
 
-#include <wolfssl/openssl/ssl.h>
-#include <wolfssl/openssl/bn.h>
+#include <wolf/ssl/headers/openssl/ssl.h>
+#include <wolf/ssl/headers/openssl/bn.h>
 
 #ifdef __cplusplus
 extern "C" {

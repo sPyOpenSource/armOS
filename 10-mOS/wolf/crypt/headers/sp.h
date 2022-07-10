@@ -23,17 +23,17 @@
 #ifndef WOLF_CRYPT_SP_H
 #define WOLF_CRYPT_SP_H
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #if defined(WOLFSSL_HAVE_SP_RSA) || defined(WOLFSSL_HAVE_SP_DH) || \
                                     defined(WOLFSSL_HAVE_SP_ECC)
 
 #include <stdint.h>
 
-#include <wolfcrypt/integer.h>
-#include <wolfcrypt/sp_int.h>
+#include <wolf/crypt/headers/integer.h>
+#include <wolf/crypt/headers/sp_int.h>
 
-#include <wolfcrypt/ecc.h>
+#include <wolf/crypt/headers/ecc.h>
 
 #if defined(_MSC_VER)
     #define SP_NOINLINE __declspec(noinline)

@@ -23,14 +23,14 @@
 #ifndef WOLF_CRYPT_CMAC_H
 #define WOLF_CRYPT_CMAC_H
 
-#include <wolfcrypt/types.h>
-#include <wolfcrypt/aes.h>
+#include <wolf/crypt/headers/types.h>
+#include <wolf/crypt/headers/aes.h>
 
 #if !defined(NO_AES) && defined(WOLFSSL_CMAC)
 
 #if defined(HAVE_FIPS) && \
     defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2)
-    #include <wolfssl/wolfcrypt/fips.h>
+    #include <wolf/ssl/headers/wolfcrypt/fips.h>
 #endif /* HAVE_FIPS_VERSION >= 2 */
 
 #ifdef __cplusplus

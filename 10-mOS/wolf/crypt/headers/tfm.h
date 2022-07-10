@@ -39,15 +39,15 @@
 #ifndef WOLF_CRYPT_TFM_H
 #define WOLF_CRYPT_TFM_H
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 #ifndef CHAR_BIT
     #include <limits.h>
 #endif
 
-#include <wolfcrypt/random.h>
+#include <wolf/crypt/headers/random.h>
 
 /* wolf big int and common functions */
-#include <wolfcrypt/wolfmath.h>
+#include <wolf/crypt/headers/wolfmath.h>
 
 #ifdef __cplusplus
     extern "C" {
@@ -750,7 +750,7 @@ WOLFSSL_API word32 CheckRunTimeFastMath(void);
 
 
 /* wolf big int and common functions */
-#include <wolfcrypt/wolfmath.h>
+#include <wolf/crypt/headers/wolfmath.h>
 
 
 #ifdef __cplusplus

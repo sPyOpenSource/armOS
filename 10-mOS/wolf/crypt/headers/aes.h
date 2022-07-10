@@ -27,13 +27,13 @@
 #ifndef WOLF_CRYPT_AES_H
 #define WOLF_CRYPT_AES_H
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #ifndef NO_AES
 
 #if defined(HAVE_FIPS) && \
     defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2)
-    #include <wolfcrypt/fips.h>
+    #include <wolf/crypt/headers/fips.h>
 #endif /* HAVE_FIPS_VERSION >= 2 */
 
 /* included for fips @wc_fips */
@@ -63,7 +63,7 @@
 #endif
 
 #if defined(HAVE_AESGCM) && !defined(WC_NO_RNG)
-    #include <wolfcrypt/random.h>
+    #include <wolf/crypt/headers/random.h>
 #endif
 
 
@@ -86,7 +86,7 @@ enum {
     (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2))
 
 #ifdef WOLFSSL_ASYNC_CRYPT
-    #include <wolfcrypt/async.h>
+    #include <wolf/crypt/headers/async.h>
 #endif
 
 enum {

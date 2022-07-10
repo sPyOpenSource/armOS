@@ -29,7 +29,7 @@
 #endif
 
 
-#include <wolfssh/port.h>
+#include <wolf/ssh/headers/port.h>
 
 
 #ifdef NO_INLINE
@@ -54,4 +54,3 @@ WOLFSSH_LOCAL int ConstantCompare(const byte*, const byte*, word32);
 
 
 #endif /* WOLFSSH_MISC_H */
-

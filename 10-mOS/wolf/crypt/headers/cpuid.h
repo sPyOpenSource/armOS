@@ -25,7 +25,7 @@
 #define WOLF_CRYPT_CPUID_H
 
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 
 #ifdef __cplusplus

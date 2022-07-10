@@ -24,7 +24,7 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 /* check old macros @wc_fips */
 #if defined(USE_CYASSL_MEMORY) && !defined(USE_WOLFSSL_MEMORY)
@@ -36,9 +36,9 @@
 
 #ifdef USE_WOLFSSL_MEMORY
 
-#include <wolfcrypt/memory.h>
-#include <wolfcrypt/error-crypt.h>
-#include <wolfcrypt/logging.h>
+#include <wolf/crypt/headers/memory.h>
+#include <wolf/crypt/headers/error-crypt.h>
+#include <wolf/crypt/headers/logging.h>
 
 #if defined(WOLFSSL_MALLOC_CHECK) || defined(WOLFSSL_TRACK_MEMORY_FULL)
     #include <stdio.h>
@@ -881,7 +881,7 @@ void* wolfSSL_Realloc(void *ptr, size_t size, void* heap, int type)
 
 /* Example for user io pool, shared build may need definitions in lib proper */
 
-#include <wolfssl/wolfcrypt/types.h>
+#include <wolf/ssl/headers/wolfcrypt/types.h>
 #include <stdlib.h>
 
 #ifndef HAVE_THREAD_LS

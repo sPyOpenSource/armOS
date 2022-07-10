@@ -72,7 +72,7 @@
 #endif
 
 #ifdef WOLFSSL_SP_MATH
-#include <wolfssl/wolfcrypt/random.h>
+#include <wolf/ssl/headers/wolfcrypt/random.h>
 
 #ifndef MIN
    #define MIN(x,y) ((x)<(y)?(x):(y))
@@ -185,7 +185,7 @@ typedef sp_digit mp_digit;
 
 #define MP_INT_DEFINED
 
-#include <wolfssl/wolfcrypt/wolfmath.h>
+#include <wolf/ssl/headers/wolfcrypt/wolfmath.h>
 #endif
 
 #endif /* WOLF_CRYPT_SP_H */

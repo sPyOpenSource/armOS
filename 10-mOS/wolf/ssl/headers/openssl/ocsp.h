@@ -25,7 +25,7 @@
 #define WOLFSSL_OCSP_H_
 
 #ifdef HAVE_OCSP
-#include <wolfssl/ocsp.h>
+#include <wolf/ssl/headers/ocsp.h>
 
 #define OCSP_REQUEST              OcspRequest
 #define OCSP_RESPONSE             OcspResponse

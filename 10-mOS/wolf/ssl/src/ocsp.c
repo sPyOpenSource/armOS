@@ -26,20 +26,20 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifndef WOLFCRYPT_ONLY
 #ifdef HAVE_OCSP
 
-#include <wolfssl/error-ssl.h>
-#include <wolfssl/ocsp.h>
-#include <wolfssl/internal.h>
+#include <wolf/ssl/headers/error-ssl.h>
+#include <wolf/ssl/headers/ocsp.h>
+#include <wolf/ssl/headers/internal.h>
 
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 

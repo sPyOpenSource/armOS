@@ -26,7 +26,7 @@
 #ifndef WOLF_CRYPT_MD4_H
 #define WOLF_CRYPT_MD4_H
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #ifndef NO_MD4
 
@@ -64,5 +64,3 @@ WOLFSSL_API void wc_Md4Final(Md4*, byte*);
 
 #endif /* NO_MD4 */
 #endif /* WOLF_CRYPT_MD4_H */
-
-

@@ -25,24 +25,24 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #if !defined(NO_MD5)
 
 #if defined(WOLFSSL_TI_HASH)
-    /* #include <wolfcrypt/src/port/ti/ti-hash.c> included by wc_port.c */
+    /* #include <wolf/crypt/src/port/ti/ti-hash.c> included by wc_port.c */
 
 #else
 
-#include <wolfcrypt/md5.h>
-#include <wolfcrypt/error-crypt.h>
-#include <wolfcrypt/logging.h>
+#include <wolf/crypt/headers/md5.h>
+#include <wolf/crypt/headers/error-crypt.h>
+#include <wolf/crypt/headers/logging.h>
 
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 
@@ -122,7 +122,7 @@
     }
 
 #elif defined(WOLFSSL_PIC32MZ_HASH)
-    #include <wolfssl/wolfcrypt/port/pic32/pic32mz-crypt.h>
+    #include <wolf/ssl/headers/wolfcrypt/port/pic32/pic32mz-crypt.h>
     #define HAVE_MD5_CUST_API
 
 #elif defined(WOLFSSL_IMX6_CAAM) && !defined(NO_IMX6_CAAM_HASH)

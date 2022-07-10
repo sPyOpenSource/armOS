@@ -29,7 +29,7 @@
 
 #pragma once
 
-#include <wolfssh/settings.h>
+#include <wolf/ssh/headers/settings.h>
 #include <stdio.h>
 
 #ifdef __cplusplus
@@ -39,7 +39,7 @@ extern "C" {
 
 /* setup memory handling */
 #ifndef WMALLOC_USER
-    #include <wolfssh/memory.h>
+    #include <wolf/ssh/headers/memory.h>
 
     #define WMALLOC(s, h, t)    ((void)h, (void)t, wolfSSH_Malloc((s)))
     #define WFREE(p, h, t)      {void* xp = (p); if ((xp)) wolfSSH_Free((xp));}
@@ -122,4 +122,3 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif
-

@@ -28,7 +28,7 @@
 #ifndef WOLF_CRYPT_HMAC_H
 #define WOLF_CRYPT_HMAC_H
 
-#include <wolfcrypt/hash.h>
+#include <wolf/crypt/headers/hash.h>
 
 #if defined(HAVE_FIPS) && \
 	(!defined(HAVE_FIPS_VERSION) || (HAVE_FIPS_VERSION < 2))
@@ -40,7 +40,7 @@
 
 #if defined(HAVE_FIPS) && \
 	defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2)
-	#include <wolfcrypt/fips.h>
+	#include <wolf/crypt/headers/fips.h>
 #endif
 
 #ifdef __cplusplus
@@ -52,7 +52,7 @@
     (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2))
 
 #ifdef WOLFSSL_ASYNC_CRYPT
-    #include <wolfcrypt/async.h>
+    #include <wolf/crypt/headers/async.h>
 #endif
 
 #ifndef NO_OLD_WC_NAMES
@@ -186,5 +186,3 @@ WOLFSSL_API int wc_HKDF(int type, const byte* inKey, word32 inKeySz,
 #endif /* WOLF_CRYPT_HMAC_H */
 
 #endif /* NO_HMAC */
-
-

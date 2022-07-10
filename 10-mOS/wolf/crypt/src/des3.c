@@ -24,9 +24,9 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
-#include <wolfcrypt/error-crypt.h>
-#include <wolfcrypt/logging.h>
+#include <wolf/crypt/headers/settings.h>
+#include <wolf/crypt/headers/error-crypt.h>
+#include <wolf/crypt/headers/logging.h>
 
 
 #ifndef NO_DES3
@@ -43,7 +43,7 @@
     #endif
 #endif
 
-#include <wolfcrypt/des3.h>
+#include <wolf/crypt/headers/des3.h>
 
 /* fips wrapper calls, user can call direct */
 #if defined(HAVE_FIPS) && \
@@ -125,15 +125,15 @@
 
 
 #if defined(WOLFSSL_TI_CRYPT)
-    #include <wolfcrypt/src/port/ti/ti-des3.c>
+    #include <wolf/crypt/src/port/ti/ti-des3.c>
 #else
 
 
 #ifdef NO_INLINE
-    #include <wolfssl/wolfcrypt/misc.h>
+    #include <wolf/ssl/headers/wolfcrypt/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 
@@ -454,7 +454,7 @@
 
 #elif defined(HAVE_COLDFIRE_SEC)
 
-    #include <wolfssl/ctaocrypt/types.h>
+    #include <wolf/ssl/headers/ctaocrypt/types.h>
 
     #include "sec.h"
     #include "mcf5475_sec.h"
@@ -1026,7 +1026,7 @@
 #elif defined(WOLFSSL_PIC32MZ_CRYPT)
 
     /* PIC32MZ DES hardware requires size multiple of block size */
-    #include <wolfssl/wolfcrypt/port/pic32/pic32mz-crypt.h>
+    #include <wolf/ssl/headers/wolfcrypt/port/pic32/pic32mz-crypt.h>
 
     int wc_Des_SetKey(Des* des, const byte* key, const byte* iv, int dir)
     {

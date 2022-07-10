@@ -25,7 +25,7 @@
 #ifndef WOLFSSL_RSA_H_
 #define WOLFSSL_RSA_H_
 
-#include <wolfssl/openssl/bn.h>
+#include <wolf/ssl/headers/openssl/bn.h>
 
 
 #ifdef __cplusplus

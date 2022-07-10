@@ -24,9 +24,9 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
-#include <wolfcrypt/cpuid.h>
+#include <wolf/crypt/headers/cpuid.h>
 
 #if (defined(WOLFSSL_X86_64_BUILD) || defined(USE_INTEL_SPEEDUP) || \
      defined(WOLFSSL_AESNI)) && !defined(WOLFSSL_NO_ASM)

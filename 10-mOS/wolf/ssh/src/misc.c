@@ -30,14 +30,14 @@
 #endif
 
 
-#include <wolfssh/settings.h>
+#include <wolf/ssh/headers/settings.h>
 
 
 #ifndef WOLFSSH_MISC_C
 #define WOLFSSH_MISC_C
 
 
-#include <wolfssh/misc.h>
+#include <wolf/ssh/headers/misc.h>
 
 
 #ifdef NO_INLINE

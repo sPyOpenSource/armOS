@@ -27,7 +27,7 @@
 #ifndef WOLF_CRYPT_RSA_H
 #define WOLF_CRYPT_RSA_H
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #ifndef NO_RSA
 
@@ -51,16 +51,16 @@
     #define WOLFSSL_KEY_GEN
 #endif
 #else
-    #include <wolfcrypt/integer.h>
-    #include <wolfcrypt/random.h>
+    #include <wolf/crypt/headers/integer.h>
+    #include <wolf/crypt/headers/random.h>
 #endif /* HAVE_FIPS && HAVE_FIPS_VERION 1 */
 #if defined(HAVE_FIPS) && \
 	defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2)
-#include <wolfcrypt/fips.h>
+#include <wolf/crypt/headers/fips.h>
 #endif
 
 /* header file needed for OAEP padding */
-#include <wolfcrypt/hash.h>
+#include <wolf/crypt/headers/hash.h>
 
 #ifdef WOLFSSL_XILINX_CRYPT
 #include "xsecure_rsa.h"
@@ -75,9 +75,9 @@
     (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2))
 
 #ifdef WOLFSSL_ASYNC_CRYPT
-    #include <wolfcrypt/async.h>
+    #include <wolf/crypt/headers/async.h>
     #ifdef WOLFSSL_CERT_GEN
-        #include <wolfcrypt/asn.h>
+        #include <wolf/crypt/headers/asn.h>
     #endif
 #endif
 
@@ -286,5 +286,3 @@ WOLFSSL_API int wc_RsaKeyToPublicDer(RsaKey*, byte* output, word32 inLen);
 
 #endif /* NO_RSA */
 #endif /* WOLF_CRYPT_RSA_H */
-
-

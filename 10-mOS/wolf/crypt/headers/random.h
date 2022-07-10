@@ -28,11 +28,11 @@
 #ifndef WOLF_CRYPT_RANDOM_H
 #define WOLF_CRYPT_RANDOM_H
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #if defined(HAVE_FIPS) && \
     defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2)
-    #include <wolfcrypt/fips.h>
+    #include <wolf/crypt/headers/fips.h>
 #endif /* HAVE_FIPS_VERSION >= 2 */
 
 /* included for fips @wc_fips */
@@ -103,7 +103,7 @@
     #ifdef NO_SHA256
         #error "Hash DRBG requires SHA-256."
     #endif /* NO_SHA256 */
-    #include <wolfcrypt/sha256.h>
+    #include <wolf/crypt/headers/sha256.h>
 #elif defined(HAVE_WNR)
      /* allow whitewood as direct RNG source using wc_GenerateSeed directly */
 #else
@@ -115,7 +115,7 @@
 #endif
 
 #ifdef WOLFSSL_ASYNC_CRYPT
-    #include <wolfcrypt/async.h>
+    #include <wolf/crypt/headers/async.h>
 #endif
 
 
@@ -209,5 +209,3 @@ WOLFSSL_API int  wc_FreeRng(WC_RNG*);
 #endif
 
 #endif /* WOLF_CRYPT_RANDOM_H */
-
-

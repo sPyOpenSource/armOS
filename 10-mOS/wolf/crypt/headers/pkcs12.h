@@ -23,7 +23,7 @@
 #ifndef WOLF_CRYPT_PKCS12_H
 #define WOLF_CRYPT_PKCS12_H
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #ifdef __cplusplus
     extern "C" {
@@ -67,5 +67,3 @@ WOLFSSL_LOCAL void wc_FreeCertList(WC_DerCertList* list, void* heap);
 #endif
 
 #endif /* WOLF_CRYPT_PKCS12_H */
-
-

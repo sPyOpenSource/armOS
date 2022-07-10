@@ -24,9 +24,9 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
-#include <wolfcrypt/error-crypt.h>
+#include <wolf/crypt/headers/error-crypt.h>
 
 #ifdef _MSC_VER
     /* 4996 warning to use MS extensions e.g., strcpy_s instead of XSTRNCPY */

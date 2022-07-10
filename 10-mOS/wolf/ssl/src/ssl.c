@@ -24,7 +24,7 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifndef WOLFCRYPT_ONLY
 
@@ -32,14 +32,14 @@
     #include <errno.h>
 #endif
 
-#include <wolfssl/internal.h>
-#include <wolfssl/error-ssl.h>
-#include <wolfcrypt/coding.h>
+#include <wolf/ssl/headers/internal.h>
+#include <wolf/ssl/headers/error-ssl.h>
+#include <wolf/crypt/headers/coding.h>
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 
@@ -53,54 +53,54 @@
 
 #if defined(OPENSSL_EXTRA) || defined(OPENSSL_EXTRA_X509_SMALL) || \
         defined(HAVE_WEBSERVER) || defined(WOLFSSL_KEY_GEN)
-    #include <wolfssl/openssl/evp.h>
+    #include <wolf/ssl/headers/openssl/evp.h>
     /* openssl headers end, wolfssl internal headers next */
 #endif
 
-#include <wolfcrypt/wc_encrypt.h>
+#include <wolf/crypt/headers/wc_encrypt.h>
 
 #ifdef OPENSSL_EXTRA
     /* openssl headers begin */
-    #include <wolfssl/openssl/aes.h>
-    #include <wolfssl/openssl/hmac.h>
-    #include <wolfssl/openssl/crypto.h>
-    #include <wolfssl/openssl/des.h>
-    #include <wolfssl/openssl/bn.h>
-    #include <wolfssl/openssl/buffer.h>
-    #include <wolfssl/openssl/dh.h>
-    #include <wolfssl/openssl/rsa.h>
-    #include <wolfssl/openssl/pem.h>
-    #include <wolfssl/openssl/ec.h>
-    #include <wolfssl/openssl/ec25519.h>
-    #include <wolfssl/openssl/ed25519.h>
-    #include <wolfssl/openssl/ecdsa.h>
-    #include <wolfssl/openssl/ecdh.h>
-    #include <wolfssl/openssl/rc4.h>
+    #include <wolf/ssl/headers/openssl/aes.h>
+    #include <wolf/ssl/headers/openssl/hmac.h>
+    #include <wolf/ssl/headers/openssl/crypto.h>
+    #include <wolf/ssl/headers/openssl/des.h>
+    #include <wolf/ssl/headers/openssl/bn.h>
+    #include <wolf/ssl/headers/openssl/buffer.h>
+    #include <wolf/ssl/headers/openssl/dh.h>
+    #include <wolf/ssl/headers/openssl/rsa.h>
+    #include <wolf/ssl/headers/openssl/pem.h>
+    #include <wolf/ssl/headers/openssl/ec.h>
+    #include <wolf/ssl/headers/openssl/ec25519.h>
+    #include <wolf/ssl/headers/openssl/ed25519.h>
+    #include <wolf/ssl/headers/openssl/ecdsa.h>
+    #include <wolf/ssl/headers/openssl/ecdh.h>
+    #include <wolf/ssl/headers/openssl/rc4.h>
     /* openssl headers end, wolfssl internal headers next */
-    #include <wolfcrypt/hmac.h>
-    #include <wolfcrypt/random.h>
-    #include <wolfcrypt/des3.h>
-    #include <wolfcrypt/md4.h>
-    #include <wolfcrypt/md5.h>
-    #include <wolfcrypt/arc4.h>
-    #include <wolfcrypt/idea.h>
-    #include <wolfcrypt/curve25519.h>
-    #include <wolfcrypt/ed25519.h>
+    #include <wolf/crypt/headers/hmac.h>
+    #include <wolf/crypt/headers/random.h>
+    #include <wolf/crypt/headers/des3.h>
+    #include <wolf/crypt/headers/md4.h>
+    #include <wolf/crypt/headers/md5.h>
+    #include <wolf/crypt/headers/arc4.h>
+    #include <wolf/crypt/headers/idea.h>
+    #include <wolf/crypt/headers/curve25519.h>
+    #include <wolf/crypt/headers/ed25519.h>
     #if defined(OPENSSL_ALL) || defined(HAVE_STUNNEL)
-        #include <wolfssl/openssl/ocsp.h>
+        #include <wolf/ssl/headers/openssl/ocsp.h>
     #endif /* WITH_STUNNEL */
     #if defined(WOLFSSL_SHA512) || defined(WOLFSSL_SHA384)
-        #include <wolfcrypt/sha512.h>
+        #include <wolf/crypt/headers/sha512.h>
     #endif
     #if defined(WOLFCRYPT_HAVE_SRP) && !defined(NO_SHA256) \
         && !defined(WC_NO_RNG)
-        #include <wolfcrypt/srp.h>
-        #include <wolfcrypt/random.h>
+        #include <wolf/crypt/headers/srp.h>
+        #include <wolf/crypt/headers/random.h>
     #endif
 #endif
 
 #ifdef NO_ASN
-    #include <wolfcrypt/dh.h>
+    #include <wolf/crypt/headers/dh.h>
 #endif
 
 

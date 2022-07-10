@@ -30,7 +30,7 @@
 #define WOLFSSL_MEMORY_H
 
 #include <stdlib.h>
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #ifdef __cplusplus
     extern "C" {

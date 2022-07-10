@@ -26,12 +26,12 @@
 #ifndef WOLF_CRYPT_DSA_H
 #define WOLF_CRYPT_DSA_H
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #ifndef NO_DSA
 
-#include <wolfcrypt/integer.h>
-#include <wolfcrypt/random.h>
+#include <wolf/crypt/headers/integer.h>
+#include <wolf/crypt/headers/random.h>
 
 /* for DSA reverse compatibility */
 #define InitDsaKey wc_InitDsaKey
@@ -91,5 +91,3 @@ WOLFSSL_API int wc_DsaExportKeyRaw(DsaKey* dsa, byte* x, word32* xSz, byte* y,
 
 #endif /* NO_DSA */
 #endif /* WOLF_CRYPT_DSA_H */
-
-

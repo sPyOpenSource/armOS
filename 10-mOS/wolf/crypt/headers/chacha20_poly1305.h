@@ -32,7 +32,7 @@
 #ifndef WOLF_CRYPT_CHACHA20_POLY1305_H
 #define WOLF_CRYPT_CHACHA20_POLY1305_H
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #if defined(HAVE_CHACHA) && defined(HAVE_POLY1305)
 

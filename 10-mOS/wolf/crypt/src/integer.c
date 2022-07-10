@@ -32,13 +32,13 @@
 #endif
 
 /* in case user set USE_FAST_MATH there */
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 #ifndef NO_BIG_INT
@@ -47,10 +47,10 @@
 
 #ifndef WOLFSSL_SP_MATH
 
-#include <wolfcrypt/integer.h>
+#include <wolf/crypt/headers/integer.h>
 
 #if defined(FREESCALE_LTC_TFM)
-    #include <wolfcrypt/port/nxp/ksdk_port.h>
+    #include <wolf/crypt/headers/port/nxp/ksdk_port.h>
 #endif
 #ifdef WOLFSSL_DEBUG_MATH
     #include <stdio.h>

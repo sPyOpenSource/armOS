@@ -24,19 +24,19 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifdef WOLFCRYPT_HAVE_SRP
 
-#include <wolfcrypt/srp.h>
-#include <wolfcrypt/random.h>
-#include <wolfcrypt/error-crypt.h>
+#include <wolf/crypt/headers/srp.h>
+#include <wolf/crypt/headers/random.h>
+#include <wolf/crypt/headers/error-crypt.h>
 
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 /** Computes the session key using the Mask Generation Function 1. */

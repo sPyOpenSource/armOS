@@ -26,7 +26,7 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #if !defined(NO_SHA256) && !defined(WOLFSSL_ARMASM)
 
@@ -42,9 +42,9 @@
     #endif
 #endif
 
-#include <wolfcrypt/sha256.h>
-#include <wolfcrypt/error-crypt.h>
-#include <wolfcrypt/cpuid.h>
+#include <wolf/crypt/headers/sha256.h>
+#include <wolf/crypt/headers/error-crypt.h>
+#include <wolf/crypt/headers/cpuid.h>
 
 /* fips wrapper calls, user can call direct */
 #if defined(HAVE_FIPS) && \
@@ -96,16 +96,16 @@
 
 
 #if defined(WOLFSSL_TI_HASH)
-    /* #include <wolfcrypt/src/port/ti/ti-hash.c> included by wc_port.c */
+    /* #include <wolf/crypt/src/port/ti/ti-hash.c> included by wc_port.c */
 #else
 
-#include <wolfcrypt/logging.h>
+#include <wolf/crypt/headers/logging.h>
 
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 
@@ -382,7 +382,7 @@ static int InitSha256(wc_Sha256* sha256)
     }
 
 #elif defined(WOLFSSL_PIC32MZ_HASH)
-    #include <wolfssl/wolfcrypt/port/pic32/pic32mz-crypt.h>
+    #include <wolf/ssl/headers/wolfcrypt/port/pic32/pic32mz-crypt.h>
 
 #elif defined(STM32_HASH_SHA2)
 

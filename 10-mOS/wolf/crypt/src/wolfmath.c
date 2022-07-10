@@ -27,28 +27,28 @@
 #endif
 
 /* in case user set USE_FAST_MATH there */
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifdef USE_FAST_MATH
-    #include <wolfcrypt/tfm.h>
+    #include <wolf/crypt/headers/tfm.h>
 #else
-    #include <wolfcrypt/integer.h>
+    #include <wolf/crypt/headers/integer.h>
 #endif
 
-#include <wolfcrypt/error-crypt.h>
-#include <wolfcrypt/logging.h>
+#include <wolf/crypt/headers/error-crypt.h>
+#include <wolf/crypt/headers/logging.h>
 
 #if defined(USE_FAST_MATH) || !defined(NO_BIG_INT)
 
 #ifdef WOLFSSL_ASYNC_CRYPT
-    #include <wolfcrypt/async.h>
+    #include <wolf/crypt/headers/async.h>
 #endif
 
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 

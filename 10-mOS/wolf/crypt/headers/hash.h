@@ -26,31 +26,31 @@
 #ifndef WOLF_CRYPT_HASH_H
 #define WOLF_CRYPT_HASH_H
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #ifndef NO_MD5
-    #include <wolfcrypt/md5.h>
+    #include <wolf/crypt/headers/md5.h>
 #endif
 #ifndef NO_SHA
-    #include <wolfcrypt/sha.h>
+    #include <wolf/crypt/headers/sha.h>
 #endif
 #if defined(WOLFSSL_SHA224) || !defined(NO_SHA256)
-    #include <wolfcrypt/sha256.h>
+    #include <wolf/crypt/headers/sha256.h>
 #endif
 #if defined(WOLFSSL_SHA384) || defined(WOLFSSL_SHA512)
-    #include <wolfcrypt/sha512.h>
+    #include <wolf/crypt/headers/sha512.h>
 #endif
 #ifdef HAVE_BLAKE2
-    #include <wolfcrypt/blake2.h>
+    #include <wolf/crypt/headers/blake2.h>
 #endif
 #ifdef WOLFSSL_SHA3
-    #include <wolfcrypt/sha3.h>
+    #include <wolf/crypt/headers/sha3.h>
 #endif
 #ifndef NO_MD4
-    #include <wolfcrypt/md4.h>
+    #include <wolf/crypt/headers/md4.h>
 #endif
 #ifdef WOLFSSL_MD2
-    #include <wolfcrypt/md2.h>
+    #include <wolf/crypt/headers/md2.h>
 #endif
 
 
@@ -137,32 +137,32 @@ WOLFSSL_API int wc_HashFinal(wc_HashAlg* hash, enum wc_HashType type,
 
 
 #ifndef NO_MD5
-#include <wolfcrypt/md5.h>
+#include <wolf/crypt/headers/md5.h>
 WOLFSSL_API int wc_Md5Hash(const byte* data, word32 len, byte* hash);
 #endif
 
 #ifndef NO_SHA
-#include <wolfcrypt/sha.h>
+#include <wolf/crypt/headers/sha.h>
 WOLFSSL_API int wc_ShaHash(const byte*, word32, byte*);
 #endif
 
 #ifdef WOLFSSL_SHA224
-#include <wolfcrypt/sha256.h>
+#include <wolf/crypt/headers/sha256.h>
 WOLFSSL_API int wc_Sha224Hash(const byte*, word32, byte*);
 #endif /* defined(WOLFSSL_SHA224) */
 
 #ifndef NO_SHA256
-#include <wolfcrypt/sha256.h>
+#include <wolf/crypt/headers/sha256.h>
 WOLFSSL_API int wc_Sha256Hash(const byte*, word32, byte*);
 #endif
 
 #ifdef WOLFSSL_SHA384
-#include <wolfcrypt/sha512.h>
+#include <wolf/crypt/headers/sha512.h>
 WOLFSSL_API int wc_Sha384Hash(const byte*, word32, byte*);
 #endif /* defined(WOLFSSL_SHA384) */
 
 #ifdef WOLFSSL_SHA512
-#include <wolfcrypt/sha512.h>
+#include <wolf/crypt/headers/sha512.h>
 WOLFSSL_API int wc_Sha512Hash(const byte*, word32, byte*);
 #endif /* WOLFSSL_SHA512 */
 
@@ -171,4 +171,3 @@ WOLFSSL_API int wc_Sha512Hash(const byte*, word32, byte*);
 #endif
 
 #endif /* WOLF_CRYPT_HASH_H */
-

@@ -21,7 +21,7 @@
 #ifndef _WOLF_CRYPTO_DEV_H_
 #define _WOLF_CRYPTO_DEV_H_
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #ifdef __cplusplus
     extern "C" {
@@ -30,10 +30,10 @@
 #ifdef WOLF_CRYPTO_DEV
 
 #ifndef NO_RSA
-    #include <wolfcrypt/rsa.h>
+    #include <wolf/crypt/headers/rsa.h>
 #endif
 #ifdef HAVE_ECC
-    #include <wolfcrypt/ecc.h>
+    #include <wolf/crypt/headers/ecc.h>
 #endif
 
 /* Crypto Information Structure for callbacks */

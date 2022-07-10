@@ -27,13 +27,13 @@
 #ifndef WOLF_CRYPT_SHA512_H
 #define WOLF_CRYPT_SHA512_H
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #if defined(WOLFSSL_SHA512) || defined(WOLFSSL_SHA384)
 
 #if defined(HAVE_FIPS) && \
     defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2)
-    #include <wolfcrypt/fips.h>
+    #include <wolf/crypt/headers/fips.h>
 #endif /* HAVE_FIPS_VERSION >= 2 */
 
 #if defined(HAVE_FIPS) && \
@@ -70,7 +70,7 @@
     (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2))
 
 #ifdef WOLFSSL_ASYNC_CRYPT
-    #include <wolfssl/wolfcrypt/async.h>
+    #include <wolf/ssl/headers/wolfcrypt/async.h>
 #endif
 
 #if defined(_MSC_VER)
@@ -193,5 +193,3 @@ WOLFSSL_API int wc_Sha384Copy(wc_Sha384* src, wc_Sha384* dst);
 
 #endif /* WOLFSSL_SHA512 || WOLFSSL_SHA384 */
 #endif /* WOLF_CRYPT_SHA512_H */
-
-

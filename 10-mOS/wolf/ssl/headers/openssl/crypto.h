@@ -24,9 +24,9 @@
 #ifndef WOLFSSL_CRYPTO_H_
 #define WOLFSSL_CRYPTO_H_
 
-#include <wolfssl/openssl/opensslv.h>
+#include <wolf/ssl/headers/openssl/opensslv.h>
 
-#include <wolfssl/wolfcrypt/settings.h>
+#include <wolf/ssl/headers/wolfcrypt/settings.h>
 
 #ifdef WOLFSSL_PREFIX
 #include "prefix_crypto.h"

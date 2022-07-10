@@ -26,14 +26,14 @@
 #ifndef WOLF_CRYPT_ARC4_H
 #define WOLF_CRYPT_ARC4_H
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #ifdef __cplusplus
     extern "C" {
 #endif
 
 #ifdef WOLFSSL_ASYNC_CRYPT
-    #include <wolfcrypt/async.h>
+    #include <wolf/crypt/headers/async.h>
 #endif
 
 enum {
@@ -65,5 +65,3 @@ WOLFSSL_API void wc_Arc4Free(Arc4*);
 
 
 #endif /* WOLF_CRYPT_ARC4_H */
-
-

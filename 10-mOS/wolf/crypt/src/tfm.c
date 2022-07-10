@@ -36,23 +36,23 @@
 #endif
 
 /* in case user set USE_FAST_MATH there */
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 #ifdef USE_FAST_MATH
 
-#include <wolfcrypt/random.h>
-#include <wolfcrypt/tfm.h>
-#include <wolfcrypt/src/asm.c>  /* will define asm MACROS or C ones */
-#include <wolfcrypt/wolfmath.h> /* common functions */
+#include <wolf/crypt/headers/random.h>
+#include <wolf/crypt/headers/tfm.h>
+#include <wolf/crypt/src/asm.c>  /* will define asm MACROS or C ones */
+#include <wolf/crypt/headers/wolfmath.h> /* common functions */
 
 #if defined(FREESCALE_LTC_TFM)
-    #include <wolfcrypt/port/nxp/ksdk_port.h>
+    #include <wolf/crypt/headers/port/nxp/ksdk_port.h>
 #endif
 #ifdef WOLFSSL_DEBUG_MATH
     #include <stdio.h>

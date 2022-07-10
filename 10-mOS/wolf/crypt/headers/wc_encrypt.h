@@ -27,11 +27,11 @@
 #ifndef WOLF_CRYPT_ENCRYPT_H
 #define WOLF_CRYPT_ENCRYPT_H
 
-#include <wolfcrypt/types.h>
-#include <wolfcrypt/aes.h>
-#include <wolfcrypt/chacha.h>
-#include <wolfcrypt/des3.h>
-#include <wolfcrypt/arc4.h>
+#include <wolf/crypt/headers/types.h>
+#include <wolf/crypt/headers/aes.h>
+#include <wolf/crypt/headers/chacha.h>
+#include <wolf/crypt/headers/des3.h>
+#include <wolf/crypt/headers/arc4.h>
 
 #ifdef __cplusplus
     extern "C" {

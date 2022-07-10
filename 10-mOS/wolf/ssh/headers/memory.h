@@ -26,7 +26,7 @@
 
 #pragma once
 
-#include <wolfssh/settings.h>
+#include <wolf/ssh/headers/settings.h>
 #include <stdlib.h>
 
 #ifdef __cplusplus
@@ -53,4 +53,3 @@ WOLFSSH_API void* wolfSSH_Realloc(void *ptr, size_t size);
 #ifdef __cplusplus
 }
 #endif
-

@@ -10,7 +10,7 @@
 
 #define MAXDATASIZE (1024 * 4)
 
-#define GRAPHICSMODE
+//#define GRAPHICSMODE
 
 const int PORT = 8000;
 static const char* SERVER_IP = "172.26.10.207"; //IP of server board

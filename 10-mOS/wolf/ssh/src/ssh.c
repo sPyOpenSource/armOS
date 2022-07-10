@@ -29,16 +29,16 @@
 #endif
 
 #include <wolf/ssh/headers/ssh.h>
-#include <wolf/ssh/internal.h>
-#include <wolf/ssh/log.h>
-#include <wolf/crypt/wc_port.h>
+#include <wolf/ssh/headers/internal.h>
+#include <wolf/ssh/headers/log.h>
+#include <wolf/crypt/headers/wc_port.h>
 //#include "esp_log.h"
 
 #ifdef NO_INLINE
     #include <wolf/ssh/misc.h>
 #else
     #define WOLFSSH_MISC_INCLUDED
-    #include "src/misc.c"
+    #include "wolf/ssh/src/misc.c"
 #endif
 
 
@@ -856,4 +856,3 @@ int wolfSSH_KDF(byte hashId, byte keyId,
     return GenerateKey(hashId, keyId, key, keySz, k, kSz, h, hSz,
                        sessionId, sessionIdSz);
 }
-

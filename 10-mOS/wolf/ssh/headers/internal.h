@@ -27,12 +27,12 @@
 
 #pragma once
 
-#include <wolfssh/ssh.h>
-#include <wolfcrypt/hash.h>
-#include <wolfcrypt/random.h>
-#include <wolfcrypt/aes.h>
-#include <wolfcrypt/dh.h>
-#include <wolfcrypt/ecc.h>
+#include <wolf/ssh/headers/ssh.h>
+#include <wolf/crypt/headers/hash.h>
+#include <wolf/crypt/headers/random.h>
+#include <wolf/crypt/headers/aes.h>
+#include <wolf/crypt/headers/dh.h>
+#include <wolf/crypt/headers/ecc.h>
 
 
 #if !defined (ALIGN16)

@@ -27,22 +27,22 @@
 #endif
 
 /* in case user set HAVE_ED25519 there */
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifdef HAVE_ED25519
 
-#include <wolfcrypt/ed25519.h>
-#include <wolfcrypt/error-crypt.h>
-#include <wolfcrypt/hash.h>
+#include <wolf/crypt/headers/ed25519.h>
+#include <wolf/crypt/headers/error-crypt.h>
+#include <wolf/crypt/headers/hash.h>
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 #ifdef FREESCALE_LTC_ECC
-    #include <wolfcrypt/port/nxp/ksdk_port.h>
+    #include <wolf/crypt/headers/port/nxp/ksdk_port.h>
 #endif
 
 /* generate an ed25519 key pair.

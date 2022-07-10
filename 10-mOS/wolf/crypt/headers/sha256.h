@@ -29,13 +29,13 @@
 #ifndef WOLF_CRYPT_SHA256_H
 #define WOLF_CRYPT_SHA256_H
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #ifndef NO_SHA256
 
 #if defined(HAVE_FIPS) && \
     defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2)
-    #include <wolfcrypt/fips.h>
+    #include <wolf/crypt/headers/fips.h>
 #endif /* HAVE_FIPS_VERSION >= 2 */
 
 #if defined(HAVE_FIPS) && \
@@ -72,13 +72,13 @@
     (defined(HAVE_FIPS_VERSION) && (HAVE_FIPS_VERSION >= 2))
 
 #ifdef WOLFSSL_MICROCHIP_PIC32MZ
-    #include <wolfcrypt/port/pic32/pic32mz-crypt.h>
+    #include <wolf/crypt/headers/port/pic32/pic32mz-crypt.h>
 #endif
 #ifdef STM32_HASH
-    #include <wolfcrypt/port/st/stm32.h>
+    #include <wolf/crypt/headers/port/st/stm32.h>
 #endif
 #ifdef WOLFSSL_ASYNC_CRYPT
-    #include <wolfcrypt/async.h>
+    #include <wolf/crypt/headers/async.h>
 #endif
 
 #if defined(_MSC_VER)

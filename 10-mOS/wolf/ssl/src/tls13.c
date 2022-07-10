@@ -76,11 +76,11 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifdef WOLFSSL_TLS13
 #ifdef HAVE_SESSION_TICKET
-    #include <wolfcrypt/wc_port.h>
+    #include <wolf/crypt/headers/wc_port.h>
 #endif
 
 #ifndef WOLFCRYPT_ONLY
@@ -89,15 +89,15 @@
     #include <errno.h>
 #endif
 
-#include <wolfssl/internal.h>
-#include <wolfssl/error-ssl.h>
-#include <wolfcrypt/asn.h>
-#include <wolfcrypt/dh.h>
+#include <wolf/ssl/headers/internal.h>
+#include <wolf/ssl/headers/error-ssl.h>
+#include <wolf/crypt/headers/asn.h>
+#include <wolf/crypt/headers/dh.h>
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 #ifdef HAVE_NTRU

@@ -30,13 +30,13 @@
 
 
 /* for users not using preprocessor flags*/
-#include <wolfcrypt/settings.h>
-#include <wolfssl/version.h>
-#include <wolfcrypt/logging.h>
-#include <wolfcrypt/asn_public.h>
+#include <wolf/crypt/headers/settings.h>
+#include <wolf/ssl/headers/version.h>
+#include <wolf/crypt/headers/logging.h>
+#include <wolf/crypt/headers/asn_public.h>
 
 #ifdef HAVE_WOLF_EVENT
-    #include <wolfcrypt/wolfevent.h>
+    #include <wolf/crypt/headers/wolfevent.h>
 #endif
 
 #ifndef NO_FILESYSTEM
@@ -88,8 +88,8 @@
     #endif
 
 #elif (defined(OPENSSL_EXTRA) || defined(OPENSSL_EXTRA_X509_SMALL))
-    #include <wolfssl/openssl/bn.h>
-    #include <wolfssl/openssl/hmac.h>
+    #include <wolf/ssl/headers/openssl/bn.h>
+    #include <wolf/ssl/headers/openssl/hmac.h>
 
     /* We need the old SSL names */
     #ifdef NO_OLD_SSL_NAMES
@@ -132,7 +132,7 @@ typedef void  *WOLFSSL_X509_STORE_CTX_verify_cb; /* verify callback */
 /* redeclare guard */
 #define WOLFSSL_TYPES_DEFINED
 
-#include <wolfssl/wolfio.h>
+#include <wolf/ssl/headers/wolfio.h>
 
 
 #ifndef WOLFSSL_RSA_TYPE_DEFINED /* guard on redeclaration */
@@ -2475,7 +2475,7 @@ int wolfSSL_DeriveTlsKeys(unsigned char* key_data, unsigned int keyLen,
 #ifdef WOLFSSL_CALLBACKS
 
 /* used internally by wolfSSL while OpenSSL types aren't */
-#include <wolfssl/callbacks.h>
+#include <wolf/ssl/headers/callbacks.h>
 
 typedef int (*HandShakeCallBack)(HandShakeInfo*);
 typedef int (*TimeoutCallBack)(TimeoutInfo*);
@@ -2502,7 +2502,7 @@ WOLFSSL_API int wolfSSL_accept_ex(WOLFSSL*, HandShakeCallBack, TimeoutCallBack,
 /* Smaller subset of X509 compatibility functions. Avoid increasing the size of
  * this subset and its memory usage */
 
-#include <wolfssl/openssl/asn1.h>
+#include <wolf/ssl/headers/openssl/asn1.h>
 struct WOLFSSL_X509_NAME_ENTRY {
     WOLFSSL_ASN1_OBJECT* object; /* not defined yet */
     WOLFSSL_ASN1_STRING  data;
@@ -2685,7 +2685,7 @@ WOLFSSL_API int wolfSSL_PEM_write_bio_X509(WOLFSSL_BIO *bp, WOLFSSL_X509 *x);
     || defined(OPENSSL_EXTRA) \
     || defined(HAVE_LIGHTY)
 
-#include <wolfssl/openssl/crypto.h>
+#include <wolf/ssl/headers/openssl/crypto.h>
 
 /* SNI received callback type */
 typedef int (*CallbackSniRecv)(WOLFSSL *ssl, int *ret, void* exArg);

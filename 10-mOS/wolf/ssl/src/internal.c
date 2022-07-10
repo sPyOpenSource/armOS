@@ -25,22 +25,22 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifndef WOLFCRYPT_ONLY
 
-#include <wolfssl/internal.h>
-#include <wolfssl/error-ssl.h>
-#include <wolfcrypt/asn.h>
-#include <wolfcrypt/dh.h>
+#include <wolf/ssl/headers/internal.h>
+#include <wolf/ssl/headers/error-ssl.h>
+#include <wolf/crypt/headers/asn.h>
+#include <wolf/crypt/headers/dh.h>
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/headers/misc.h>
 #endif
 #if defined(OPENSSL_EXTRA) && defined(WOLFCRYPT_HAVE_SRP) && !defined(NO_SHA)
-    #include <wolfcrypt/srp.h>
+    #include <wolf/crypt/headers/srp.h>
 #endif
 
 #ifdef HAVE_LIBZ
@@ -6993,7 +6993,7 @@ static const byte PAD2[PAD_MD5] =
 
 /* calculate MD5 hash for finished */
 #ifdef WOLFSSL_TI_HASH
-#include <wolfssl/wolfcrypt/hash.h>
+#include <wolf/ssl/headers/wolfcrypt/hash.h>
 #endif
 
 static int BuildMD5(WOLFSSL* ssl, Hashes* hashes, const byte* sender)

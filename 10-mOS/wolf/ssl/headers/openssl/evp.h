@@ -30,32 +30,32 @@
 #ifndef WOLFSSL_EVP_H_
 #define WOLFSSL_EVP_H_
 
-#include <wolfssl/wolfcrypt/settings.h>
+#include <wolf/ssl/headers/wolfcrypt/settings.h>
 
 #ifdef WOLFSSL_PREFIX
 #include "prefix_evp.h"
 #endif
 
 #ifndef NO_MD4
-    #include <wolfssl/openssl/md4.h>
+    #include <wolf/ssl/headers/openssl/md4.h>
 #endif
 #ifndef NO_MD5
-    #include <wolfssl/openssl/md5.h>
+    #include <wolf/ssl/headers/openssl/md5.h>
 #endif
-#include <wolfssl/openssl/sha.h>
-#include <wolfssl/openssl/ripemd.h>
-#include <wolfssl/openssl/rsa.h>
-#include <wolfssl/openssl/dsa.h>
-#include <wolfssl/openssl/ec.h>
+#include <wolf/ssl/headers/openssl/sha.h>
+#include <wolf/ssl/headers/openssl/ripemd.h>
+#include <wolf/ssl/headers/openssl/rsa.h>
+#include <wolf/ssl/headers/openssl/dsa.h>
+#include <wolf/ssl/headers/openssl/ec.h>
 
-#include <wolfssl/wolfcrypt/aes.h>
-#include <wolfssl/wolfcrypt/des3.h>
-#include <wolfssl/wolfcrypt/arc4.h>
-#include <wolfssl/wolfcrypt/hmac.h>
+#include <wolf/ssl/headers/wolfcrypt/aes.h>
+#include <wolf/ssl/headers/wolfcrypt/des3.h>
+#include <wolf/ssl/headers/wolfcrypt/arc4.h>
+#include <wolf/ssl/headers/wolfcrypt/hmac.h>
 #ifdef HAVE_IDEA
-    #include <wolfssl/wolfcrypt/idea.h>
+    #include <wolf/ssl/headers/wolfcrypt/idea.h>
 #endif
-#include <wolfssl/wolfcrypt/pwdbased.h>
+#include <wolf/ssl/headers/wolfcrypt/pwdbased.h>
 
 #ifdef __cplusplus
     extern "C" {

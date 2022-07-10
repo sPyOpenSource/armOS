@@ -26,18 +26,18 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #if defined(HAVE_CURVE25519) || defined(HAVE_ED25519)
 #if defined(CURVE25519_SMALL) || defined(ED25519_SMALL) /* use slower code that takes less memory */
 
-#include <wolfcrypt/fe_operations.h>
+#include <wolf/crypt/headers/fe_operations.h>
 
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 void fprime_copy(byte *x, const byte *a)

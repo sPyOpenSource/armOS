@@ -32,12 +32,12 @@
 /* wolfssl_openssl compatibility layer */
 #ifndef OPENSSL_EXTRA_SSL_GUARD
 #define OPENSSL_EXTRA_SSL_GUARD
-#include <wolfssl/ssl.h>
+#include <wolf/ssl/headers/ssl.h>
 #endif /* OPENSSL_EXTRA_SSL_GUARD */
 
-#include <wolfssl/openssl/evp.h>
+#include <wolf/ssl/headers/openssl/evp.h>
 #ifdef OPENSSL_EXTRA
-#include <wolfssl/openssl/crypto.h>
+#include <wolf/ssl/headers/openssl/crypto.h>
 #endif
 
 #ifdef __cplusplus
@@ -626,7 +626,7 @@ enum {
 #endif /* OPENSSL_ALL || WOLFSSL_HAPROXY */
 
 #if defined(OPENSSL_ALL) || defined(WOLFSSL_ASIO)
-#include <wolfssl/openssl/pem.h>
+#include <wolf/ssl/headers/openssl/pem.h>
 
 typedef STACK_OF(WOLFSSL_ASN1_OBJECT) GENERAL_NAMES;
 #define SSL_CTRL_CHAIN       88
@@ -758,7 +758,7 @@ typedef STACK_OF(WOLFSSL_ASN1_OBJECT) GENERAL_NAMES;
 #define SSL3_RANDOM_SIZE                 32 /* same as RAN_LEN in internal.h */
 #if defined(HAVE_STUNNEL) || defined(WOLFSSL_NGINX) || defined(OPENSSL_EXTRA) \
                                                          || defined(OPENSSL_ALL)
-#include <wolfssl/openssl/asn1.h>
+#include <wolf/ssl/headers/openssl/asn1.h>
 
 #define SSL2_VERSION                     0x0002
 #define SSL3_VERSION                     0x0300
@@ -874,7 +874,7 @@ typedef WOLFSSL_ASN1_BIT_STRING    ASN1_BIT_STRING;
     defined(WOLFSSL_MYSQL_COMPATIBLE) || defined(OPENSSL_ALL) || \
     defined(HAVE_LIGHTY)
 
-#include <wolfssl/error-ssl.h>
+#include <wolf/ssl/headers/error-ssl.h>
 
 #define OPENSSL_STRING    WOLFSSL_STRING
 

@@ -24,7 +24,7 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 /*
 ASN Options:
@@ -50,31 +50,31 @@ ASN Options:
 
 #ifndef NO_ASN
 
-#include <wolfcrypt/asn.h>
-#include <wolfcrypt/coding.h>
-#include <wolfcrypt/md2.h>
-#include <wolfcrypt/hmac.h>
-#include <wolfcrypt/error-crypt.h>
-#include <wolfcrypt/pwdbased.h>
-#include <wolfcrypt/des3.h>
-#include <wolfcrypt/aes.h>
-#include <wolfcrypt/wc_encrypt.h>
-#include <wolfcrypt/logging.h>
+#include <wolf/crypt/headers/asn.h>
+#include <wolf/crypt/headers/coding.h>
+#include <wolf/crypt/headers/md2.h>
+#include <wolf/crypt/headers/hmac.h>
+#include <wolf/crypt/headers/error-crypt.h>
+#include <wolf/crypt/headers/pwdbased.h>
+#include <wolf/crypt/headers/des3.h>
+#include <wolf/crypt/headers/aes.h>
+#include <wolf/crypt/headers/wc_encrypt.h>
+#include <wolf/crypt/headers/logging.h>
 
-#include <wolfcrypt/random.h>
-#include <wolfcrypt/hash.h>
+#include <wolf/crypt/headers/random.h>
+#include <wolf/crypt/headers/hash.h>
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 #ifndef NO_PWDBASED
-    #include <wolfcrypt/aes.h>
+    #include <wolf/crypt/headers/aes.h>
 #endif
 #ifndef NO_RC4
-    #include <wolfcrypt/arc4.h>
+    #include <wolf/crypt/headers/arc4.h>
 #endif
 
 #ifdef HAVE_NTRU
@@ -82,23 +82,23 @@ ASN Options:
 #endif
 
 #if defined(WOLFSSL_SHA512) || defined(WOLFSSL_SHA384)
-    #include <wolfcrypt/sha512.h>
+    #include <wolf/crypt/headers/sha512.h>
 #endif
 
 #ifndef NO_SHA256
-    #include <wolfcrypt/sha256.h>
+    #include <wolf/crypt/headers/sha256.h>
 #endif
 
 #ifdef HAVE_ECC
-    #include <wolfcrypt/ecc.h>
+    #include <wolf/crypt/headers/ecc.h>
 #endif
 
 #ifdef HAVE_ED25519
-    #include <wolfcrypt/ed25519.h>
+    #include <wolf/crypt/headers/ed25519.h>
 #endif
 
 #ifndef NO_RSA
-    #include <wolfcrypt/rsa.h>
+    #include <wolf/crypt/headers/rsa.h>
 #endif
 
 #ifdef WOLFSSL_DEBUG_ENCODING

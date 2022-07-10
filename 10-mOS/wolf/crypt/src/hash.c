@@ -24,14 +24,14 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
-#include <wolfcrypt/logging.h>
-#include <wolfcrypt/error-crypt.h>
+#include <wolf/crypt/headers/settings.h>
+#include <wolf/crypt/headers/logging.h>
+#include <wolf/crypt/headers/error-crypt.h>
 #ifndef NO_ASN
-#include <wolfcrypt/asn.h>
+#include <wolf/crypt/headers/asn.h>
 #endif
 
-#include <wolfcrypt/hash.h>
+#include <wolf/crypt/headers/hash.h>
 
 
 #if !defined(NO_ASN) || !defined(NO_DH) || defined(HAVE_ECC)

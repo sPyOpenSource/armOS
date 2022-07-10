@@ -27,21 +27,21 @@
     #include <config.h>
 #endif
 
-#include <wolfcrypt/settings.h>
+#include <wolf/crypt/headers/settings.h>
 
 #ifdef HAVE_CURVE25519
 
-#include <wolfcrypt/curve25519.h>
-#include <wolfcrypt/error-crypt.h>
+#include <wolf/crypt/headers/curve25519.h>
+#include <wolf/crypt/headers/error-crypt.h>
 #ifdef NO_INLINE
-    #include <wolfcrypt/misc.h>
+    #include <wolf/crypt/headers/misc.h>
 #else
     #define WOLFSSL_MISC_INCLUDED
-    #include <wolfcrypt/src/misc.c>
+    #include <wolf/crypt/src/misc.c>
 #endif
 
 #if defined(FREESCALE_LTC_ECC)
-    #include <wolfcrypt/port/nxp/ksdk_port.h>
+    #include <wolf/crypt/headers/port/nxp/ksdk_port.h>
 #endif
 
 const curve25519_set_type curve25519_sets[] = {

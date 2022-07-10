@@ -27,8 +27,8 @@
 
 #ifdef HAVE_CRL
 
-#include <wolfssl/ssl.h>
-#include <wolfssl/wolfcrypt/asn.h>
+#include <wolf/ssl/headers/ssl.h>
+#include <wolf/ssl/headers/wolfcrypt/asn.h>
 
 #ifdef __cplusplus
     extern "C" {

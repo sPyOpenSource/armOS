@@ -27,17 +27,17 @@
 #ifndef WOLF_CRYPT_ED25519_H
 #define WOLF_CRYPT_ED25519_H
 
-#include <wolfcrypt/types.h>
+#include <wolf/crypt/headers/types.h>
 
 #ifdef HAVE_ED25519
 
-#include <wolfcrypt/fe_operations.h>
-#include <wolfcrypt/ge_operations.h>
-#include <wolfcrypt/random.h>
-#include <wolfcrypt/sha512.h>
+#include <wolf/crypt/headers/fe_operations.h>
+#include <wolf/crypt/headers/ge_operations.h>
+#include <wolf/crypt/headers/random.h>
+#include <wolf/crypt/headers/sha512.h>
 
 #ifdef WOLFSSL_ASYNC_CRYPT
-    #include <wolfcrypt/async.h>
+    #include <wolf/crypt/headers/async.h>
 #endif
 
 #ifdef __cplusplus

@@ -30,9 +30,9 @@
     #include <config.h>
 #endif
 
-#include <wolf/ssh/ssh.h>
-#include <wolf/ssh/internal.h>
-#include <wolf/ssh/log.h>
+#include <wolf/ssh/headers/ssh.h>
+#include <wolf/ssh/headers/internal.h>
+#include <wolf/ssh/headers/log.h>
 
 #ifndef NULL
     #include <stddef.h>
@@ -371,4 +371,3 @@ int wsEmbedSend(WOLFSSH* ssh, void* data, word32 sz, void* ctx)
 
 
 #endif /* WOLFSSH_USER_IO */
-
