@@ -30,7 +30,7 @@ ADIR:=.
 #ATTRS{idVendor}=="2341", SYMLINK+="arduino_due" in /etc/udev/rules.d/
 #to get this working). Do not prefix the port with /dev/, just take
 #the basename.
-PORT:=ttyACM0
+PORT:=/dev/cu.usbmodem1101
 #if you want to verify the bossac upload, define this to -v
 VERIFY:=
 
@@ -87,7 +87,7 @@ COREOBJSXX:=$(addsuffix .o,$(COREOBJSXX))
 COREOBJS:=$(addprefix $(TMPDIR)/core/,$(notdir $(CORESRC)) )
 COREOBJS:=$(addsuffix .o,$(COREOBJS))
 
-default: $(TMPDIR)/$(PROJNAME).elf $(TMPDIR)/$(PROJNAME).bin
+default: $(TMPDIR)/$(PROJNAME).elf $(TMPDIR)/$(PROJNAME).hex
 
 #This is a make rule template to create object files from the source files.
 # arg 1=src file
@@ -145,12 +145,12 @@ $(TMPDIR)/$(PROJNAME).elf: $(TMPDIR)/core.a
 	$(CC) -Wl,--start-group -o $@ $(TMPDIR)/core/variant.cpp.o $(TMPDIR)/core.a $(SAM)/src/variants/standard/CyCompLib.a $(SAM)/src/variants/standard/Uno_blocks.a -mthumb -march=armv7-m -mfix-cortex-m3-ldrd -lm -Wl,-Map,$(TMPDIR)/main.cpp.map -T$(SAM)/src/cores/arduino/cm3gcc.ld -g -u _printf_float -Wl,--gc-sections -Wl,--end-group -lstdc++
 
 #copy from the hex to our bin file (why?)
-$(TMPDIR)/$(PROJNAME).bin: $(TMPDIR)/$(PROJNAME).elf
-	$(OBJCOPY) -O binary $< $@
+$(TMPDIR)/$(PROJNAME).hex: $(TMPDIR)/$(PROJNAME).elf
+	$(OBJCOPY) -O ihex -R .cyeeprom -R .cyconfigecc -R .cycustnvl -R .cywolatch -R .cyflashprotect -R .cybootloader -R .cyloadablemeta -R .cyloadermeta -R .cymeta $< $@
 
 #upload to the arduino by first resetting it (stty) and the running bossac
-upload: $(TMPDIR)/$(PROJNAME).bin
-	./avrdude -i -d --port=$(PORT) -U false -e -w $(VERIFY) -b $(TMPDIR)/$(PROJNAME).bin -R
+upload: $(TMPDIR)/$(PROJNAME).hex
+	/Users/xuyi/Library/Arduino15/packages/arduino/tools/avrdude/6.3.0-arduino17/bin/avrdude -ppsoc -C avrdude.conf -v -c avr109 -P $(PORT) -b 57600 -D -Uflash:w:$(TMPDIR)/$(PROJNAME).hex:i
 
 #to view the serial port with screen.
 monitor:
