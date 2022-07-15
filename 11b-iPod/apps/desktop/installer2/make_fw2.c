@@ -1175,7 +1175,7 @@ fw_set_generation (int gen)
 
 
 #ifdef EMBED_MAKEFW
-#define main make_fw_main
+//#define main make_fw_main
 #endif
 
 int

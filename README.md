@@ -1,4 +1,4 @@
-Build a minimal multi-tasking OS kernel for ARM from scratch
+Build a multi-tasking OS kernel for ARM from scratch
 
 Prerequisites
 -------------
@@ -243,7 +243,7 @@ Now, you can try the "Available commands" in this README.
 
 Licensing
 ---------
-`mini-arm-os` is freely redistributable under the two-clause BSD License.
+`armOS` is freely redistributable under the two-clause BSD License.
 Use of this source code is governed by a BSD-style license that can be found
 in the `LICENSE` file.
 
