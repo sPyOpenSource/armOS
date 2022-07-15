@@ -30,7 +30,7 @@ ADIR:=.
 #ATTRS{idVendor}=="2341", SYMLINK+="arduino_due" in /etc/udev/rules.d/
 #to get this working). Do not prefix the port with /dev/, just take
 #the basename.
-PORT:=/dev/cu.usbmodem1101
+PORT:=/dev/cu.usbmodem101
 #if you want to verify the bossac upload, define this to -v
 VERIFY:=
 
@@ -150,7 +150,9 @@ $(TMPDIR)/$(PROJNAME).hex: $(TMPDIR)/$(PROJNAME).elf
 
 #upload to the arduino by first resetting it (stty) and the running bossac
 upload: $(TMPDIR)/$(PROJNAME).hex
-	/Users/xuyi/Library/Arduino15/packages/arduino/tools/avrdude/6.3.0-arduino17/bin/avrdude -ppsoc -C avrdude.conf -v -c avr109 -P $(PORT) -b 57600 -D -Uflash:w:$(TMPDIR)/$(PROJNAME).hex:i
+	stty -f $(PORT) 1200
+	sleep 3
+	/Users/xuyi/Library/Arduino15/packages/arduino/tools/avrdude/6.3.0-arduino17/bin/avrdude -ppsoc -C avrdude.conf -v -c avr109 -P $(PORT) -D -Uflash:w:build/psoc.hex:i
 
 #to view the serial port with screen.
 monitor:

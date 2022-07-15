@@ -1,3 +1,5 @@
+menu.cpu=Processor
+
 psoc.name=PSoC Dev Board
 psoc.upload.tool=avrdude
 
@@ -20,4 +22,3 @@ psoc.build.variant=standard
 psoc.build.variant_system_lib=CyCompLib.a
 psoc.build.vid=0x2341
 psoc.build.pid=0x003e
-

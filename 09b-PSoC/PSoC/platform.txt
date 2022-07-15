@@ -42,7 +42,7 @@ compiler.cpp.extra_flags=
 compiler.ar.extra_flags=
 compiler.elf2hex.extra_flags=
 
-#local_libraries={runtime.hardware.path}/psoc/Libraries/
+#local_libraries={runtime.hardware.path}/psoc/1.6.3/Libraries/
 
 ## Compile c files
 recipe.c.o.pattern="{compiler.path}{compiler.c.cmd}"  {compiler.c.flags}  {compiler.c.extra_flags} {build.extra_flags} {includes} "{source_file}" -o "{object_file}"
@@ -57,7 +57,7 @@ recipe.S.o.pattern="{compiler.path}{compiler.S.cmd}" {compiler.S.flags} {include
 recipe.ar.pattern="{compiler.path}{compiler.ar.cmd}" {compiler.ar.flags} {compiler.ar.extra_flags} "{build.path}/{archive_file}" "{object_file}"
 
 ## Combine gc-sections, archives, and objects
-recipe.c.combine.pattern="{compiler.path}{compiler.c.elf.cmd}" -Wl,--start-group -o "{build.path}/{build.project_name}.elf" {object_files} "{build.variant.path}/Uno_blocks.a" "{build.variant.path}/{build.variant_system_lib}" "{build.path}/core/core.a"  -mthumb -march=armv7-m -mfix-cortex-m3-ldrd -lm "-Wl,-Map,{build.path}/{build.project_name}.map" "-T{runtime.hardware.path}/psoc/cores/arduino/cm3gcc.ld" -g "-u _printf_float" ""  -Wl,--gc-sections -Wl,--end-group -lstdc++ 
+recipe.c.combine.pattern="{compiler.path}{compiler.c.elf.cmd}" -Wl,--start-group -o "{build.path}/{build.project_name}.elf" {object_files} "{build.variant.path}/Uno_blocks.a" "{build.variant.path}/{build.variant_system_lib}" "{build.path}/core/core.a"  -mthumb -march=armv7-m -mfix-cortex-m3-ldrd -lm "-Wl,-Map,{build.path}/{build.project_name}.map" "-T{runtime.hardware.path}/psoc/1.6.3/cores/arduino/cm3gcc.ld" -g "-u _printf_float" ""  -Wl,--gc-sections -Wl,--end-group -lstdc++ 
 recipe.objcopy.eep.pattern=
 
 ## Create hex
@@ -69,7 +69,7 @@ recipe.size.regex=\.text\s+([0-9]+).*
 
 ## Upload
 tools.avrdude.cmd.path={runtime.ide.path}/hardware/tools/avr/bin
-tools.avrdude.conf.path={runtime.hardware.path}/psoc/avrdude.conf
+tools.avrdude.conf.path={runtime.hardware.path}/psoc/1.6.3/avrdude.conf
 tools.avrdude.cmd=avrdude
 tools.avrdude.upload.params.verbose=
 tools.avrdude.upload.params.quiet=

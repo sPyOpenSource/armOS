@@ -17,7 +17,7 @@ class Avr109(object):
     def start(self):
         self.sio_writer.write(b'\033')
         self.sio_writer.flush()
-        buf = self.sio_reader.read(10)
+        #buf = self.sio_reader.read(10)
     
     def send_address(self, address):
         address //= 2 # convert from byte to word address
@@ -72,7 +72,6 @@ class Avr109(object):
         pass
     
     def verify_command_sent(self, cmd):
-        
         timeout = self.sio_reader.timeout
         self.sio_reader.timeout = 1
         c = self.sio_reader.read(1)
@@ -116,7 +115,6 @@ class Avr109(object):
         return (self.sio_reader.read(1) == b'Y')
     
     def get_block_size(self):
-        
         time.sleep(.1)
         self.sio_writer.write(b'b')
         self.sio_writer.flush()
@@ -126,23 +124,22 @@ class Avr109(object):
         return 0
    
     def get_bootloader_signature(self):
-        
         self.sio_reader.timeout = 1
         junk = self.sio_reader.read()
         self.sio_reader.timeout = .1
-        for i in range(10):
+        for i in range(20):
             self.start()
             # Bootloader
             self.sio_writer.write(b'S')
             self.sio_writer.flush()
             loader = self.sio_reader.read(7)
-            if loader == b'XBoot++':
+            print(loader)
+            if loader == b'AVRBOOT':
                 return loader
             time.sleep(.1)
         raise RuntimeError("Invalid bootloader: {}".format(loader))
     
     def send_expect(self, cmd, expected, retries = 5):
-        
         expected_len = len(expected)
         self.sio_reader.timeout = .1
         junk = self.sio_reader.read()
@@ -169,7 +166,6 @@ class Avr109(object):
         return "%d.%d" % (sw_version[0] - 48, sw_version[1] - 48)
     
     def get_programmer_type(self):
-        
         return b'S' if self.send_expect(b'p', b'S') else None
         
         time.sleep(.1)
@@ -179,7 +175,6 @@ class Avr109(object):
         return self.sio_reader.read(1)
     
     def get_device_list(self):
-        
         # Device Code
         self.sio_reader.timeout = .1
         self.sio_writer.write(b't')
@@ -197,11 +192,27 @@ class Avr109(object):
         self.sio_writer.write(b's')
         self.sio_writer.flush()
         return self.sio_reader.read(3)
+f = open("build/psoc.hex", "r")
 
- 
-ser = Serial('/dev/ttyACM0', 115200)
-f = open("Bootloader.hex", "r")
+import os
+print("ready")
+#ser = Serial('/dev/cu.usbmodem101', 11520)
+#print(ser.readline())
+while True:
+    if os.path.exists("/dev/cu.usbmodem101"):
+        break
+    else:
+        break
+print("reset")
+while True:
+    if os.path.exists("/dev/cu.usbmodem101"):
+        break
+    else:
+        pass
+#os.system("make upload")
+print("ok")
+ser = Serial('/dev/cu.usbmodem101', 115200)
 programmer = Avr109(f, ser)
 programmer.start()
 #programmer.enter_program_mode()
-print(programmer.get_device_signature())
+print(programmer.get_bootloader_signature())
