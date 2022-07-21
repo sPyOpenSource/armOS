@@ -305,12 +305,12 @@ void setup(){
     Serial2.begin(57600);
     while(true){
       if (Serial1.available()) {      // If anything comes in Serial (USB),
-        Serial.write(Serial1.read());   // read it and send it out Serial1 (pins 0 & 1)
+        Serial.write(Serial1.read()); // read it and send it out Serial1 (pins 0 & 1)
       }
 
-      if (Serial.available()) {     // If anything comes in Serial1 (pins 0 & 1)]
+      if (Serial.available()) {       // If anything comes in Serial1 (pins 0 & 1)]
           char c = Serial.read();
-          Serial1.write(c);   // read it and send it out Serial (USB)
+          Serial1.write(c);           // read it and send it out Serial (USB)
           //Serial.write(c);
       }
     }

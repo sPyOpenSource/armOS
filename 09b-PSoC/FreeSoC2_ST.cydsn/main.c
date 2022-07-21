@@ -363,7 +363,7 @@ int main()
         //sprintf(Hello, "Hello: %x\n\r", (net_1_ON_val)); 
         //USBUART_PutString(Hello);
         //CyDelay(1500);
-     for(;;)
+    for(;;)
     {}
 }
 

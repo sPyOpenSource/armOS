@@ -182,8 +182,8 @@ SUBARCH := $(shell uname -m | sed -e s/i.86/i386/ -e s/sun4u/sparc64/ \
 # Default value for CROSS_COMPILE is not to prefix executables
 # Note: Some architectures assign CROSS_COMPILE in their arch/*/Makefile
 
-ARCH		?= armnommu
-CROSS_COMPILE	?= arm-elf-
+ARCH		  ?= armnommu
+CROSS_COMPILE ?= arm-elf-
 
 # Architecture as present in compile.h
 UTS_MACHINE := $(ARCH)
@@ -193,10 +193,10 @@ CONFIG_SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
 	  else if [ -x /bin/bash ]; then echo /bin/bash; \
 	  else echo sh; fi ; fi)
 
-HOSTCC  	= gcc
-HOSTCXX  	= g++
-HOSTCFLAGS	= -Wall -Wstrict-prototypes -O2 -fomit-frame-pointer
-HOSTCXXFLAGS	= -O2
+HOSTCC  	 = gcc
+HOSTCXX  	 = g++
+HOSTCFLAGS	 = -Wall -Wstrict-prototypes -O2 -fomit-frame-pointer
+HOSTCXXFLAGS = -O2
 
 # 	Decide whether to build built-in, modular, or both.
 #	Normally, just do built-in.
@@ -298,11 +298,11 @@ KALLSYMS	= scripts/kallsyms
 PERL		= perl
 CHECK		= sparse
 MODFLAGS	= -DMODULE
-CFLAGS_MODULE   = $(MODFLAGS)
-AFLAGS_MODULE   = $(MODFLAGS)
-LDFLAGS_MODULE  = -r
-CFLAGS_KERNEL	=
-AFLAGS_KERNEL	=
+CFLAGS_MODULE  = $(MODFLAGS)
+AFLAGS_MODULE  = $(MODFLAGS)
+LDFLAGS_MODULE = -r
+CFLAGS_KERNEL  =
+AFLAGS_KERNEL  =
 
 NOSTDINC_FLAGS  = -nostdinc -iwithprefix include
 
@@ -335,7 +335,7 @@ depfile = $(subst $(comma),_,$(@D)/.$(@F).d)
 # Files to ignore in find ... statements
 
 RCS_FIND_IGNORE := \( -name SCCS -o -name BitKeeper -o -name .svn -o -name CVS \) -prune -o
-RCS_TAR_IGNORE := --exclude SCCS --exclude BitKeeper --exclude .svn --exclude CVS
+RCS_TAR_IGNORE  := --exclude SCCS --exclude BitKeeper --exclude .svn --exclude CVS
 
 # ===========================================================================
 # Rules shared between *config targets and build targets

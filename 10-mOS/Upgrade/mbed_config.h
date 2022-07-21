@@ -35,5 +35,6 @@
 #define MBED_CONF_TARGET_NETWORK_DEFAULT_INTERFACE_TYPE ETHERNET   // set by target:K64F
 #define MBED_CONF_TARGET_TICKLESS_FROM_US_TICKER        0          // set by target:Target
 #define MBED_CONF_TARGET_XIP_ENABLE                     0          // set by target:Target
+#define MBED_CONF_LWIP_PPP_IPV4_ENABLED                                       0                                                                                                // set by library:lwip
 
 #endif
