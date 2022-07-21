@@ -5,13 +5,18 @@
 #define TIMEOUT     10000000
 #define BUFFER_SIZE 16
 
-void setupserial();
-void write(char *value);
+FlashIAP flash;
 
-__attribute__((section(".ARM.__at_0x10000"))) void bootloader(void){
-    setupserial();
-    write("Bootloader\r\n");
-    write("Continue? (y/n)");
+void writeIAP(int count, char* buffer){
+    const static uint32_t page_size = flash.get_page_size();
+    //Program the buffer into the flash memory
+    flash.erase(count, flash.get_sector_size(count));
+    flash.program(buffer, count, page_size * 2);
+}
+
+void bootloader(void){
+    printf("Bootloader\r\n");
+    printf("Continue? (y/n)");
     
     //Wait until data arrived, if it is 'y', continue
     while(!(UART0->S1 & UART_S1_RDRF_MASK));
@@ -22,11 +27,12 @@ __attribute__((section(".ARM.__at_0x10000"))) void bootloader(void){
     __disable_irq();
     
     //Erase all sectors we use for the user program
-    write("Erasing sectors!\r\n");
-    for (int i = 0; i < NUM_SECTORS; i++)
-        erase_sector(SECTOR_SIZE * i);
+    printf("Erasing sectors!\r\n");
+    for (int i = 0; i < NUM_SECTORS; i++){
+        flash.erase(flash.get_sector_size(0) * i, flash.get_sector_size(0));
+    }
 
-    write("Done erasing, send file!\r\n");
+    printf("Done erasing, send file!\r\n");
     
     char buffer[BUFFER_SIZE];
     uint32_t count = 0;
@@ -58,13 +64,13 @@ __attribute__((section(".ARM.__at_0x10000"))) void bootloader(void){
                 }
                 
                 //Program the buffer into the flash memory
-                if (program_flash(count, buffer, BUFFER_SIZE) != 0) {
-                    write("Error!\r\n");   
+                if (flash.program(buffer, count, BUFFER_SIZE) != 0) {
+                    printf("Error!\r\n");   
                     break;
                 }
                 
                 //Reset buffercount for next buffer
-                write("#");
+                printf("#");
                 buffercount = 0;
                 count += BUFFER_SIZE;
             }
@@ -79,37 +85,12 @@ __attribute__((section(".ARM.__at_0x10000"))) void bootloader(void){
                     for (int i = buffercount; i < BUFFER_SIZE; i++) {
                         buffer[i] = 0xFF;
                     }
-                    program_flash(count, buffer, BUFFER_SIZE);
+                    flash.program(buffer, count, BUFFER_SIZE);
                 }
                 break; //We should be done programming :D
             }
         }
     }
-    write("Done programming!\r\n");
+    printf("Done programming!\r\n");
     NVIC_SystemReset();
 }
-
-__attribute__((section(".ARM.__at_0x10080"))) static void setupserial(void) {
-        //Setup USBTX/USBRX pins (PTB16/PTB17)
-        SIM->SCGC5 |= 1 << SIM_SCGC5_PORTB_SHIFT;
-        PORTB->PCR[16] = (PORTB->PCR[16] & 0x700) | (3 << 8);
-        PORTB->PCR[17] = (PORTB->PCR[17] & 0x700) | (3 << 8);
-
-        //Setup UART (ugly, copied resulting values from mbed serial setup)
-        SIM->SCGC4 |= SIM_SCGC4_UART0_MASK;
-
-        UART0->BDH = 3;
-        UART0->BDL = 13;
-        UART0->C4 = 8;
-        UART0->C2 = 12; //Enables UART
-    }
-
-__attribute__((section(".ARM.__at_0x100A0"))) static void write(char *value){
-        int i = 0;
-        //Loop through string and send everything
-        while(*(value + i) != '\0') {
-            while(!(UART0->S1 & UART_S1_TDRE_MASK));
-            UART0->D = *(value + i);
-            i++;
-        }
-    }

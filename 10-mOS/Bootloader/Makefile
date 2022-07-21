@@ -796,6 +796,7 @@ INCLUDE_PATHS += -I../usr/src/mbed-sdk
 INCLUDE_PATHS += -I../UnitTest
 INCLUDE_PATHS += -I../drivers
 INCLUDE_PATHS += -I../mDNS
+INCLUDE_PATHS += -I../../
 INCLUDE_PATHS += -I../../mbed-os
 INCLUDE_PATHS += -I../../mbed-os/cmsis
 INCLUDE_PATHS += -I../../mbed-os/cmsis/TARGET_CORTEX_M
