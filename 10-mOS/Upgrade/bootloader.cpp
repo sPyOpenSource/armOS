@@ -3,7 +3,6 @@
 //Could be nicer, but for now just erase all preceding sectors
 #define NUM_SECTORS 15
 #define TIMEOUT     10000000
-#define BUFFER_SIZE 16
 
 FlashIAP flash;
 
@@ -29,12 +28,12 @@ void bootloader(void){
     //Erase all sectors we use for the user program
     printf("Erasing sectors!\r\n");
     for (int i = 0; i < NUM_SECTORS; i++){
-        flash.erase(flash.get_sector_size(0) * i, flash.get_sector_size(0));
+        flash.erase(flash.get_page_size() * i * 2, flash.get_sector_size(flash.get_page_size() * i * 2));
     }
 
     printf("Done erasing, send file!\r\n");
     
-    char buffer[BUFFER_SIZE];
+    char buffer[flash.get_page_size() * 2];
     uint32_t count = 0;
     uint8_t buffercount = 0;
     uint32_t timeout = 0;
@@ -43,7 +42,7 @@ void bootloader(void){
     while(!(UART0->S1 & UART_S1_RDRF_MASK));
     
     //Data receive loop
-    while(1) {
+    while(true) {
         //Check if there is new data
         if (UART0->S1 & UART_S1_RDRF_MASK) {
             //Place data in buffer
@@ -54,7 +53,7 @@ void bootloader(void){
             timeout = 0;
 
             //We write per BUFFER_SIZE chars
-            if (buffercount == BUFFER_SIZE) {
+            if (buffercount == flash.get_page_size() * 2) {
                 //NMI Handler is at bytes 8-9-10-11, we overwrite this to point to bootloader function
                 if (count == 0) {
                     buffer[8] = 0x01;
@@ -64,7 +63,7 @@ void bootloader(void){
                 }
                 
                 //Program the buffer into the flash memory
-                if (flash.program(buffer, count, BUFFER_SIZE) != 0) {
+                if (flash.program(buffer, count, flash.get_page_size() * 2) != 0) {
                     printf("Error!\r\n");   
                     break;
                 }
@@ -72,7 +71,7 @@ void bootloader(void){
                 //Reset buffercount for next buffer
                 printf("#");
                 buffercount = 0;
-                count += BUFFER_SIZE;
+                count += flash.get_page_size() * 2;
             }
         } else {
             //No new data, increase timeout
@@ -82,10 +81,10 @@ void bootloader(void){
             if (timeout > TIMEOUT) {
                 //If there is data left in the buffer, program it
                 if (buffercount != 0) {
-                    for (int i = buffercount; i < BUFFER_SIZE; i++) {
+                    for (uint32_t i = buffercount; i < flash.get_page_size() * 2; i++) {
                         buffer[i] = 0xFF;
                     }
-                    flash.program(buffer, count, BUFFER_SIZE);
+                    flash.program(buffer, count, flash.get_page_size() * 2);
                 }
                 break; //We should be done programming :D
             }

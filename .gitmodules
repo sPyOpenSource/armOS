@@ -1,0 +1,6 @@
+[submodule "jcore"]
+	path = lib/jcore
+	url = https://github.com/sPyOpenSource/jcore.git
+[submodule "micropython"]
+	path = lib/micropython
+	url = https://github.com/micropython/micropython.git

@@ -23,10 +23,10 @@
 #else /* USE_WINDOWS_API */
     #include <unistd.h>
     #include <netdb.h>
-    #include <netinet/in.h>
+    //#include <netinet/in.h>
     //#include <netinet/tcp.h>
     #include <arpa/inet.h>
-    #include <sys/ioctl.h>
+    //#include <sys/ioctl.h>
     #include <sys/socket.h>
     #include <pthread.h>
     #include <fcntl.h>
@@ -161,7 +161,7 @@ void WaitTcpReady(func_args*);
 #else /* TEST_IPV6 */
     static const char* const wolfSshIp = "::1";
 #endif /* TEST_IPV6 */
-static const word16 wolfSshPort = 22222;
+static const word16 wolfSshPort = 22;
 
 
 #ifdef __GNUC__
@@ -393,6 +393,12 @@ static INLINE void tcp_socket(SOCKET_T* sockFd)
 
 static INLINE void tcp_listen(SOCKET_T* sockfd, word16* port, int useAnyAddr)
 {
+    TCPSocket server;
+    server.open(&interface);
+    server.bind(22);
+    server.listen(1);
+    return;
+    
     SOCKADDR_IN_T addr;
 
     /* don't use INADDR_ANY by default, firewall may block, make user switch
