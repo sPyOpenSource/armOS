@@ -1,5 +1,0 @@
-Module: mouse
-Display-name: Mouse
-Description: An input API providing a TTK widget for simulating a mouse device.
-Category: Libraries
-Author: Rebecca G. Bettencourt

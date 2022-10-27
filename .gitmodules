@@ -4,9 +4,6 @@
 [submodule "micropython"]
 	path = lib/micropython
 	url = https://github.com/micropython/micropython.git
-[submodule "m1n1"]
-	path = 12-m1n1
-	url = https://github.com/AsahiLinux/m1n1.git
 [submodule "lib/axtls"]
 	path = lib/axtls
 	url = https://github.com/pfalcon/axtls

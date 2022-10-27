@@ -1,8 +1,0 @@
-Module: mpdc
-Display-name: MPDc
-Description: A really good music player, and currently the only one. Requires MPD.
-Category: Music
-Author: Courtney Cavin
-Provides: music
-Contact: courtc@ipodlinux.org
-Soft-Dependencies: tiwidgets, mpd

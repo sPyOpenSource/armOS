@@ -1,6 +1,0 @@
-Module: tikana
-Display-name: Kana Palette
-Description: A text input method that allows you to scroll through a palette of Japanese kana characters to select the one you want.
-Category: Text Input/Text Input Methods
-Author: Rebecca G. Bettencourt
-Dependencies: textinput

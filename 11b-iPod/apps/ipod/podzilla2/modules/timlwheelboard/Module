@@ -1,6 +1,0 @@
-Module: timlwheelboard
-Display-name: Multilingual Wheelboard
-Description: A text input method that allows you to scroll left or right, dividing the character list in half, to select the character you want.
-Category: Text Input/Text Input Methods
-Author: Rebecca G. Bettencourt & Stefan Lange-Hegermann
-Dependencies: textinput
