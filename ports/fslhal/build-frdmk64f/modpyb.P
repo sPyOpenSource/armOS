@@ -1,0 +1,82 @@
+build-frdmk64f/modpyb.o: modpyb.c \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/lib/gcc/arm-none-eabi/4.8.3/include/stdint.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/stdint.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/machine/_default_types.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/sys/features.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/stdio.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/_ansi.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/newlib.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/sys/config.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/machine/ieeefp.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/lib/gcc/arm-none-eabi/4.8.3/include/stddef.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/lib/gcc/arm-none-eabi/4.8.3/include/stdarg.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/sys/reent.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/_ansi.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/sys/_types.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/machine/_types.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/sys/lock.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/sys/types.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/machine/types.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/sys/stdio.h \
+ boards/frdmk64f/mk20dx128.h boards/frdmk64f/MK64F12.h \
+ boards/frdmk64f/core_cm4.h boards/frdmk64f/core_cmInstr.h \
+ boards/frdmk64f/core_cmFunc.h boards/frdmk64f/core_cmSimd.h \
+ boards/frdmk64f/system_MK64F12.h boards/frdmk64f/Arduino.h \
+ boards/frdmk64f/core_pins.h boards/frdmk64f/mk20dx128.h \
+ boards/frdmk64f/pins_arduino.h ../../py/headers/obj.h \
+ ../../py/headers/mpconfig.h mpconfigport.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/alloca.h \
+ ../../py/headers/misc.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/lib/gcc/arm-none-eabi/4.8.3/include/stdbool.h \
+ ../../py/headers/qstr.h build-frdmk64f/genhdr/qstrdefs.generated.h \
+ ../../py/headers/mpprint.h ../../py/headers/gc.h \
+ boards/frdmk64f/teensy_hal.h boards/frdmk64f/hal_ftm.h \
+ ../stm32/headers/gccollect.h ../stm32/headers/irq.h \
+ ../stm32/headers/systick.h ../../lib/utils/pyexec.h led.h \
+ ../stm32/headers/pin.h boards/frdmk64f/pin_defs_teensy.h \
+ boards/frdmk64f/teensy_hal.h timer.h ../stm32/headers/extint.h \
+ ../stm32/headers/usrsw.h ../stm32/headers/rng.h ../stm32/headers/uart.h \
+ ../stm32/headers/adc.h ../stm32/headers/storage.h \
+ ../stm32/headers/sdcard.h ../stm32/headers/accel.h \
+ ../stm32/headers/dac.h usb.h ../stm32/headers/portmodules.h
+modpyb.c :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/lib/gcc/arm-none-eabi/4.8.3/include/stdint.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/stdint.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/machine/_default_types.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/sys/features.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/stdio.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/_ansi.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/newlib.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/sys/config.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/machine/ieeefp.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/lib/gcc/arm-none-eabi/4.8.3/include/stddef.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/lib/gcc/arm-none-eabi/4.8.3/include/stdarg.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/sys/reent.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/_ansi.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/sys/_types.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/machine/_types.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/sys/lock.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/sys/types.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/machine/types.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/sys/stdio.h :
+ boards/frdmk64f/mk20dx128.h boards/frdmk64f/MK64F12.h :
+ boards/frdmk64f/core_cm4.h boards/frdmk64f/core_cmInstr.h :
+ boards/frdmk64f/core_cmFunc.h boards/frdmk64f/core_cmSimd.h :
+ boards/frdmk64f/system_MK64F12.h boards/frdmk64f/Arduino.h :
+ boards/frdmk64f/core_pins.h boards/frdmk64f/mk20dx128.h :
+ boards/frdmk64f/pins_arduino.h ../../py/headers/obj.h :
+ ../../py/headers/mpconfig.h mpconfigport.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/alloca.h :
+ ../../py/headers/misc.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/lib/gcc/arm-none-eabi/4.8.3/include/stdbool.h :
+ ../../py/headers/qstr.h build-frdmk64f/genhdr/qstrdefs.generated.h :
+ ../../py/headers/mpprint.h ../../py/headers/gc.h :
+ boards/frdmk64f/teensy_hal.h boards/frdmk64f/hal_ftm.h :
+ ../stm32/headers/gccollect.h ../stm32/headers/irq.h :
+ ../stm32/headers/systick.h ../../lib/utils/pyexec.h led.h :
+ ../stm32/headers/pin.h boards/frdmk64f/pin_defs_teensy.h :
+ boards/frdmk64f/teensy_hal.h timer.h ../stm32/headers/extint.h :
+ ../stm32/headers/usrsw.h ../stm32/headers/rng.h ../stm32/headers/uart.h :
+ ../stm32/headers/adc.h ../stm32/headers/storage.h :
+ ../stm32/headers/sdcard.h ../stm32/headers/accel.h :
+ ../stm32/headers/dac.h usb.h ../stm32/headers/portmodules.h :

@@ -1,0 +1,72 @@
+build-teensy/py/compile.o: ../py/compile.c \
+ /usr/lib/gcc/arm-none-eabi/4.9.3/include/stdbool.h \
+ /usr/lib/gcc/arm-none-eabi/4.9.3/include/stdint.h \
+ /usr/arm-none-eabi/include/stdint.h \
+ /usr/arm-none-eabi/include/machine/_default_types.h \
+ /usr/arm-none-eabi/include/sys/features.h \
+ /usr/arm-none-eabi/include/sys/_intsup.h \
+ /usr/arm-none-eabi/include/sys/_stdint.h \
+ /usr/arm-none-eabi/include/stdio.h /usr/arm-none-eabi/include/_ansi.h \
+ /usr/arm-none-eabi/include/newlib.h \
+ /usr/arm-none-eabi/include/sys/config.h \
+ /usr/arm-none-eabi/include/machine/ieeefp.h \
+ /usr/arm-none-eabi/include/sys/cdefs.h \
+ /usr/lib/gcc/arm-none-eabi/4.9.3/include/stddef.h \
+ /usr/lib/gcc/arm-none-eabi/4.9.3/include/stdarg.h \
+ /usr/arm-none-eabi/include/sys/reent.h \
+ /usr/arm-none-eabi/include/_ansi.h \
+ /usr/arm-none-eabi/include/sys/_types.h \
+ /usr/arm-none-eabi/include/machine/_types.h \
+ /usr/arm-none-eabi/include/sys/lock.h \
+ /usr/arm-none-eabi/include/sys/types.h \
+ /usr/arm-none-eabi/include/machine/types.h \
+ /usr/arm-none-eabi/include/sys/stdio.h \
+ /usr/arm-none-eabi/include/string.h \
+ /usr/arm-none-eabi/include/sys/string.h \
+ /usr/arm-none-eabi/include/assert.h ../py/scope.h ../py/parse.h \
+ ../py/mpconfig.h mpconfigport.h /usr/arm-none-eabi/include/alloca.h \
+ ../py/emitglue.h ../py/obj.h ../py/misc.h ../py/qstr.h \
+ build-teensy/genhdr/qstrdefs.generated.h ../py/mpprint.h ../py/emit.h \
+ ../py/lexer.h ../py/runtime0.h ../py/compile.h ../py/smallint.h \
+ ../py/runtime.h ../py/mpstate.h ../py/nlr.h \
+ /usr/lib/gcc/arm-none-eabi/4.9.3/include-fixed/limits.h \
+ /usr/lib/gcc/arm-none-eabi/4.9.3/include-fixed/syslimits.h \
+ /usr/arm-none-eabi/include/limits.h /usr/arm-none-eabi/include/setjmp.h \
+ /usr/arm-none-eabi/include/machine/setjmp.h ../py/objlist.h \
+ ../py/objexcept.h ../py/objtuple.h ../py/builtin.h ../py/grammar.h
+../py/compile.c :
+ /usr/lib/gcc/arm-none-eabi/4.9.3/include/stdbool.h :
+ /usr/lib/gcc/arm-none-eabi/4.9.3/include/stdint.h :
+ /usr/arm-none-eabi/include/stdint.h :
+ /usr/arm-none-eabi/include/machine/_default_types.h :
+ /usr/arm-none-eabi/include/sys/features.h :
+ /usr/arm-none-eabi/include/sys/_intsup.h :
+ /usr/arm-none-eabi/include/sys/_stdint.h :
+ /usr/arm-none-eabi/include/stdio.h /usr/arm-none-eabi/include/_ansi.h :
+ /usr/arm-none-eabi/include/newlib.h :
+ /usr/arm-none-eabi/include/sys/config.h :
+ /usr/arm-none-eabi/include/machine/ieeefp.h :
+ /usr/arm-none-eabi/include/sys/cdefs.h :
+ /usr/lib/gcc/arm-none-eabi/4.9.3/include/stddef.h :
+ /usr/lib/gcc/arm-none-eabi/4.9.3/include/stdarg.h :
+ /usr/arm-none-eabi/include/sys/reent.h :
+ /usr/arm-none-eabi/include/_ansi.h :
+ /usr/arm-none-eabi/include/sys/_types.h :
+ /usr/arm-none-eabi/include/machine/_types.h :
+ /usr/arm-none-eabi/include/sys/lock.h :
+ /usr/arm-none-eabi/include/sys/types.h :
+ /usr/arm-none-eabi/include/machine/types.h :
+ /usr/arm-none-eabi/include/sys/stdio.h :
+ /usr/arm-none-eabi/include/string.h :
+ /usr/arm-none-eabi/include/sys/string.h :
+ /usr/arm-none-eabi/include/assert.h ../py/scope.h ../py/parse.h :
+ ../py/mpconfig.h mpconfigport.h /usr/arm-none-eabi/include/alloca.h :
+ ../py/emitglue.h ../py/obj.h ../py/misc.h ../py/qstr.h :
+ build-teensy/genhdr/qstrdefs.generated.h ../py/mpprint.h ../py/emit.h :
+ ../py/lexer.h ../py/runtime0.h ../py/compile.h ../py/smallint.h :
+ ../py/runtime.h ../py/mpstate.h ../py/nlr.h :
+ /usr/lib/gcc/arm-none-eabi/4.9.3/include-fixed/limits.h :
+ /usr/lib/gcc/arm-none-eabi/4.9.3/include-fixed/syslimits.h :
+ /usr/arm-none-eabi/include/limits.h /usr/arm-none-eabi/include/setjmp.h :
+ /usr/arm-none-eabi/include/machine/setjmp.h ../py/objlist.h :
+ ../py/objexcept.h ../py/objtuple.h ../py/builtin.h ../py/grammar.h :

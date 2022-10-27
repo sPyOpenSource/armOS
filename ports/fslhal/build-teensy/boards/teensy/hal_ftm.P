@@ -1,0 +1,16 @@
+build-teensy/boards/teensy/hal_ftm.o: boards/teensy/hal_ftm.c \
+ /usr/lib/gcc/arm-none-eabi/4.9.3/include/stdint.h \
+ /usr/arm-none-eabi/include/stdint.h \
+ /usr/arm-none-eabi/include/machine/_default_types.h \
+ /usr/arm-none-eabi/include/sys/features.h \
+ /usr/arm-none-eabi/include/sys/_intsup.h \
+ /usr/arm-none-eabi/include/sys/_stdint.h boards/teensy/mk20dx128.h \
+ boards/teensy/teensy_hal.h boards/teensy/hal_ftm.h
+boards/teensy/hal_ftm.c :
+ /usr/lib/gcc/arm-none-eabi/4.9.3/include/stdint.h :
+ /usr/arm-none-eabi/include/stdint.h :
+ /usr/arm-none-eabi/include/machine/_default_types.h :
+ /usr/arm-none-eabi/include/sys/features.h :
+ /usr/arm-none-eabi/include/sys/_intsup.h :
+ /usr/arm-none-eabi/include/sys/_stdint.h boards/teensy/mk20dx128.h :
+ boards/teensy/teensy_hal.h boards/teensy/hal_ftm.h :

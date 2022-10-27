@@ -1,0 +1,26 @@
+build-teensy/core/usb_desc.o: core/usb_desc.c core/usb_desc.h \
+ /usr/lib/gcc/arm-none-eabi/4.9.3/include/stdint.h \
+ /usr/arm-none-eabi/include/stdint.h \
+ /usr/arm-none-eabi/include/machine/_default_types.h \
+ /usr/arm-none-eabi/include/sys/features.h \
+ /usr/arm-none-eabi/include/sys/_intsup.h \
+ /usr/arm-none-eabi/include/sys/_stdint.h \
+ /usr/lib/gcc/arm-none-eabi/4.9.3/include/stddef.h core/usb_names.h \
+ boards/teensy/mk20dx128.h boards/teensy/avr_functions.h \
+ /usr/arm-none-eabi/include/inttypes.h \
+ /usr/arm-none-eabi/include/newlib.h \
+ /usr/arm-none-eabi/include/sys/config.h \
+ /usr/arm-none-eabi/include/machine/ieeefp.h
+core/usb_desc.c core/usb_desc.h :
+ /usr/lib/gcc/arm-none-eabi/4.9.3/include/stdint.h :
+ /usr/arm-none-eabi/include/stdint.h :
+ /usr/arm-none-eabi/include/machine/_default_types.h :
+ /usr/arm-none-eabi/include/sys/features.h :
+ /usr/arm-none-eabi/include/sys/_intsup.h :
+ /usr/arm-none-eabi/include/sys/_stdint.h :
+ /usr/lib/gcc/arm-none-eabi/4.9.3/include/stddef.h core/usb_names.h :
+ boards/teensy/mk20dx128.h boards/teensy/avr_functions.h :
+ /usr/arm-none-eabi/include/inttypes.h :
+ /usr/arm-none-eabi/include/newlib.h :
+ /usr/arm-none-eabi/include/sys/config.h :
+ /usr/arm-none-eabi/include/machine/ieeefp.h :

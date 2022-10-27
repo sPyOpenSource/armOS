@@ -1,0 +1,22 @@
+build-frdmk64f/core/usb_desc.o: core/usb_desc.c core/usb_desc.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/lib/gcc/arm-none-eabi/4.8.3/include/stdint.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/stdint.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/machine/_default_types.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/sys/features.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/lib/gcc/arm-none-eabi/4.8.3/include/stddef.h \
+ core/usb_names.h boards/frdmk64f/mk20dx128.h boards/frdmk64f/MK64F12.h \
+ boards/frdmk64f/core_cm4.h boards/frdmk64f/core_cmInstr.h \
+ boards/frdmk64f/core_cmFunc.h boards/frdmk64f/core_cmSimd.h \
+ boards/frdmk64f/system_MK64F12.h boards/frdmk64f/avr_functions.h \
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/inttypes.h
+core/usb_desc.c core/usb_desc.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/lib/gcc/arm-none-eabi/4.8.3/include/stdint.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/stdint.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/machine/_default_types.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/sys/features.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/lib/gcc/arm-none-eabi/4.8.3/include/stddef.h :
+ core/usb_names.h boards/frdmk64f/mk20dx128.h boards/frdmk64f/MK64F12.h :
+ boards/frdmk64f/core_cm4.h boards/frdmk64f/core_cmInstr.h :
+ boards/frdmk64f/core_cmFunc.h boards/frdmk64f/core_cmSimd.h :
+ boards/frdmk64f/system_MK64F12.h boards/frdmk64f/avr_functions.h :
+ /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/arm-none-eabi/include/inttypes.h :

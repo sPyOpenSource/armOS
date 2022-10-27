@@ -1,0 +1,16 @@
+build-teensy/boards/teensy/analog.o: boards/teensy/analog.c \
+ boards/teensy/core_pins.h boards/teensy/mk20dx128.h \
+ /usr/lib/gcc/arm-none-eabi/4.9.3/include/stdint.h \
+ /usr/arm-none-eabi/include/stdint.h \
+ /usr/arm-none-eabi/include/machine/_default_types.h \
+ /usr/arm-none-eabi/include/sys/features.h \
+ /usr/arm-none-eabi/include/sys/_intsup.h \
+ /usr/arm-none-eabi/include/sys/_stdint.h boards/teensy/pins_arduino.h
+boards/teensy/analog.c :
+ boards/teensy/core_pins.h boards/teensy/mk20dx128.h :
+ /usr/lib/gcc/arm-none-eabi/4.9.3/include/stdint.h :
+ /usr/arm-none-eabi/include/stdint.h :
+ /usr/arm-none-eabi/include/machine/_default_types.h :
+ /usr/arm-none-eabi/include/sys/features.h :
+ /usr/arm-none-eabi/include/sys/_intsup.h :
+ /usr/arm-none-eabi/include/sys/_stdint.h boards/teensy/pins_arduino.h :

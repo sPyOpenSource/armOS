@@ -1,0 +1,20 @@
+build-teensy/boards/teensy/usb_dev.o: boards/teensy/usb_dev.c \
+ boards/teensy/mk20dx128.h \
+ /usr/lib/gcc/arm-none-eabi/4.9.3/include/stdint.h \
+ /usr/arm-none-eabi/include/stdint.h \
+ /usr/arm-none-eabi/include/machine/_default_types.h \
+ /usr/arm-none-eabi/include/sys/features.h \
+ /usr/arm-none-eabi/include/sys/_intsup.h \
+ /usr/arm-none-eabi/include/sys/_stdint.h core/usb_dev.h core/usb_mem.h \
+ core/usb_desc.h /usr/lib/gcc/arm-none-eabi/4.9.3/include/stddef.h \
+ core/usb_mem.h
+boards/teensy/usb_dev.c :
+ boards/teensy/mk20dx128.h :
+ /usr/lib/gcc/arm-none-eabi/4.9.3/include/stdint.h :
+ /usr/arm-none-eabi/include/stdint.h :
+ /usr/arm-none-eabi/include/machine/_default_types.h :
+ /usr/arm-none-eabi/include/sys/features.h :
+ /usr/arm-none-eabi/include/sys/_intsup.h :
+ /usr/arm-none-eabi/include/sys/_stdint.h core/usb_dev.h core/usb_mem.h :
+ core/usb_desc.h /usr/lib/gcc/arm-none-eabi/4.9.3/include/stddef.h :
+ core/usb_mem.h :
