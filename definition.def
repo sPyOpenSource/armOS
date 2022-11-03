@@ -1,6 +1,6 @@
 ISDIRECTORY  = FALSE
-CAPTION      = TEST ELEMENT
-CAPTION_EN   = TEST ELEMENT
-CAPTION_ES   = TEST ELEMENT
+CAPTION      = MicroPython
+CAPTION_EN   = MicroPython
+CAPTION_ES   = MicroPython
 classCircuit = TEST
 Icon         = bin/TEST.gif
