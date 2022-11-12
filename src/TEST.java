@@ -24,7 +24,7 @@ import VisualLogic.variables.VSComboBox;
 import java.util.ArrayList;
 import tools.*;
 
-public class TEST extends JVSMain
+public class MicroPython extends JVSMain
 {
   private MyOpenLabDriverIF driver;
   private final VSComboBox comport = new VSComboBox();
