@@ -2,5 +2,5 @@ ISDIRECTORY  = FALSE
 CAPTION      = MicroPython
 CAPTION_EN   = MicroPython
 CAPTION_ES   = MicroPython
-classCircuit = TEST
-Icon         = bin/TEST.gif
+classCircuit = MicroPython
+Icon         = bin/MicroPython.gif
