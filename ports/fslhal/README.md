@@ -1,4 +1,3 @@
-branch  fshal-work
 Being upgraded to add a FRDM-K64F board with a K64FN1M processor
 frdmk64f Status: Runs to after the frdmk64f_pins.csv is generated, then the compile has errors on symbols generated in the two .csv files have problems
 
