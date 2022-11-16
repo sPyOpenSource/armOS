@@ -6,21 +6,22 @@ This is a fork of micropython repository which aims to port micropython
 on Atmel's SAM3X (Arduino Due) microcontrollers.
 
 
-## Status:
+## Status
 This port is still in Beta.
 
-## Docs
+
+## Documents
 See What's supported section in ``atmel-sam3x/``
 
 
-Major components in this repository:
+## Major components
 - py/ -- the core Python implementation, including compiler, runtime, and
   core library.
 - tests/ -- test framework and test scripts.
 - docs/ -- user documentation in Sphinx reStructuredText format.
 
 
-Additional components:
+## Additional components
 - atmel-sam3x/ -- a port of micropython for SAM3X (Arduino Due) board.
 - bare-arm/ -- a bare minimum version of MicroPython for ARM MCUs. Used
   mostly to control code size.
