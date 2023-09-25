@@ -39,6 +39,7 @@ public class MicroPython extends JVSMain
         args.add(0);
         args.add(0);
         args.add(false);
+        
         driver = element.jOpenDriver("MyOpenLab.RS232", args);
 
         System.out.println("driver=" + driver.toString());
