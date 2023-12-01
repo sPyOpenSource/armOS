@@ -29,23 +29,23 @@
 #include <PS2Mouse.h>
 #include "UnitTest.h"
 
-#define MOUSE_DATA 7
-#define MOUSE_CLOCK 6
+#define MOUSE_DATA 	7
+#define MOUSE_CLOCK 	6
 #define GRAPHICSMODE
 
-#define Z_STEP_PIN         46
-#define Z_DIR_PIN          48
-#define Z_ENABLE_PIN       62
+#define Z_STEP_PIN      46
+#define Z_DIR_PIN       48
+#define Z_ENABLE_PIN    62
 
-#define E_STEP_PIN         26
-#define E_DIR_PIN          28
-#define E_ENABLE_PIN       24
+#define E_STEP_PIN      26
+#define E_DIR_PIN       28
+#define E_ENABLE_PIN    24
 
-#define STEPS              2000
+#define STEPS           2000
 
-#define HEATER_0_PIN       9
-#define TEMP_0_PIN         13   // ANALOG NUMBERING
-#define TEMP_1_PIN         14   // ANALOG NUMBERING
+#define HEATER_0_PIN    9
+#define TEMP_0_PIN      13   // ANALOG NUMBERING
+#define TEMP_1_PIN      14   // ANALOG NUMBERING
 
 using namespace myos::gui;
 
