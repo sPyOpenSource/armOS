@@ -363,7 +363,7 @@ static INLINE void c32toa(word32 u32, byte* c)
     c[0] = (u32 >> 24) & 0xff;
     c[1] = (u32 >> 16) & 0xff;
     c[2] = (u32 >>  8) & 0xff;
-    c[3] =  u32 & 0xff;
+    c[3] =  u32        & 0xff;
 }
 
 /* Map user names to passwords */
@@ -428,9 +428,7 @@ static void PwMapListDelete(PwMapList* list)
     }
 }
 
-
 static const char samplePasswordBuffer[] = "hopkins:hopkinsdev\n";
-
 
 static int LoadPasswordBuffer(byte* buf, word32 bufSz, PwMapList* list)
 {
@@ -467,7 +465,6 @@ static int LoadPasswordBuffer(byte* buf, word32 bufSz, PwMapList* list)
 
     return 0;
 }
-
 
 static int wsUserAuth(byte authType,
                       WS_UserAuthData* authData,
@@ -683,7 +680,6 @@ static THREAD_RETURN WOLFSSH_THREAD server_worker(void* vArgs)
 
     return 0;
 }
-
 
 THREAD_RETURN WOLFSSH_THREAD echoserver_test()
 {
