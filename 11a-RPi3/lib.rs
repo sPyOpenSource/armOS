@@ -1,6 +1,8 @@
 #![no_std]
 #![feature(core_intrinsics, lang_items)]
 
+global_asm!(include_str!("boot.S"));
+
 use core::intrinsics::abort;
 use core::intrinsics::volatile_load;
 use core::intrinsics::volatile_store;
