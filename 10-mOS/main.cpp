@@ -218,9 +218,6 @@ int main() {
    CONDITIONS OF ANY KIND, either express or implied.
 */
 #include <stdio.h>
-#include "mbed-os/rtos/rtos.h"
-#include "mbed-os/rtos/ThisThread.h"
-#include <mbed-os/rtos/EventFlags.h>
 
 #include <wolf/ssl/headers/options.h>
 #include <wolf/crypt/headers/sha256.h>
@@ -355,8 +352,6 @@ unsigned int server_key_rsa_der_len = 1191;
 #define EXAMPLE_BUFFER_SZ 4096
 
 #define SSH_GREETING_MESSAGE (byte*)((char*)"Welcome to SSH Server!\r\nYou have now logged in!\r\n\r\n")
-
-THREAD_RETURN WOLFSSH_THREAD echoserver_test(void* args);
 
 static INLINE void c32toa(word32 u32, byte* c)
 {
@@ -577,7 +572,7 @@ static int dump_stats(thread_ctx_t* ctx)
     return wolfSSH_stream_send(ctx->ssh, (byte*)stats, statsSz);
 }
 
-static THREAD_RETURN WOLFSSH_THREAD server_worker(void* vArgs)
+void server_worker()
 {
     thread_ctx_t* threadCtx = (thread_ctx_t*)vArgs;
     //ESP_LOGI(TAG, "server_worker: entry");
@@ -681,7 +676,7 @@ static THREAD_RETURN WOLFSSH_THREAD server_worker(void* vArgs)
     return 0;
 }
 
-THREAD_RETURN WOLFSSH_THREAD echoserver_test()
+void echoserver_test()
 {
     WOLFSSH_CTX* ctx = NULL;
     PwMapList pwMapList;
