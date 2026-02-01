@@ -53,7 +53,7 @@ static inline mp_uint_t mp_hal_ticks_cpu(void) {
 // C-level pin HAL
 
 #include "stm32/headers/pin.h"
-
+//#define GPIO_NOPULL ((uint32_t)0x00000000U)
 #define MP_HAL_PIN_FMT                  "%q"
 #define MP_HAL_PIN_MODE_INPUT           (0)
 #define MP_HAL_PIN_MODE_OUTPUT          (1)

@@ -20,3 +20,6 @@
 [submodule "lib/stm32lib"]
 	path = lib/stm32lib
 	url = https://github.com/mcauser/stm32lib
+[submodule "lib/Marlin"]
+	path = lib/Marlin
+	url = https://github.com/MarlinFirmware/Marlin.git

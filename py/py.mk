@@ -273,7 +273,7 @@ MPCONFIGPORT_MK = $(wildcard mpconfigport.mk)
 # created before we run the script to generate the .h
 # Note: we need to protect the qstr names from the preprocessor, so we wrap
 # the lines in "" and then unwrap after the preprocessor is finished.
-$(HEADER_BUILD)/qstrdefs.generated.h: $(PY_QSTR_DEFS) $(QSTR_DEFS) $(QSTR_DEFS_COLLECTED) $(PY_SRC)/python/makeqstrdata.py mpconfigport.h $(MPCONFIGPORT_MK) $(PY_SRC)/headers/mpconfig.h | $(HEADER_BUILD)
+$(HEADER_BUILD)/qstrdefs.generated.h: $(PY_QSTR_DEFS) $(QSTR_DEFS) $(QSTR_DEFS_COLLECTED) $(PY_SRC)/python/makeqstrdata.py headers/mpconfigport.h $(MPCONFIGPORT_MK) $(PY_SRC)/headers/mpconfig.h | $(HEADER_BUILD)
 	$(ECHO) "GEN $@"
 	$(Q)cat $(PY_QSTR_DEFS) $(QSTR_DEFS) $(QSTR_DEFS_COLLECTED) | $(SED) 's/^Q(.*)/"&"/' | $(CPP) $(CFLAGS) - | $(SED) 's/^"\(Q(.*)\)"/\1/' > $(HEADER_BUILD)/qstrdefs.preprocessed.h
 	$(Q)$(PYTHON) $(PY_SRC)/python/makeqstrdata.py $(HEADER_BUILD)/qstrdefs.preprocessed.h > $@

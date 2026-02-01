@@ -105,6 +105,9 @@
 #define MICROPY_PY_THREAD           (0)
 #define MICROPY_PY_THREAD_GIL       (0)
 
+#define SPI_FIRSTBIT_MSB                ((uint32_t)0x00000000)
+#define SPI_FIRSTBIT_LSB                ((uint32_t)0x00000001)
+
 // extended modules
 #define MICROPY_PY_UCTYPES          (1)
 #define MICROPY_PY_UZLIB            (1)

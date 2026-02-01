@@ -1,7 +1,7 @@
 include ../../py/mkenv.mk
 
 # qstr definitions (must come before including py.mk)
-QSTR_DEFS = qstrdefsport.h
+QSTR_DEFS = headers/qstrdefsport.h
 
 # include py core make definitions
 include ../../py/py.mk
@@ -11,6 +11,7 @@ ROOT := $(realpath $(shell dirname '$(dir $(lastword $(MAKEFILE_LIST)))'))
 INC += -I.
 INC += -I../..
 INC += -I../../lib/libm
+INC += -Iheaders
 INC += -I./ASF/
 INC += -I./ASF/common/
 INC += -I./ASF/common/boards/

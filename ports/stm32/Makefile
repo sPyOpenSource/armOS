@@ -13,7 +13,7 @@ include ../../py/mkenv.mk
 include boards/$(BOARD)/mpconfigboard.mk
 
 # qstr definitions (must come before including py.mk)
-QSTR_DEFS = qstrdefsport.h $(BUILD)/pins_qstr.h $(BUILD)/modstm_qstr.h
+QSTR_DEFS = headers/qstrdefsport.h $(BUILD)/pins_qstr.h $(BUILD)/modstm_qstr.h
 
 # directory containing scripts to be frozen as bytecode
 FROZEN_MPY_DIR ?= modules
@@ -42,6 +42,7 @@ CROSS_COMPILE = /Users/xuyi/Library/Arduino15/packages/arduino/tools/arm-none-ea
 
 INC += -I.
 INC += -I..
+INC += -Iheaders
 INC += -I$(TOP)
 INC += -I$(BUILD)
 INC += -I$(TOP)/lib/cmsis/inc
@@ -418,7 +419,7 @@ GEN_PINS_AF_PY = $(BUILD)/pins_af.py
 INSERT_USB_IDS = $(TOP)/tools/insert-usb-ids.py
 FILE2H = $(TOP)/tools/file2h.py
 
-USB_IDS_FILE = usb.h
+USB_IDS_FILE = headers/usb.h
 CDCINF_TEMPLATE = pybcdc.inf_template
 GEN_CDCINF_FILE = $(HEADER_BUILD)/pybcdc.inf
 GEN_CDCINF_HEADER = $(HEADER_BUILD)/pybcdc_inf.h
