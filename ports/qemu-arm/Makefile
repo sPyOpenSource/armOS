@@ -1,11 +1,11 @@
-include ../py/mkenv.mk
+include ../../py/mkenv.mk
 -include mpconfigport.mk
 
 # qstr definitions (must come before including py.mk)
 QSTR_DEFS = qstrdefsport.h
 
 # include py core make definitions
-include ../py/py.mk
+include ../../py/py.mk
 
 CROSS_COMPILE = arm-none-eabi-
 
@@ -61,7 +61,7 @@ LIB_SRC_C = $(addprefix lib/,\
 	libm/atan2f.c \
 	)
 
-STM_SRC_C = $(addprefix stmhal/,\
+STM_SRC_C = $(addprefix stm32/,\
 	pybstdio.c \
 	)
 
@@ -113,4 +113,4 @@ $(BUILD)/firmware-test.elf: $(OBJ_TEST)
 	$(Q)$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
 	$(Q)$(SIZE) $@
 
-include ../py/mkrules.mk
+include ../../py/mkrules.mk

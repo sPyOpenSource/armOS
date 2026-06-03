@@ -110,7 +110,6 @@ void __attribute__((naked)) thread_start()
 
 	/* Never reach here */
 	while(1);
-
 }
 
 int thread_create(void (*run)(void *), void *userdata)

@@ -67,8 +67,6 @@ typedef long mp_off_t;
 #define MICROPY_HW_MCU_NAME "ARM cortex-m3 (SAM3X8E)"
 
 
-
-
 extern const struct _mp_obj_module_t pyb_module;
 
 
