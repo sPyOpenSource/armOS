@@ -27,8 +27,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "py/mperrno.h"
-#include "py/mphal.h"
+#include "py/headers/mperrno.h"
+#include "py/headers/mphal.h"
 #include "extmod/machine_spi.h"
 #include "drivers/memory/spiflash.h"
 

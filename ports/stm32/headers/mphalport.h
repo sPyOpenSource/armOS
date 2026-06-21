@@ -34,12 +34,21 @@ void mp_hal_set_interrupt_char(int c); // -1 to disable
 // timing functions
 
 #include "stm32/headers/systick.h"
+#include "irq.h"
 
 #define mp_hal_delay_ms HAL_Delay
 #define mp_hal_delay_us(us) sys_tick_udelay(us)
 #define mp_hal_delay_us_fast(us) sys_tick_udelay(us)
 #define mp_hal_ticks_ms HAL_GetTick
 #define mp_hal_ticks_us() sys_tick_get_microseconds()
+
+#if __CORTEX_M == 0
+#define mp_hal_quiet_timing_enter() (1)
+#define mp_hal_quiet_timing_exit(irq_state) (void)(irq_state)
+#else
+#define mp_hal_quiet_timing_enter() raise_irq_pri(1)
+#define mp_hal_quiet_timing_exit(irq_state) restore_irq_pri(irq_state)
+#endif
 
 extern bool mp_hal_ticks_cpu_enabled;
 void mp_hal_ticks_cpu_enable(void);

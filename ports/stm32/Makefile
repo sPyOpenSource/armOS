@@ -16,7 +16,8 @@ include boards/$(BOARD)/mpconfigboard.mk
 QSTR_DEFS = headers/qstrdefsport.h $(BUILD)/pins_qstr.h $(BUILD)/modstm_qstr.h
 
 # directory containing scripts to be frozen as bytecode
-FROZEN_MPY_DIR ?= modules
+# (mpy-cross not available on this build host, so disabled)
+FROZEN_MPY_DIR =
 
 # include py core make definitions
 include $(TOP)/py/py.mk
@@ -155,7 +156,7 @@ SRC_LIBM = $(addprefix lib/libm_dbl/,\
 else
 SRC_LIBM = $(addprefix lib/libm/,\
 	math.c \
-	thumb_vfp_sqrtf.c \
+	ef_sqrt.c \
 	acoshf.c \
 	asinfacosf.c \
 	asinhf.c \
