@@ -431,8 +431,17 @@ def make_bytes(cfg_bytes_len, cfg_bytes_hash, qstr):
     if qlen >= (1 << (8 * cfg_bytes_len)):
         print("qstr is too long:", qstr)
         assert False
-    qdata = escape_bytes(qstr, qbytes)
-    return '%d, %d, "%s"' % (qhash, qlen, qdata)
+    # Build raw bytes: hash (little-endian) + length (little-endian)
+    raw = bytearray()
+    for i in range(cfg_bytes_hash):
+        raw.append((qhash >> (8 * i)) & 0xff)
+    for i in range(cfg_bytes_len):
+        raw.append((qlen >> (8 * i)) & 0xff)
+    # hex-escape the hash+len prefix
+    hex_part = "".join("\\x%02x" % b for b in raw)
+    # escape the data string
+    data_part = escape_bytes(qstr, qbytes)
+    return '(const byte*)"%s" "%s"' % (hex_part, data_part)
 
 
 def print_qstr_data(qcfgs, qstrs):
@@ -445,19 +454,15 @@ def print_qstr_data(qcfgs, qstrs):
     print("")
 
     # add NULL qstr with no hash or data
-    print('QDEF0(MP_QSTRnull, 0, 0, "")')
+    print("QDEF(MP_QSTR_NULL, %s)" % make_bytes(cfg_bytes_len, cfg_bytes_hash, ""))
 
-    # add static qstrs to the first unsorted pool
+    # add static qstrs
     for qstr in static_qstr_list:
-        qbytes = make_bytes(cfg_bytes_len, cfg_bytes_hash, qstr)
-        print("QDEF0(MP_QSTR_%s, %s)" % (qstr_escape(qstr), qbytes))
+        print("QDEF(MP_QSTR_%s, %s)" % (qstr_escape(qstr), make_bytes(cfg_bytes_len, cfg_bytes_hash, qstr)))
 
-    # add remaining qstrs to the sorted (by value) pool (unless they're in
-    # unsorted_qstr_list, in which case add them to the unsorted pool)
+    # add remaining qstrs
     for ident, qstr in sorted(qstrs.values(), key=lambda x: x[1]):
-        qbytes = make_bytes(cfg_bytes_len, cfg_bytes_hash, qstr)
-        pool = 0 if qstr in unsorted_qstr_list else 1
-        print("QDEF%d(MP_QSTR_%s, %s)" % (pool, ident, qbytes))
+        print("QDEF(MP_QSTR_%s, %s)" % (ident, make_bytes(cfg_bytes_len, cfg_bytes_hash, qstr)))
 
 
 def do_work(infiles):
