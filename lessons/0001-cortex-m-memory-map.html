@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 1: Where Does Everything Live? The Cortex-M Memory Map</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+
+<h1>Lesson 1: Where Does Everything Live?</h1>
+<p class="subtitle">The ARM Cortex-M Memory Map &amp; Vector Table</p>
+
+<blockquote>
+<strong>Mission tie-in:</strong> When you port armOS to a new Cortex-M chip, the first thing you need to know is <em>where things are</em> in the address space. The linker script, vector table, and startup code all revolve around this map.
+</blockquote>
+
+<h2>1. The 4 GiB Playground</h2>
+<p>A Cortex-M CPU has a 32-bit address bus — <strong>4,294,967,296</strong> unique addresses. ARM partitions this space into large regions, each with a fixed purpose:</p>
+
+<table>
+<thead>
+<tr><th>Start</th><th>End</th><th>Region</th><th>What lives here</th></tr>
+</thead>
+<tbody>
+<tr><td><code>0x00000000</code></td><td><code>0x1FFFFFFF</code></td><td>Code</td><td>Flash, ROM, or aliased boot memory</td></tr>
+<tr><td><code>0x20000000</code></td><td><code>0x3FFFFFFF</code></td><td>SRAM</td><td>Static data, heap, stack</td></tr>
+<tr><td><code>0x40000000</code></td><td><code>0x5FFFFFFF</code></td><td>Peripherals</td><td>GPIO, USART, SPI, ADC, …</td></tr>
+<tr><td><code>0x60000000</code></td><td><code>0x9FFFFFFF</code></td><td>External RAM</td><td>SDRAM, FSMC, NAND</td></tr>
+<tr><td><code>0xE0000000</code></td><td><code>0xFFFFFFFF</code></td><td>System</td><td>NVIC, SysTick, MPU, Debug</td></tr>
+</tbody>
+</table>
+
+<blockquote>
+<strong>Rule of thumb:</strong> Every Cortex-M chip maps its flash somewhere in the Code region and its SRAM at <code>0x20000000</code>. The rest (peripherals, system) varies per vendor but always falls in the same region.
+</blockquote>
+
+<p>Open your <code>ports/stm32/boards/stm32f103xe.ld</code> — you'll see:</p>
+
+<pre>MEMORY
+{
+    FLASH (rx)   : ORIGIN = 0x08000000, LENGTH = 512K
+    RAM (xrw)    : ORIGIN = 0x20000000, LENGTH = 64K
+}</pre>
+
+<p>Flash at <code>0x08000000</code> (Code region), RAM at <code>0x20000000</code> (SRAM region). Textbook Cortex-M.</p>
+
+<p>Now open <code>ports/atmel-sam3x/flash.ld</code>:</p>
+
+<pre>MEMORY
+{
+    rom (rx)     : ORIGIN = 0x00080000, LENGTH = 512K
+    sram0 (rwx)  : ORIGIN = 0x20000000, LENGTH = 64K
+    ram (rwx)    : ORIGIN = 0x20070000, LENGTH = 96K
+}</pre>
+
+<p>Same SRAM base. Flash is at <code>0x00080000</code> — still in the Code region, just a different spot. Each chip vendor chooses its own flash base within the Code region.</p>
+
+<h2>2. The Boot-Time Mirage: Aliasing</h2>
+<p>Here's where it gets interesting. At reset, the CPU doesn't know where your flash is. It blindly reads two values from <strong>address <code>0x00000000</code></strong>:</p>
+<ul>
+<li>First word → initial <strong>Stack Pointer</strong></li>
+<li>Second word → address of <strong>Reset_Handler</strong></li>
+</ul>
+
+<p>But your flash is at <code>0x08000000</code> (STM32) or <code>0x00080000</code> (SAM3X), not at <code>0x00000000</code>. How does this work?</p>
+
+<p>The chip <strong>aliases</strong> the boot memory to <code>0x00000000</code>. On STM32, <code>0x00000000</code> is a mirror of <code>0x08000000</code> at reset. The CPU sees your vector table at <code>0x00000000</code>, reads the SP and reset vector, and starts executing.</p>
+
+<blockquote>
+<strong>Key insight for porting:</strong> You must place the vector table at the beginning of your flash region. The chip's boot logic ensures it appears at <code>0x00000000</code>.</p>
+</blockquote>
+
+<h2>3. The Vector Table</h2>
+<p>The vector table is just an array of 32-bit addresses. Entry 0 is the stack pointer; entry 1 is the reset handler; entries 2–15 are system exceptions (faults, SVCall, SysTick); entry 16 onward are your chip's peripheral IRQs.</p>
+
+<table>
+<thead>
+<tr><th>Offset</th><th>Exception</th><th>Handler name</th></tr>
+</thead>
+<tbody>
+<tr><td><code>0x00</code></td><td>—</td><td><code>_estack</code> (initial SP)</td></tr>
+<tr><td><code>0x04</code></td><td>Reset</td><td><code>Reset_Handler</code></td></tr>
+<tr><td><code>0x08</code></td><td>NMI</td><td><code>NMI_Handler</code></td></tr>
+<tr><td><code>0x0C</code></td><td>HardFault</td><td><code>HardFault_Handler</code></td></tr>
+<tr><td><code>0x10</code></td><td>MemManage</td><td><code>MemManage_Handler</code></td></tr>
+<tr><td><code>0x14</code></td><td>BusFault</td><td><code>BusFault_Handler</code></td></tr>
+<tr><td><code>0x18</code></td><td>UsageFault</td><td><code>UsageFault_Handler</code></td></tr>
+<tr><td>…</td><td>…</td><td>…</td></tr>
+<tr><td><code>0x40</code></td><td>SysTick</td><td><code>SysTick_Handler</code></td></tr>
+<tr><td><code>0x44</code></td><td>IRQ 0</td><td>First chip-specific peripheral</td></tr>
+</tbody>
+</table>
+
+<p>Each entry is 4 bytes. The linker places this table at the very start of flash via the <code>.vectors</code> or <code>.isr_vector</code> section:</p>
+
+<pre>KEEP(*(.vectors .vectors.*))     /* SAM3X: flash.ld line 50 */
+KEEP(*(.isr_vector))              /* STM32: common.ld line 10 */</pre>
+
+<h2>4. A Quick Look at the Boot Sequence</h2>
+<p>Here's what happens from power-on to your <code>main()</code>:</p>
+<ol>
+<li>CPU reads <code>[0x00000000]</code> → SP, <code>[0x00000004]</code> → Reset_Handler PC.</li>
+<li>Jumps to <strong>Reset_Handler</strong> (defined in <code>startup_sam3x.c</code> or CMSIS <code>startup_*.s</code>).</li>
+<li>Reset_Handler calls <strong>SystemInit</strong> (clock config, FPU enable, etc.).</li>
+<li>Calls <strong>_start</strong> or equivalent: copies <code>.data</code> from flash to RAM, zeroes <code>.bss</code>.</li>
+<li>Calls <strong>main()</strong>.</li>
+</ol>
+<p>Steps 3–4 are why the linker script defines symbols like <code>_sdata</code>, <code>_edata</code>, <code>_sbss</code>, <code>_ebss</code>.</p>
+
+<h2>5. Skill Practice: Map Your Own Chip</h2>
+<p>Find the linker script and startup file for the sam3x port, then answer:</p>
+
+<ol>
+<li>What is the flash base address? Where is the SRAM base?</li>
+<li>What value does the initial stack pointer get set to? (look for <code>_estack</code> or <code>__StackTop</code>)</li>
+<li>Where is the vector table defined — in which file?</li>
+<li>What is the first IRQ handler in the vector table (at index 16)?</li>
+</ol>
+
+<p>Open <code>ports/atmel-sam3x/flash.ld</code> and <code>ports/atmel-sam3x/startup_sam3x.c</code> to check your answers.</p>
+
+<details>
+<summary>Check your answers</summary>
+<ol>
+<li>Flash: <code>0x00080000</code>, SRAM: <code>0x20000000</code> (sram0), with another at <code>0x20070000</code> (ram).</li>
+<li><code>_estack = ORIGIN(ram) + LENGTH(ram)</code> = <code>0x20070000 + 0x18000</code> = <code>0x20088000</code>.</li>
+<li>In <code>ports/atmel-sam3x/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.c</code>.</li>
+<li>Open the startup file and count — the first IRQ after the 15 system exceptions is the first peripheral. On SAM3X it's <code>SUPC_Handler</code> at IRQ 0.</li>
+</ol>
+</details>
+
+<h2>Further Reading</h2>
+<ul>
+<li><strong>ARMv7-M Architecture Reference Manual</strong> (DDI 0403E), chapter B1 — the canonical memory map description.</li>
+<li><strong>Cortex-M3 TRM</strong> (DDI 0337), chapter 2 — memory map and boot details.</li>
+<li><a href="../reference/cortex-m-memory-map.html">Reference: Cortex-M Memory Map &amp; Vector Table</a></li>
+</ul>
+
+<hr>
+<p><em>Ask followup questions — I'm your teacher. If anything is unclear, say so.</em></p>
+
+</body>
+</html>

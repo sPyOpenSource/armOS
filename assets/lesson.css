@@ -1,0 +1,129 @@
+/* Shared stylesheet for armOS Architecture Lessons */
+/* Tufte-inspired: clean, readable, print-friendly */
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&family=Source+Code+Pro:wght@400;600&family=Source+Serif+Pro:wght@400;600&display=swap');
+
+:root {
+  --text: #222;
+  --bg: #fffff8;
+  --accent: #2363a8;
+  --accent-light: #e6f0fa;
+  --code-bg: #f4f4f0;
+  --border: #d4d4d4;
+  --muted: #666;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #e0e0e0;
+    --bg: #1a1a1a;
+    --accent: #6ab0f3;
+    --accent-light: #1a2a3a;
+    --code-bg: #252525;
+    --border: #444;
+    --muted: #999;
+  }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Serif Pro', Georgia, serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--bg);
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+h1, h2, h3 { font-family: 'Source Sans Pro', sans-serif; font-weight: 600; line-height: 1.3; }
+h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+h2 { font-size: 1.4rem; margin-top: 2rem; margin-bottom: 0.5rem; }
+h3 { font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: 0.3rem; }
+
+p { margin-bottom: 1rem; }
+p, li { font-size: 1rem; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+ul, ol { margin-bottom: 1rem; padding-left: 1.5rem; }
+li { margin-bottom: 0.25rem; }
+
+code {
+  font-family: 'Source Code Pro', 'Consolas', monospace;
+  font-size: 0.88em;
+  background: var(--code-bg);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+
+pre {
+  font-family: 'Source Code Pro', 'Consolas', monospace;
+  font-size: 0.82em;
+  background: var(--code-bg);
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border);
+}
+
+pre code { background: none; padding: 0; }
+
+blockquote {
+  border-left: 4px solid var(--accent);
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  background: var(--accent-light);
+  border-radius: 0 4px 4px 0;
+}
+
+blockquote p:last-child { margin-bottom: 0; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+th, td {
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+}
+
+th {
+  background: var(--accent-light);
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 600;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
+
+.callout {
+  background: var(--accent-light);
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  border-left: 4px solid var(--accent);
+}
+
+.callout strong:first-child {
+  color: var(--accent);
+}
+
+img { max-width: 100%; height: auto; }
+
+/* print */
+@media print {
+  body { font-size: 12pt; max-width: none; padding: 1in; }
+  pre { white-space: pre-wrap; word-wrap: break-word; }
+}

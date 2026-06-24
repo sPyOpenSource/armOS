@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reference: ARM Cortex-M Memory Map &amp; Vector Table</title>
+<link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<h1>ARM Cortex-M Memory Map &amp; Vector Table</h1>
+
+<h2>4GB Address Space</h2>
+<p>Cortex-M3/M4 have a flat 32-bit address space (4 GiB). ARM divides it into regions:</p>
+
+<table>
+<thead>
+<tr><th>Address Range</th><th>Region</th><th>Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td><code>0x00000000 – 0x1FFFFFFF</code></td><td>Code</td><td>Flash, ROM, or aliased to SRAM. <strong>Vector table lives here at boot.</strong></td></tr>
+<tr><td><code>0x20000000 – 0x3FFFFFFF</code></td><td>SRAM</td><td>On-chip RAM (static &amp; heap). Bit-band region for atomic bit ops.</td></tr>
+<tr><td><code>0x40000000 – 0x5FFFFFFF</code></td><td>Peripheral</td><td>GPIO, USART, SPI, TIM, etc. All memory-mapped registers.</td></tr>
+<tr><td><code>0x60000000 – 0x9FFFFFFF</code></td><td>External RAM / Device</td><td>FSMC, SDRAM, external memory controllers.</td></tr>
+<tr><td><code>0xE0000000 – 0xFFFFFFFF</code></td><td>System</td><td>NVIC, MPU, SysTick, debug (SCS). Not flash; CPU internal.</td></tr>
+</tbody>
+</table>
+
+<h3>Boot-time alias</h3>
+<p>At reset, the region <code>0x00000000</code> is aliased to whatever memory the chip boots from (usually flash at <code>0x08000000</code> on STM32, or <code>0x00080000</code> on SAM3X). The CPU reads the <strong>initial SP</strong> from <code>0x00000000</code> and <strong>Reset_Handler</strong> from <code>0x00000004</code>.</p>
+
+<h2>Vector Table</h2>
+<p>The vector table is an array of function pointers starting at address <code>0x00000000</code>. <strong>Entry 0 is the initial stack pointer</strong>, entries 1–15 are system exceptions, and entry 16+ are peripheral IRQs.</p>
+
+<table>
+<thead>
+<tr><th>Offset</th><th>Exception #</th><th>Name</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>0x00</code></td><td>—</td><td>_estack</td><td>Initial SP (top of RAM)</td></tr>
+<tr><td><code>0x04</code></td><td>1</td><td>Reset_Handler</td><td>First code executed</td></tr>
+<tr><td><code>0x08</code></td><td>2</td><td>NMI_Handler</td><td>Non-maskable interrupt</td></tr>
+<tr><td><code>0x0C</code></td><td>3</td><td>HardFault_Handler</td><td>Unexpected fault</td></tr>
+<tr><td><code>0x10</code></td><td>4</td><td>MemManage_Handler</td><td>MPU violation</td></tr>
+<tr><td><code>0x14</code></td><td>5</td><td>BusFault_Handler</td><td>Bus error</td></tr>
+<tr><td><code>0x18</code></td><td>6</td><td>UsageFault_Handler</td><td>Undefined instruction, unaligned</td></tr>
+<tr><td colspan="4">… reserved …</td></tr>
+<tr><td><code>0x40</code></td><td>15</td><td>SysTick_Handler</td><td>System tick timer</td></tr>
+<tr><td><code>0x44</code></td><td>16</td><td><em>first peripheral IRQ</em></td><td>Chip-specific (TIM, USART, etc.)</td></tr>
+</tbody>
+</table>
+
+<p>Each entry is 4 bytes (a 32-bit address). Peripheral IRQ lines start at offset <code>0x40 + 4 × n</code> where <code>n</code> is the IRQ number.</p>
+
+<h2>Vector table placement</h2>
+<p>The table must be 4-byte aligned (256-byte aligned on some chips). It is typically placed in flash at the beginning of the <code>.vectors</code> / <code>.isr_vector</code> linker section:</p>
+
+<pre>KEEP(*(.vectors .vectors.*))     /* SAM3X style */
+KEEP(*(.isr_vector))              /* STM32 style */</pre>
+
+<h2>Key addresses in your ports</h2>
+
+<table>
+<thead>
+<tr><th>Port</th><th>Flash base</th><th>SRAM base</th><th>Vectors at</th></tr>
+</thead>
+<tbody>
+<tr><td>sam3x (atmel-sam3x)</td><td><code>0x00080000</code></td><td><code>0x20000000</code></td><td>flash <code>0x00080000</code> (aliased to <code>0x00000000</code>)</td></tr>
+<tr><td>stm32f103</td><td><code>0x08000000</code></td><td><code>0x20000000</code></td><td>flash <code>0x08000000</code> (aliased to <code>0x00000000</code>)</td></tr>
+</tbody>
+</table>
+
+<h2>Startup files</h2>
+<p>The vector table is defined in assembly startup files:</p>
+<ul>
+<li><strong>sam3x</strong>: <code>ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.c</code></li>
+<li><strong>stm32</strong>: <code>stm32_it.c</code> (also uses CMSIS startup via <code>system_stm32.c</code>)</li>
+</ul>
+
+</body>
+</html>
