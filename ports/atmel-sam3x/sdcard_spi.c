@@ -144,6 +144,32 @@ static bool sdcard_wait_not_busy(void) {
     return true;
 }
 
+// Returns the number of 512-byte blocks from a 16-byte CSD register
+// (read via CMD9). Handles both CSD v1 and v2.
+static uint32_t sdcard_csd_block_count(const uint8_t *csd) {
+    uint8_t csd_structure = (csd[0] >> 6) & 0x03;
+    if (csd_structure == 0x01) {
+        // CSD v2 (SDHC/SDXC): C_SIZE = bits [69:48]
+        uint32_t c_size = ((uint32_t)(csd[7] & 0x3f) << 16)
+                        | ((uint32_t)csd[8] << 8)
+                        | csd[9];
+        return (c_size + 1) * 1024;
+    }
+    // CSD v1 (SDSC): READ_BL_LEN = bits [83:80], C_SIZE = bits [73:62],
+    // C_SIZE_MULT = bits [49:47]
+    uint32_t c_size = ((uint32_t)(csd[6] & 0x03) << 10)
+                    | ((uint32_t)csd[7] << 2)
+                    | ((csd[8] >> 6) & 0x03);
+    uint32_t c_size_mult = ((uint32_t)(csd[9] & 0x03) << 1)
+                         | ((csd[10] >> 7) & 0x01);
+    uint32_t read_bl_len = csd[5] & 0x0f;
+    uint32_t block_nr = (c_size + 1) * (1 << (c_size_mult + 2));
+    if (read_bl_len > 9) {
+        block_nr <<= (read_bl_len - 9);
+    }
+    return block_nr;
+}
+
 // ---- public API ----
 
 bool sdcard_init(sdcard_config_t *config) {
@@ -260,9 +286,21 @@ bool sdcard_read_blocks(uint8_t *dest, uint32_t block_num, uint32_t num_blocks) 
         spi_master_transfer_bytes(NULL, dest, SDCARD_BLOCK_SIZE);
         spi_master_transfer_bytes(NULL, NULL, 2); // CRC16
     } else {
-        // CMD18: multiple block read (multi-block body added in Task 4)
-        sdcard_cs_high();
-        return false;
+        // CMD18: multiple block read
+        if (sdcard_cmd(18, addr, false) != 0x00) {
+            sdcard_cs_high();
+            return false;
+        }
+        for (uint32_t i = 0; i < num_blocks; i++) {
+            if (sdcard_wait_data_token(0xfe) != 0xfe) {
+                sdcard_cmd(12, 0, false); // stop transmission
+                sdcard_cs_high();
+                return false;
+            }
+            spi_master_transfer_bytes(NULL, dest + i * SDCARD_BLOCK_SIZE, SDCARD_BLOCK_SIZE);
+            spi_master_transfer_bytes(NULL, NULL, 2); // CRC16
+        }
+        sdcard_cmd(12, 0, false); // stop transmission
     }
 
     sdcard_cs_high();
@@ -300,9 +338,33 @@ bool sdcard_write_blocks(const uint8_t *src, uint32_t block_num, uint32_t num_bl
             return false;
         }
     } else {
-        // CMD25: multiple block write (multi-block body added in Task 4)
-        sdcard_cs_high();
-        return false;
+        // CMD25: multiple block write
+        if (sdcard_cmd(25, addr, false) != 0x00) {
+            sdcard_cs_high();
+            return false;
+        }
+        for (uint32_t i = 0; i < num_blocks; i++) {
+            spi_master_transfer(0xfc); // multi-block start token
+            spi_master_transfer_bytes(src + i * SDCARD_BLOCK_SIZE, NULL, SDCARD_BLOCK_SIZE);
+            uint16_t crc = sdcard_crc16(src + i * SDCARD_BLOCK_SIZE, SDCARD_BLOCK_SIZE);
+            spi_master_transfer((uint8_t)(crc >> 8));
+            spi_master_transfer((uint8_t)(crc & 0xff));
+
+            uint8_t resp = spi_master_transfer(0xff);
+            if ((resp & 0x1f) != 0x05) {
+                sdcard_cs_high();
+                return false;
+            }
+            if (!sdcard_wait_not_busy()) {
+                sdcard_cs_high();
+                return false;
+            }
+        }
+        spi_master_transfer(0xfd); // stop token
+        if (!sdcard_wait_not_busy()) {
+            sdcard_cs_high();
+            return false;
+        }
     }
 
     sdcard_cs_high();
@@ -319,7 +381,20 @@ uint32_t sdcard_ioctl(uint32_t cmd, uint32_t arg) {
         case BP_IOCTL_SYNC:
             return 0;
         case BP_IOCTL_SEC_COUNT:
-            return 0; // implemented in Task 4 via CSD parse
+        {
+            // read CSD (CMD9) and return the sector count
+            sdcard_cs_low();
+            uint8_t r1 = sdcard_cmd(9, 0, false);
+            uint32_t count = 0;
+            if (r1 == 0x00 && sdcard_wait_data_token(0xfe) == 0xfe) {
+                uint8_t csd[16];
+                spi_master_transfer_bytes(NULL, csd, 16);
+                spi_master_transfer_bytes(NULL, NULL, 2); // CRC16
+                count = sdcard_csd_block_count(csd);
+            }
+            sdcard_cs_high();
+            return count;
+        }
         case BP_IOCTL_SEC_SIZE:
             return SDCARD_BLOCK_SIZE;
         default:
