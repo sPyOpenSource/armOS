@@ -29,6 +29,7 @@
  * THE SOFTWARE.
  */
 
+#include <stdbool.h>
 #include <stdint.h>
 
 #include "asf.h"
@@ -53,6 +54,8 @@ void spi_master_init(void) {
     SPI0->SPI_CR = SPI_CR_SPIEN;
 }
 
+static bool spi_master_csat = false;
+
 void spi_master_set_frequency(uint32_t freq_hz) {
     uint32_t pclk = sysclk_get_peripheral_hz();
     uint32_t scbr = pclk / freq_hz;
@@ -61,13 +64,25 @@ void spi_master_set_frequency(uint32_t freq_hz) {
     } else if (scbr > 0xff) {
         scbr = 0xff;
     }
-    // 8-bit transfers, SPI mode 0, baud-rate divisor for CS0
+    // 8-bit transfers, SPI mode 0, baud-rate divisor for CS0;
+    // optionally keep CS asserted after each byte (hardware-CS mode)
     uint32_t csr = SPI_CSR_BITS_8_BIT | SPI_CSR_SCBR(scbr);
+    if (spi_master_csat) {
+        csr |= SPI_CSR_CSAAT;
+    }
     SPI0->SPI_CSR[0] = csr;
 }
 
-// NOTE: spi_master_set_csat() is declared in the header but its body is added
-// in Task 7 together with hardware-CS support in the SD layer.
+void spi_master_set_csat(bool enable) {
+    spi_master_csat = enable;
+    uint32_t csr = SPI0->SPI_CSR[0];
+    if (enable) {
+        csr |= SPI_CSR_CSAAT;
+    } else {
+        csr &= ~SPI_CSR_CSAAT;
+    }
+    SPI0->SPI_CSR[0] = csr;
+}
 
 uint8_t spi_master_transfer(uint8_t out) {
     // Wait for transmit buffer empty

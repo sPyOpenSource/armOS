@@ -49,15 +49,26 @@ static bool sdcard_initialised = false;
 
 // ---- chip select ----
 // GPIO mode drives the CS pin directly. Hardware-CS mode relies on
-// SPI_CSR_CSAAT + SPI_TDR_LASTXFER (Task 7); until then use_hw_cs is
-// treated as GPIO by sdcard_cs_low/high, which Task 7 replaces.
+// SPI_CSR_CSAAT so the peripheral asserts NPCS0 for the first byte of a
+// transaction; the LASTXFER byte (written in sdcard_cs_high) releases it.
 
 static void sdcard_cs_low(void) {
-    set_pin(sdcard_config.cs_pin, 0);
+    if (!sdcard_config.use_hw_cs) {
+        set_pin(sdcard_config.cs_pin, 0);
+    }
 }
 
 static void sdcard_cs_high(void) {
-    set_pin(sdcard_config.cs_pin, 1);
+    if (sdcard_config.use_hw_cs) {
+        // deassert NPCS0 after this byte
+        while (!(SPI0->SPI_SR & SPI_SR_TDRE)) {
+        }
+        SPI0->SPI_TDR = SPI_TDR_LASTXFER;
+        while (!(SPI0->SPI_SR & SPI_SR_RDRF)) {
+        }
+    } else {
+        set_pin(sdcard_config.cs_pin, 1);
+    }
 }
 
 // ---- CRC ----
@@ -191,6 +202,13 @@ bool sdcard_init(sdcard_config_t *config) {
         dummy[i] = 0xff;
     }
     spi_master_transfer_bytes(dummy, NULL, 10);
+
+    // after power-up, let the SPI peripheral drive NPCS0 if requested
+    if (sdcard_config.use_hw_cs) {
+        // configure PA28 as NPCS0 (peripheral A) and use hardware CS
+        pio_configure(PIOA, PIO_PERIPH_A, PIO_PA28A_SPI0_NPCS0, PIO_DEFAULT);
+        spi_master_set_csat(true);
+    }
 
     // keep CS low for the whole init sequence
     sdcard_cs_low();
