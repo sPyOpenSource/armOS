@@ -539,9 +539,18 @@ static void sdcard_cs_high(void) {
 static uint8_t sdcard_crc7(const uint8_t *data, uint8_t len) {
     uint8_t crc = 0;
     for (uint8_t i = 0; i < len; i++) {
-        crc ^= data[i];
-        for (uint8_t j = 0; j < 8; j++) {
-            crc = (crc << 1) ^ ((crc & 0x80) ? 0x09 : 0);
+        for (uint8_t j = 8; j-- != 0;) {
+            crc = (uint8_t)((crc << 1) | ((data[i] >> j) & 1));
+            if (crc & 0x80) {
+                crc ^= 0x89;
+            }
+        }
+    }
+    // account for the 7 zero bits appended by the x^7 term of M(x)*x^7 mod G(x)
+    for (uint8_t j = 0; j < 7; j++) {
+        crc = (uint8_t)(crc << 1);
+        if (crc & 0x80) {
+            crc ^= 0x89;
         }
     }
     return crc & 0x7f;
@@ -634,8 +643,13 @@ bool sdcard_init(sdcard_config_t *config) {
     // keep CS low for the whole init sequence
     sdcard_cs_low();
 
-    // CMD0: go to idle (CRC is mandatory here)
-    if (sdcard_cmd(0, 0x00000000, true) != 0x01) {
+    // CMD0: go to idle (CRC is mandatory here); retry a few times as the
+    // first command after power-up can be lost
+    bool idle = false;
+    for (int attempt = 0; attempt < 5 && !idle; attempt++) {
+        idle = (sdcard_cmd(0, 0x00000000, true) == 0x01);
+    }
+    if (!idle) {
         sdcard_cs_high();
         return false;
     }
@@ -645,6 +659,10 @@ bool sdcard_init(sdcard_config_t *config) {
     if (r1 == 0x01) {
         uint8_t echo[4];
         spi_master_transfer_bytes(NULL, echo, 4);
+        if (echo[2] != 0x01 || echo[3] != 0xaa) {
+            sdcard_cs_high();
+            return false;
+        }
     } else if (r1 != 0x05) {
         sdcard_cs_high();
         return false;
@@ -1398,3 +1416,8 @@ git commit -m "Add hardware NPCS0 chip-select mode for atmel-sam3x SD card"
 - **Spec coverage:** file-storage via `open()` (Tasks 1+6); SPI0 + PA25/26/27/28 (Tasks 2-3); configurable CS (Tasks 3, 5, 7); polling card detect (`sdcard_is_present` → `present()`, Task 3); 400 kHz init / up-to-25 MHz data (Task 3); block read/write incl. multi-block (Tasks 3-4); ioctl SEC_COUNT/SEC_SIZE (Tasks 3-4); `machine.SDCard` (Task 5); VFS mount at `/sd` (Task 6). CRC7 commands + CRC16 data implemented (Task 3). Removed from spec by documented deviations: CMD2/3/7 (not used in SPI mode), the non-existent ASF SPI driver, and `machine.SPI`-based constructor.
 - **Placeholder scan:** no TBD/TODO; every code step shows full code; the two "added in Task 4" markers in Task 3 are resolved by Task 4 steps, and the "implementation added in Task 7" marker for `spi_master_set_csat` is resolved by Task 7 Step 1.
 - **Type consistency:** `sdcard_config_t`, `sdcard_init/read_blocks/write_blocks/ioctl/is_present`, `pyb_sdcard_type`, `spi_master_*` signatures are identical across all tasks that reference them. `BP_IOCTL_*` matches `extmod/vfs.h`. `SDCard_BLOCK_SIZE` is 512 everywhere. `use_hw_cs` semantics (GPIO vs CSAAT/LASTXFER) are consistent between Task 3 comments, Task 5 constructor, and Task 7.
+
+## Execution Notes (added during implementation)
+
+- **Task 1:** the port also needed `$(CFLAGS_MOD)` folded into `CFLAGS` (picks up `-DFFCONF_H="lib/oofatfs/ffconf.h"` from `py/py.mk`), `lib/timeutils/timeutils.c` in `SRC_C` (`extmod/vfs_fat.c` calls `timeutils_seconds_since_2000`), `#define MICROPY_FATFS_RPATH (2)` (`f_chdir`/`f_getcwd`), `#define mp_type_fileio fatfs_type_fileio` (`py/modio.c` needs it), and a port-level `mp_sys_stdout_obj`/`mp_sys_stdout_print` in `main.c` (`MP_PYTHON_PRINTER` needs them with `MICROPY_PY_SYS=0`). All mirror the stm32 port.
+- **Task 3 CRC7 fix:** the original CRC7 in this plan (shift-with-poly-0x09 form) was WRONG — it produced 0x37/0x40 instead of the required 0x4A/0x43 for CMD0/CMD8 (verified against the polynomial definition and known-good reference bytes 0x95/0x87). The code above is the corrected, verified bit-feeding form (`M(x)*x^7 mod G(x)`, G=0x89). CMD0 is also now retried up to 5× and CMD8's echo is validated (echo[2]==0x01, echo[3]==0xaa).
