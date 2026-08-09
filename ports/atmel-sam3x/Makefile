@@ -230,7 +230,7 @@ $(BUILD)/firmware.bin: $(BUILD)/firmware.elf
 
 upload: %(BUILD)/firmware.bin
 %(BUILD)/firmware.bin:
-	stty -F /dev/$(port) cs8 1200 hupcl
+	stty -f /dev/$(port) cs8 1200 hupcl
 	./tools/bossac --port=${port} -U true -e -w -b $(BUILD)/firmware.bin -R
 
 include ../../py/mkrules.mk
