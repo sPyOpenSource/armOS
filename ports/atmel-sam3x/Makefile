@@ -165,6 +165,7 @@ SRC_C = \
 	modpwm.c 		\
 	help.c 			\
 	modrandom.c 	\
+	spi_master.c 	\
 	moduos.c 		\
 	fatfs_port.c 	\
 	lib/oofatfs/ff.c \
