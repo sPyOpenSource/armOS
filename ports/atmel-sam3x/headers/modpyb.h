@@ -9,5 +9,6 @@
 #include "modtwi.h"
 #include "modpwm.h"
 #include "modrandom.h"
+#include "sdcard.h"
 
 #endif

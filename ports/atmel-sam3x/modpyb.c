@@ -90,6 +90,7 @@ STATIC const mp_map_elem_t pyb_module_globals_table[]= {
 	{MP_OBJ_NEW_QSTR(MP_QSTR_enable_irq), (mp_obj_t)&pyb_enble_irq},
 	{MP_OBJ_NEW_QSTR(MP_QSTR_I2C), (mp_obj_t)&i2c_type},
 	{MP_OBJ_NEW_QSTR(MP_QSTR_PWM), (mp_obj_t)&pwm_type},
+	{MP_OBJ_NEW_QSTR(MP_QSTR_SDCard), (mp_obj_t)&pyb_sdcard_type},
 	{MP_OBJ_NEW_QSTR(MP_QSTR_reset), (mp_obj_t)&pyb_hard_rest},
 	{MP_OBJ_NEW_QSTR(MP_QSTR_reset_cause), (mp_obj_t)&pyb_reset_cause},
 	{MP_OBJ_NEW_QSTR(MP_QSTR_wfi), (mp_obj_t)&pyb_wfi},

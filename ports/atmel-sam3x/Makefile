@@ -167,6 +167,7 @@ SRC_C = \
 	modrandom.c 	\
 	spi_master.c 	\
 	sdcard_spi.c 	\
+	modsdcard.c 	\
 	moduos.c 		\
 	fatfs_port.c 	\
 	lib/oofatfs/ff.c \
