@@ -135,7 +135,7 @@ INC += -I$(BUILD)
 #GEN_PINS_QSTR = $(BUILD)/pins_qstr.h
 
 CFLAGS_CORTEX_M4 = -O2 -mthumb -mtune=cortex-m3 -mcpu=cortex-m3 -msoft-float -mfloat-abi=soft -fsingle-precision-constant -Wdouble-promotion --param max-inline-insns-single=500 -mlong-calls -ffunction-sections -fdata-sections
-CFLAGS = $(INC) -Wall -std=c99 -nostdlib -D__SAM3X8E__  -lm -lc  $(CFLAGS_CORTEX_M4)
+CFLAGS = $(INC) -Wall -std=c99 -nostdlib -D__SAM3X8E__  -lm -lc  $(CFLAGS_CORTEX_M4) $(CFLAGS_MOD)
 
 #Debugging/Optimization
 ifeq ($(DEBUG), 1)
@@ -165,6 +165,11 @@ SRC_C = \
 	modpwm.c 		\
 	help.c 			\
 	modrandom.c 	\
+	moduos.c 		\
+	fatfs_port.c 	\
+	lib/oofatfs/ff.c \
+	lib/oofatfs/option/unicode.c \
+	lib/timeutils/timeutils.c \
 
 
 SRC_ASF = \

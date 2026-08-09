@@ -40,7 +40,13 @@
 #define MICROPY_PY_COLLECTIONS      (0)
 #define MICROPY_PY_MATH             (1)
 #define MICROPY_PY_CMATH            (0)
-#define MICROPY_PY_IO               (0)
+#define MICROPY_PY_IO               (1)
+#define MICROPY_PY_IO_FILEIO        (1)
+#define MICROPY_VFS                 (1)
+#define MICROPY_VFS_FAT             (1)
+#define MICROPY_READER_VFS          (1)
+#define MICROPY_FATFS_RPATH         (2)
+#define mp_type_fileio fatfs_type_fileio
 #define MICROPY_PY_STRUCT           (0)
 #define MICROPY_PY_SYS              (0)
 #define MICROPY_CPYTHON_COMPAT      (0)
@@ -69,9 +75,16 @@ typedef long mp_off_t;
 
 extern const struct _mp_obj_module_t pyb_module;
 
+extern const struct _mp_obj_module_t mp_module_uos;
+extern const struct _mp_obj_module_t mp_module_io;
+
+#define mp_import_stat mp_vfs_import_stat
 
 #define MICROPY_PORT_BUILTIN_MODULES \
     { MP_OBJ_NEW_QSTR(MP_QSTR_machine), (mp_obj_t)&pyb_module}, \
+    { MP_OBJ_NEW_QSTR(MP_QSTR_uos), (mp_obj_t)&mp_module_uos}, \
+    { MP_OBJ_NEW_QSTR(MP_QSTR_os), (mp_obj_t)&mp_module_uos}, \
+    { MP_OBJ_NEW_QSTR(MP_QSTR_io), (mp_obj_t)&mp_module_io}, \
 
 #define MICROPY_PORT_BUILTIN_MODULE_WEAK_LINKS \
     mp_obj_t c_sample_callback_obj;  \

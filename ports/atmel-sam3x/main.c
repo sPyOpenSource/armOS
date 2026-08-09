@@ -13,10 +13,12 @@
 #include "py/headers/repl.h"
 #include "py/headers/mphal.h"
 #include "py/headers/mpstate.h"
+#include "py/headers/stream.h"
 #include "lib/utils/pyexec.h"
 #include "lib/mp-readline/readline.h"
 
 #include "asf.h"
+#include "extmod/vfs.h"
 #include "due_mphal.h"
 #include "modpyb.h"
 #include "led.h"
@@ -59,19 +61,49 @@ void gc_collect(void) {
     // gc_dump_info();
 }
 
+#if !MICROPY_READER_VFS
 mp_lexer_t *mp_lexer_new_from_file(const char *filename) {
     return NULL;
 }
+#endif
 
+#if !MICROPY_VFS
 mp_import_stat_t mp_import_stat(const char *path) {
     return MP_IMPORT_STAT_NO_EXIST;
 }
+#endif
 
 mp_obj_t mp_builtin_open(size_t n_args, const mp_obj_t *args, mp_map_t *kwargs) {
-    return mp_const_none;
+    return mp_vfs_open(n_args, args, kwargs);
 }
 
 MP_DEFINE_CONST_FUN_OBJ_KW(mp_builtin_open_obj, 1, mp_builtin_open);
+
+#if MICROPY_PY_IO
+typedef struct _mp_stdout_obj_t {
+    mp_obj_base_t base;
+} mp_stdout_obj_t;
+
+STATIC mp_uint_t stdout_write(mp_obj_t self_in, const void *buf, mp_uint_t size, int *errcode) {
+    mp_hal_stdout_tx_strn_cooked(buf, size);
+    return size;
+}
+
+STATIC const mp_stream_p_t stdout_obj_stream_p = {
+    .write = stdout_write,
+    .is_text = true,
+};
+
+STATIC const mp_obj_type_t stdout_obj_type = {
+    { &mp_type_type },
+    .name = MP_QSTR_stdout,
+    .protocol = &stdout_obj_stream_p,
+};
+
+const mp_stdout_obj_t mp_sys_stdout_obj = {{&stdout_obj_type}};
+
+const mp_print_t mp_sys_stdout_print = {(void*)&mp_sys_stdout_obj, mp_stream_write_adaptor};
+#endif
 
 void nlr_jump_fail(void *val) {
 	mp_hal_stdout_tx_str("jmp failed");
