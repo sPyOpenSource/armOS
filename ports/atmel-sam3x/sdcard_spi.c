@@ -65,9 +65,18 @@ static void sdcard_cs_high(void) {
 static uint8_t sdcard_crc7(const uint8_t *data, uint8_t len) {
     uint8_t crc = 0;
     for (uint8_t i = 0; i < len; i++) {
-        crc ^= data[i];
-        for (uint8_t j = 0; j < 8; j++) {
-            crc = (crc << 1) ^ ((crc & 0x80) ? 0x09 : 0);
+        for (uint8_t j = 8; j-- != 0;) {
+            crc = (uint8_t)((crc << 1) | ((data[i] >> j) & 1));
+            if (crc & 0x80) {
+                crc ^= 0x89;
+            }
+        }
+    }
+    // account for the 7 zero bits appended by the x^7 term of M(x)*x^7 mod G(x)
+    for (uint8_t j = 0; j < 7; j++) {
+        crc = (uint8_t)(crc << 1);
+        if (crc & 0x80) {
+            crc ^= 0x89;
         }
     }
     return crc & 0x7f;
@@ -160,8 +169,13 @@ bool sdcard_init(sdcard_config_t *config) {
     // keep CS low for the whole init sequence
     sdcard_cs_low();
 
-    // CMD0: go to idle (CRC is mandatory here)
-    if (sdcard_cmd(0, 0x00000000, true) != 0x01) {
+    // CMD0: go to idle (CRC is mandatory here); retry a few times as the
+    // first command after power-up can be lost
+    bool idle = false;
+    for (int attempt = 0; attempt < 5 && !idle; attempt++) {
+        idle = (sdcard_cmd(0, 0x00000000, true) == 0x01);
+    }
+    if (!idle) {
         sdcard_cs_high();
         return false;
     }
@@ -171,6 +185,10 @@ bool sdcard_init(sdcard_config_t *config) {
     if (r1 == 0x01) {
         uint8_t echo[4];
         spi_master_transfer_bytes(NULL, echo, 4);
+        if (echo[2] != 0x01 || echo[3] != 0xaa) {
+            sdcard_cs_high();
+            return false;
+        }
     } else if (r1 != 0x05) {
         sdcard_cs_high();
         return false;
